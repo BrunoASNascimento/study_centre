@@ -1,3 +1,10 @@
+# Rust
+debug/
+target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+*.exe
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
