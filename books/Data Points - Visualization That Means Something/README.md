@@ -1,3 +1,4 @@
+#TODO: Finish the README.md file
 # Data Points: Visualization That Means Something
 
 ## Chapter 1 - Understanding Data

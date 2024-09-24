@@ -1,3 +1,5 @@
+
+#TODO: Finish the README.md file
 # BigQuery for Data Analysts
 
 ## Course Introduction
