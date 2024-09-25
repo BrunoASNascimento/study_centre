@@ -83,3 +83,4 @@
   - Choropleth map: Defined regions coloured by data and meaning can change based an scale.
   - Contour map: Lines show data continuously over geography, using density.
   - Multiple variables:
+    - A few variables: Use scatterplot. With this chart, you can see how two variables relate to each other.
