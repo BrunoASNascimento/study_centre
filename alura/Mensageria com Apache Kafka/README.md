@@ -529,3 +529,265 @@ Ao executar, consumiu três mensagens: a terceira, a quarta e a quinta, que envi
 Produzir mensagens resume-se a isso: criar um produtor, criar mensagens, enviá-las e adicionar algum listener. Assim, ficamos ouvindo e quando a mensagem é bem-sucedida sabemos que foi realmente enviada. Enquanto não recebermos a confirmação, não podemos ter certeza.
 
 Nós já enviamos a mensagem. Agora, quem está ouvindo essa mensagem? Quais são os consumidores? Vamos implementá-los em Java logo mais!
+
+### Criando consumidores em Java
+Quando uma nova solicitação de compra entra em nosso sistema, várias operações podem ser desencadeadas. Podemos ter múltiplos consumidores executando diversas tarefas simultaneamente. Em nosso caso, um desses consumidores será responsável por verificar se a transação é uma fraude ou não. Portanto, precisamos desenvolver um serviço dedicado a essa detecção.
+
+Dentro de java > br.com.alura.ecommerce, criaremos uma nova classe chamada FraudDetectorService, que conterá diversas funções internas responsáveis por realizar essa verificação de fraude. Além disso, teremos uma função estática e criaremos um consumidor Kafka, que será um new KafkaConsumer. Vale ressaltar que tanto a chave quanto o valor serão strings.
+
+package br.com.alura.ecommerce;
+
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+
+public class Fraud DetectorService {
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+    }
+}
+Copiar código
+Ao criarmos o consumidor, ele receberá as propriedades (properties) do consumidor, seguindo uma abordagem semelhante ao que fizemos anteriormente. Depois, criaremos essas propriedades e configuramos. Por padrão, essas propriedades incluirão várias informações importantes, entre elas temos o ConsumerConfig ao invés de ProducerConfig, além do servidor, definido pela propriedade BOOTSTRAP_SERVERS_CONFIG, que indica onde o consumidor irá escutar, e o endereço 127.0.0.1:9092, onde ele tentará iniciar a conexão.
+
+package br.com.alura.ecommerce;
+
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+
+public class Fraud DetectorService {
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+    }
+    
+    private static Properties properties() {
+        var properties = new Properties();
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        return properties;
+    }
+}
+Copiar código
+Além disso, teremos outras propriedades a serem configuradas. Uma delas é o deserializador, que agora será responsável por transformar os bytes em strings, já que anteriormente fizemos a serialização de strings para bytes. Portanto, as chaves (KEY_DESERIALIZER_CLASS_CONFIG) serão deserializadas utilizando o StringDeserializer e .class.getName().
+
+Essas configurações de deserialização serão aplicadas tanto para as chaves quanto para os valores (VALUE_DESERIALIZER_CLASS_CONFIG), utilizando o mesmo deserializador de string. Embora haja mais configurações disponíveis, optaremos por abordá-las posteriormente. Por enquanto, focaremos nessas configurações.
+
+package br.com.alura.ecommerce;
+
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+
+public class Fraud DetectorService {
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+    }
+    
+    private static Properties properties() {
+        var properties = new Properties();
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        return properties;
+    }
+}
+Copiar código
+Quanto ao comportamento do nosso consumidor, ele irá simplesmente solicitar a leitura de mensagens de um determinado local. Para isso, usaremos o método consumer.subscribe() para se inscrever em um tópico específico. Em seguida, passamos uma Collections e uma .singletonList(), que é uma forma simples de criar uma lista. Nesta lista, indicaremos que nosso consumidor irá subscrever o tópico "ECOMMERCE_NEW_ORDER".
+
+package br.com.alura.ecommerce;
+
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+
+public class Fraud DetectorService {
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+    }
+    
+    private static Properties properties() {
+        var properties = new Properties();
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        
+        return properties;
+    }
+}
+Copiar código
+É possível escutar em mais de um tópico, mas isso é incomum porque se torna confuso ter um consumidor escutando em diversos tópicos simultaneamente. Geralmente, cada serviço tem uma função específica e, portanto, estará escutando em um tópico relacionado a essa função específica.
+
+Agora, queremos verificar se há mensagens disponíveis para consumo. Para isso, criaremos uma var record e utilizaremos consumer.poll() passando Duration.ofMillis(100), o que significa que queremos fazer essa verificação por um determinado período de tempo, como 100 milissegundos, o que geralmente é suficiente.
+
+Esse método nos retornará uma lista de registros. Esses registros são exatamente as mensagens que foram enviadas para o tópico em questão. Portanto, podemos verificar se essa lista está vazia. Se estiver vazia, significa que não há mensagens disponíveis para consumo. Em seguida, faremos um retorno (return).
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+        var record = consumer.poll(Duration.ofMillis(100));
+        if(records.isEmpty()) {
+            System.out.println("Não encontrei registros");
+            return;
+        }
+    }
+Copiar código
+Se encontrarmos registros disponíveis, vamos iterar sobre eles utilizando um loop for. Para cada registro em nossa lista de registros, vamos realizar alguma ação. Por exemplo, podemos imprimir uma mensagem indicando que estamos verificando se há fraude na nova ordem: "Processing new order, checking for fraud".
+
+Para isso, podemos aproveitar as informações contidas em cada registro, como a chave, o valor da mensagem, a partição à qual pertence e o offset associado a essa mensagem. Vamos incluir a impressão de um conjunto de hífens para imprimir essas informações de forma organizada, deixando claro que estamos processando uma nova mensagem a cada iteração do loop.
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+        var record = consumer.poll(Duration.ofMillis(100));
+        if(records.isEmpty()) {
+            System.out.println("Não encontrei registros");
+            return;
+        }
+        for(var record: records) {
+            System.out.println("---------------------");
+            System.out.println("Processing new order, checking for fraud");
+            System.out.println(record.key());
+            System.out.println(record.value());
+            System.out.println(record.partition());
+            System.out.println(record.offset());
+        }
+    }
+Copiar código
+Para simular um processo de verificação de fraude mais demorado, vamos introduzir um atraso entre o processamento de cada registro utilizando a função Thread.sleep(5000), que vai fazer com que o programa aguarde por cinco segundos antes de prosseguir para o próximo registro.
+
+Além disso, vamos adicionar um bloco try-catch para lidar com qualquer exceção que possa surgir durante o processo de espera. Apesar de não estarmos realizando nenhuma ação específica durante esse intervalo, isso nos permitirá criar uma pausa artificial.
+
+Então, vamos adicionar uma instrução System.out.println() para indicar que a ordem foi processada com sucesso ou sem sucesso. Dessa forma, conseguiremos acompanhar o progresso do processamento de nossas ordens.
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+        var record = consumer.poll(Duration.ofMillis(100));
+        if(records.isEmpty()) {
+            System.out.println("Não encontrei registros");
+            return;
+        }
+        for(var record: records) {
+            System.out.println("---------------------");
+            System.out.println("Processing new order, checking for fraud");
+            System.out.println(record.key());
+            System.out.println(record.value());
+            System.out.println(record.partition());
+            System.out.println(record.offset());
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                // ignoring
+                e.printStackTrace();
+            }
+                System.out.println("Order processed");
+        }
+    }
+Copiar código
+Agora, vamos tentar executar nosso serviço de detecção de fraude uma vez e observar o que acontece. Vale lembrar que já enviamos três mensagens, então vamos ver como nosso serviço reage a esses registros.
+
+Ao tentar executar, recebemos uma mensagem informando a necessidade de especificar um grupo. Acontece que podemos ter o detector de fraude em execução, mas também podemos ter outras funcionalidades como o envio de e-mails de confirmação de compra ou um sistema de análise de dados que precisa acessar as mesmas mensagens.
+
+Portanto, é importante que cada uma dessas funcionalidades receba todas as mensagens disponíveis. Isso significa que o FraudDetectorService, o Log Service e qualquer outro serviço que esteja escutando esse tópico precisam receber todas as mensagens. Cada um desses serviços é associado a um grupo diferente.
+
+Quando criamos um consumidor, precisamos especificar a qual grupo ele pertence. Para isso, utilizaremos o ID do grupo (GROUP_ID_CONFIG), que será o nome da nossa classe.
+
+Neste caso, para identificar nosso grupo, poderíamos usar FraudDetectorService com .class.getName(). Porém, o método .getName() retorna o nome completo da classe, incluindo o pacote. Então, optaremos pelo método .getSimpleName() para obter um nome mais simples para o ID do grupo, sendo apenas FraudDetectorService.
+
+    private static Properties properties() {
+        var properties = new Properties();
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, FraudDetectorService.class.getSimpleName());
+        return properties;
+    }
+Copiar código
+Portanto, nosso serviço estará associado a um grupo chamado FraudDetectorService. Isso significa que o FraudDetectorService receberá todas as mensagens do tópico. Se houver outros serviços com grupos diferentes, cada um receberá todas as mensagens. No entanto, se dois serviços estiverem no mesmo grupo, as mensagens serão distribuídas entre eles.
+
+Ou seja, um grupo receberá todas as mensagens, mas se vários serviços estiverem no mesmo grupo, não poderemos prever quais mensagens cada serviço receberá. No final, todas as mensagens serão processadas, mas não haverá garantia sobre qual serviço receberá qual mensagem. Essa é a essência dos grupos.
+
+Vamos executar novamente. Ao fazê-lo, não encontramos registros, pois o consumidor está configurado para buscar apenas novas mensagens e ainda não há nenhuma disponível.
+
+Então, o próximo passo é manter o serviço continuamente escutando novas mensagens. Para isso, podemos colocar a chamada do método .poll() dentro de um loop while(true). Isso mantém o serviço em execução indefinidamente, pois ele continuará escutando caso cheguem novas mensagens.
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+        while(true) {
+        var record = consumer.poll(Duration.ofMillis(100));
+        if(records.isEmpty()) {
+            System.out.println("Não encontrei registros");
+            return;
+        }
+        for(var record: records) {
+            System.out.println("---------------------");
+            System.out.println("Processing new order, checking for fraud");
+            System.out.println(record.key());
+            System.out.println(record.value());
+            System.out.println(record.partition());
+            System.out.println(record.offset());
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                // ignoring
+                e.printStackTrace();
+            }
+                System.out.println("Order processed");
+        }
+    }
+}
+Copiar código
+Dentro desse loop, podemos adicionar outras condições de saída, como um sinalizador para indicar quando o serviço deve ser encerrado. Por enquanto, vamos manter simplesmente em um loop while(true). Ao rodar novamente, veremos o serviço aguardando por mensagens.
+
+No entanto, ao encontrar a condição de não haver registros, ele para. Isso, porque, atualmente, estamos usando um return, o que termina a execução do método. Em vez disso, devemos usar um continue para retornar ao início do loop e continuar ouvindo por novas mensagens.
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+        while(true) {
+        var record = consumer.poll(Duration.ofMillis(100));
+        if(records.isEmpty()) {
+            System.out.println("Não encontrei registros");
+            continue;
+        }
+Copiar código
+Ao rodar novamente, podemos ver o serviço continuamente verificando por mensagens. No entanto, pode ser um pouco excessivo imprimir a mensagem de não encontrar registros repetidamente. Vamos ajustar para imprimir a mensagem somente quando registros forem encontrados, indicando quantos registros forem encontrados com o método records.count(). Além disso, precisamos incluir ! na condiconal if.
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+        while(true) {
+        var record = consumer.poll(Duration.ofMillis(100));
+        if(!records.isEmpty()) {
+            System.out.println("Encontrei " + records.count() + " registros");
+            continue;
+        }
+Copiar código
+Portanto, ao encontrar registros, ele imprime quantos foram encontrados. Além disso, podemos mover o trecho de código de iteração (for) para dentro do bloco if, garantindo que a mensagem seja exibida apenas quando registros são encontrados.
+
+    public static void main(String[] args) {
+        var consumer = new KafkaConsumer<String, String>()
+        consumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
+        while(true) {
+        var record = consumer.poll(Duration.ofMillis(100));
+        if(records.isEmpty()) {
+            System.out.println("Encontrei " + records.count() + " registros");
+            for(var record: records) {
+            System.out.println("---------------------");
+            System.out.println("Processing new order, checking for fraud");
+            System.out.println(record.key());
+            System.out.println(record.value());
+            System.out.println(record.partition());
+            System.out.println(record.offset());
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                // ignoring
+                e.printStackTrace();
+            }
+                System.out.println("Order processed");
+                }
+            }
+        }
+    }
+Copiar código
+Ao rodar uma nova ordem de compra, o serviço detecta a ordem e a processa, fornecendo informações sobre a chave, o valor e o offset da mensagem.
+
+Se alterarmos os valores de produção e rodarmos novamente, enviando novas ordens, podemos ver que o FraudDetectorService continua recebendo e processando as mensagens, conforme esperado. Com isso, tanto o produtor quanto o consumidor estão funcionando!
