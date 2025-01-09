@@ -1,4 +1,4 @@
-# study_centre
+# Study Centre
 
 ## Coursera:
 
