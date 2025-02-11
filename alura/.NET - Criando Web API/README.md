@@ -178,7 +178,8 @@ Da linha 5 a 7 desse arquivo, vale notar o uso da extensão : ControllerBase e d
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBaseCopiar código
+public class WeatherForecastController : ControllerBase
+
 Ainda nesse arquivo, temos definições de atributos estáticos, como o Summaries (linha 9), \_logger (linha 14) e o construtor (linha 16). Ao final, temos um método chamado Get() que não recebe parâmetro nenhum e cujo retorno é um enumerável de WeatherForecast.
 
 Apesar deste curso ser voltado para quem está começando a aprender sobre APIs com .NET, é importante que você já tenha uma base de conhecimento sobre C#. Por exemplo, não vamos explicar o que é uma lista, um enumerável ou como implementar uma interface. O foco do treinamento é entender a criação de APIs e conhecer os padrões a serem seguidos.
@@ -209,7 +210,8 @@ Antes disso, vamos explorar o arquivo launchSettings.json, na pasta "Properties"
 }
 }
 }
-}Copiar código
+}
+
 Para salvar as alterações, pressionaremos "Ctrl + S".
 
 Na linha 17 desse arquivo, temos a applicationUrl. Com protocolo HTTPS, usamos o localhost, na porta 7106. Com protocolo HTTP, a porta 5106. Na linha 15, temos a configuração lauchBrowser: true, de modo que o navegador será aberto automaticamente, quando a aplicação for iniciada.
@@ -233,7 +235,8 @@ A vantagem de usar a anotação [Route("[controller]")] em vez de [Route("Weathe
 
 Além disso, imediatamente acima do método Get(), temos a seguinte anotação:
 
-[HttpGet(Name = "GetWeatherForecast")]Copiar código
+[HttpGet(Name = "GetWeatherForecast")]
+
 O HttpGet é uma das operações que podem ser executadas em uma API. Na nossa aplicação, foi exatamente essa ação que executamos ao expandir a seção "GET /WeatherForecast" e pressionar o botão "Execute".
 
 Dessa forma, o controlador sabe que, ao acessar a rota /WeatherForecast com o verbo GET, ele deve executar toda a lógica do método Get()!
@@ -252,26 +255,32 @@ Em seguida, vamos criar um projeto via linha de comando. No menu superior do VS 
 
 Um novo terminal será aberto na parte inferior da tela. Vamos criar uma pasta chamada "projetolinux", com o seguinte comando:
 
-mkdir projetolinuxCopiar código
+mkdir projetolinux
+
 Em seguida, vamos acessar a pasta:
 
-cd projetolinuxCopiar código
+cd projetolinux
+
 E abrir uma nova instância do Visual Studio Code nela:
 
-code .Copiar código
+code .
+
 Na nova instância, abriremos o terminal novamente, com "Ctrl + Shift + '". Para criar um projeto .NET, rodaremos o seguinte comando:
 
-dotnet new webapi --name FilmesApiCopiar código
+dotnet new webapi --name FilmesApi
+
 Assim, criaremos um modelo de Web API com o nome "FilmesApi". No painel à esquerda, temos a mesma estrutura de pastas que teríamos no Visual Studio 2022!
 
 Para executar o projeto, basta rodar o seguinte comando no terminal:
 
-dotnet run --project FilmesApi/FilmesApi.csprojCopiar código
+dotnet run --project FilmesApi/FilmesApi.csproj
+
 Após a compilação, serão mostradas várias informações no terminal, como o endereço de execução da aplicação. No caso, no localhost, na porta 7174 com protocolo HTTPS, ou na porta 5177 com HTTP. Basta dar um "Ctrl + Clique" sobre o endereço para acessá-lo no navegador.
 
 Inicialmente, teremos um erro, pois é preciso acessar o endereço com /swagger ao final. Portanto, usaremos o seguinte endereço:
 
-https://localhost:7174/swagger/index.htmlCopiar código
+https://localhost:7174/swagger/index.html
+
 O foco dessa aula foi apenas criar o projeto, conferir algumas particularidade do .NET 6 e entender como interagir com uma API. Caso tenha ficado alguma dúvida, não se preocupe! Na próxima aula, vamos recriar toda essa lógica do início ao fim com nossos próprios controladores e modelos. Pensaremos como apagar os elementos de weather forecast e começar a migrar para o nosso conceito de filmes.
 
 ## Recebendo os dados de um filme
@@ -294,7 +303,8 @@ namespace FilmesApi.Controllers
 public class FilmeController
 {
 }
-}Copiar código
+}
+
 Vamos posicionar o cursor sobre o namespace, pressionar "Ctrl + Enter" e selecionar "Converter em namespace com escopo de arquivo". Assim, ganhamos mais espaço e centralizamos nosso conteúdo.
 
 Para que essa classe seja um controlador e esteja hábil a lidar com requisições de usuários, precisamos adicionar alguns elementos. A primeira delas são as anotações [ApiController] e [Route], antes da definição da classe:
@@ -306,7 +316,8 @@ namespace FilmesApi.Controllers;
 public class FilmeController
 {
 
-}Copiar código
+}
+
 Quando o usuário enviar uma requisição para /filme, queremos atingir este controlador. Portanto, indicaremos que rota é para o nome do controlador. Como aprendemos anteriormente, podemos fazer essa indicação com colchetes:
 
 namespace FilmesApi.Controllers;
@@ -316,7 +327,8 @@ namespace FilmesApi.Controllers;
 public class FilmeController
 {
 
-}Copiar código
+}
+
 Atualmente, as anotações estão sublinhadas em vermelho como uma indicação de erro, pois faltam algumas importações. Basta posicionar o cursor sobre [ApiController], pressionar "Alt + Enter" e selecionar "using Microsoft.ApsNetCore.Mvc":
 
 using Microsoft.AspNetCore.Mvc;
@@ -328,7 +340,8 @@ namespace FilmesApi.Controllers;
 public class FilmeController
 {
 
-}Copiar código
+}
+
 Além disso, é necessário que a classe FilmeController seja uma extensão do ControllerBase:
 
 using Microsoft.AspNetCore.Mvc;
@@ -340,7 +353,8 @@ namespace FilmesApi.Controllers;
 public class FilmeController : ControllerBase
 {
 
-}Copiar código
+}
+
 A seguir, vamos desenvolver um método chamado AdicionaFilme() para cadastrar um filme no sistema. A princípio, não vamos nos preocupar com o tipo de retorno, apenas usaremos o void:
 
 using Microsoft.AspNetCore.Mvc;
@@ -356,7 +370,8 @@ public void AdicionaFilme()
 
     }
 
-}Copiar código
+}
+
 Ao receber uma requisição para /filme, receberemos por parâmetro as informações do filme que será cadastrado. Esse parâmetro será um objeto do tipo Filme, que chamaremos de filme:
 
 // código anterior omitido
@@ -368,7 +383,8 @@ public void AdicionaFilme(Filme filme)
 
     }
 
-}Copiar código
+}
+
 Em seguida, adicionaremos esse filme a uma lista chamada filmes:
 
 // ...
@@ -379,7 +395,8 @@ public void AdicionaFilme(Filme filme)
 {
 filmes.Add(filme);
 }
-}Copiar código
+}
+
 No entanto, há dois pontos importantes. Nós precisamos:
 
 criar essa lista de filmes.
@@ -398,7 +415,8 @@ public class FilmeController : ControllerBase
         filmes.Add(filme);
     }
 
-}Copiar código
+}
+
 Na sequência, criaremos nossa classe.
 
 Criando um modelo
@@ -411,7 +429,8 @@ namespace FilmesApi.Models
 public class Filme
 {
 }
-}Copiar código
+}
+
 Vamos posicionar o cursor sobre o namespace, pressionar "Alt + Enter" e selecionar "Converter em namespace com escopo de arquivo".
 
 Agora, pensaremos nas propriedades de um filme. Existem inúmeras informações relevantes de um filme — neste curso, trabalharemos com:
@@ -428,7 +447,8 @@ public class Filme
 public string Titulo { get; set; }
 public string Genero { get; set; }
 public int Duracao { get; set; }
-}Copiar código
+}
+
 Após salvar o arquivo, vamos voltar ao FilmeController.cs e fazer a importação do namespace em questão. Posicionando o cursor sobre Filme (sublinhado em vermelho), pressionaremos "Alt + Enter" e selecionaremos "using FilmeApi.Models":
 
 using FilmesApi.Models;
@@ -448,7 +468,8 @@ public class FilmeController : ControllerBase
         filmes.Add(filme);
     }
 
-}Copiar código
+}
+
 A princípio, tudo está funcionando! O Visual Studio não está mostrando mais nenhuma indicação de erro.
 
 Anteriormente, quando fizemos uma requisição GET para WeatherForecast, estávamos recuperando e lendo uma informação do nosso sistema. Agora, nosso objetivo é escrever dados, criando algo dentro do sistema. Portanto, em lugar do verbo GET, usaremos o verbo POST.
@@ -468,7 +489,8 @@ public class FilmeController : ControllerBase
         filmes.Add(filme);
     }
 
-}Copiar código
+}
+
 Dessa maneira, sempre que fizermos uma operação do tipo POST para o controlador de prefixo "Filme", cadastraremos o filme recebido por parâmetro. Apesar de recebê-lo por parâmetro, as informações são enviadas através do corpo da requisição e, para explicitar esse fato, usaremos a anotação [FromBody]:
 
 // ...
@@ -484,7 +506,8 @@ public class FilmeController : ControllerBase
         filmes.Add(filme);
     }
 
-}Copiar código
+}
+
 Sendo assim, definimos que o filme virá pelo corpo da requisição e conterá informações de título, gênero e tempo de duração. Com o método AdicionaFilmes(), adicionaremos esse elemento à lista filmes. Por ora, não estamos nos preocupando em como esse dado será armazenado, vamos simplesmente colocá-lo em uma lista. Mais adiante, podemos melhorar elaborar esses processos.
 
 Como validação, vamos inserir alguns Console.WriteLine() para exibir o título e a duração do filme:
@@ -504,7 +527,8 @@ public class FilmeController : ControllerBase
         Console.WriteLine(filme.Duracao);
     }
 
-}Copiar código
+}
+
 Em seguida, vamos executar nossa aplicação. No menu superior do Visual Studio, basta pressionar o ícone de play com borda verde, ou usar o atalho "Ctrl + F5". Como usamos a configuração launchBrowser: true no arquivo launchSettings.json, a aplicação será executada no navegador, novamente com o Swagger.
 
 Por enquanto, não nos interessa abrir o browser, então vamos alterar essa configuração e alterar seu valor para false:
@@ -522,7 +546,8 @@ Por enquanto, não nos interessa abrir o browser, então vamos alterar essa conf
 "ASPNETCORE_ENVIRONMENT": "Development"
 }
 }
-}Copiar código
+}
+
 A partir de agora, quando executarmos a aplicação, apenas um console será aberto e utilizaremos o Postman para interagir com a nossa API.
 
 Postman
@@ -530,7 +555,8 @@ Na interface do Postman, temos um menu superior, um painel na lateral esquerda e
 
 Uma nova aba será criada, chamada "Untitled Request". À esquerda do método GET, vamos digitar a seguinte URL:
 
-https://localhost:7106/filmeCopiar código
+https://localhost:7106/filme
+
 No menu seguinte, selecionaremos a aba "Body". Depois, vamos marcar "raw" e trocar a opção "Text" para "JSON". Dessa forma, enviaremos um texto no corpo da requisição no formato JSON.
 
 Como estamos usando o padrão arquitetural REST, é comum trafegar dados através de JSON — JavaScript Object Notation. Assim, facilitamos a maneira como trafegamos a informação e sabemos como ela será recebida ou enviada entre os diferentes consumidores e servidores do nosso sistema.
@@ -541,7 +567,8 @@ Na sequência, temos a área onde criaremos o nosso JSON. Colocaremos o título,
 "Titulo" : "Alura Filmes",
 "Genero" : "Aventura",
 "Duracao" : 180
-}Copiar código
+}
+
 Em seguida, vamos clicar no botão azul "Send", à direita da URL que definimos. No painel inferior do Postman, o resultado será o seguinte:
 
 Status: 405 Method Not Allowed
@@ -567,14 +594,16 @@ Há pouco, enviamos os seguintes dados de um filme, via Postman:
 "Titulo" : "Alura Filmes",
 "Genero" : "Aventura",
 "Duracao" : 180
-}Copiar código
+}
+
 No entanto, o usuário poderia escrever informações erradas, com caracteres inválidos, por exemplo:
 
 {
 "Titulo" : "Alura Filmes----------!@#!@#!@#",
 "Genero" : "Televisão",
 "Duracao" : 180000
-}Copiar código
+}
+
 É necessário validar a entrada do usuário, verificando o que pode ou não ser enviado ao sistema. Na próxima aula, estudaremos como validar informações, por exemplo, quais são os tamanhos mínimo e máximo permitidos de um campo.
 
 ## Validando parâmetros recebidos
@@ -585,7 +614,8 @@ A seguir, vamos aprender como validar os dados enviados pelo usuário. No Postma
 "Titulo" : "Avatar",
 "Genero" : "Ação",
 "Duracao" : 162
-}Copiar código
+}
+
 Aparentemente, esses dados são válidos. Ao clicar no botão "Send", conseguimos inserir o filme no nosso sistema e obtemos o seguinte resultado no painel inferior do Postman:
 
 Status: 200 OK
@@ -596,7 +626,8 @@ O que aconteceria se enviássemos dados inválidos? Vamos testar, informando um 
 "Titulo" : " ",
 "Genero" : " ",
 "Duracao" : -120
-}Copiar código
+}
+
 Ao clicar no botão "Send", recebemos o mesmo resultado:
 
 Status: 200 OK
@@ -617,7 +648,8 @@ filmes.Add(filme);
 Console.WriteLine(filme.Titulo);
 Console.WriteLine(filme.Duracao);
 }
-}Copiar código
+}
+
 Também é preciso checar se o gênero não é vazio e se a duração é de, ao menos, 70 minutos (tempo mínimo para um longa-metragem):
 
 // ...
@@ -633,7 +665,8 @@ filmes.Add(filme);
 Console.WriteLine(filme.Titulo);
 Console.WriteLine(filme.Duracao);
 }
-} Copiar código
+}
+
 Ainda é possível acrescentar outras validações. Por exemplo, que o título tenha o máximo de 500 caracteres:
 
 // ...
@@ -650,7 +683,8 @@ filmes.Add(filme);
 Console.WriteLine(filme.Titulo);
 Console.WriteLine(filme.Duracao);
 }
-}Copiar código
+}
+
 Essa estratégia funciona, mas não é muito prática, pois são inúmeras condições que poderíamos adicionar manualmente ao código para verificar se os dados enviados são válidos ou não. Além disso, seria bastante problemático exibir uma mensagem de erro customizada, baseada no parâmetro inválido (título, gênero ou duração). Teríamos que adicionar mais condicionais para evidenciar qual parâmetro é inválido, para então gerar um texto específico e conciso.
 
 Concluímos que colocar validações diretamente no código não é a melhor solução, então vamos retornar o método AdicionaFilme() ao estado original:
@@ -662,7 +696,8 @@ public void AdicionaFilme([FromBody] Filme filme)
 filmes.Add(filme);
 Console.WriteLine(filme.Titulo);
 Console.WriteLine(filme.Duracao);
-}Copiar código
+}
+
 Validação de dados: data annotations
 A seguir, vamos empregar uma solução mais elegante e funcional, usando as Data Annotations para fazer validações em tempo de execução. No arquivo Filme.cs, vamos adicionar as data annotations acima de cada campo que queremos validar.
 
@@ -676,7 +711,8 @@ public class Filme
 public string Titulo { get; set; }
 public string Genero { get; set; }
 public int Duracao { get; set; }
-}Copiar código
+}
+
 Vamos posicionar o cursor sobre essa anotação, pressionar "Alt + Enter" e selecionar "using System.ComponentModelo.DataAnnotations" para fazer a importação do namespace necessário.
 
 Tornaremos as demais propriedades obrigatórias também, adicionando a mesma anotação acima de cada uma delas:
@@ -693,7 +729,8 @@ public string Titulo { get; set; }
 public string Genero { get; set; }
 [Required]
 public int Duracao { get; set; }
-}Copiar código
+}
+
 A seguir, vamos executar nossa aplicação novamente e realizar alguns testes para conferir o que acontece agora quando deixamos de inserir um campo obrigatório.
 
 No Postman, enviaremos uma requisição POST para https://localhost:7106/filme com o seguinte JSON:
@@ -702,7 +739,8 @@ No Postman, enviaremos uma requisição POST para https://localhost:7106/filme c
 "Titulo" : " ",
 "Genero" : " ",
 "Duracao" : -120
-}Copiar código
+}
+
 Ao pressionar o botão "Send", o resultado será:
 
 Status: 400 Bad Request
@@ -720,7 +758,8 @@ Status: 400 Bad Request
 "The Titulo field is required."
 ]
 }
-}Copiar código
+}
+
 Ou seja, fizemos uma requisição inválida (bad request) e recebemos uma resposta em inglês, pouco precisa para o usuário, indicando que os campos "Genero" e "Titulo" são obrigatórios. Seria mais interessante elaborar uma resposta clara e concisa, como:
 
 O título do filme é obrigatório.
@@ -741,7 +780,8 @@ public string Titulo { get; set; }
 public string Genero { get; set; }
 [Required]
 public int Duracao { get; set; }
-}Copiar código
+}
+
 Com a data annotation [MaxLength], também adicionaremos uma validação referente à quantidade máxima de caracteres para o gênero. No caso, o valor máximo será 50:
 
 using System.ComponentModel.DataAnnotations;
@@ -757,7 +797,8 @@ public string Titulo { get; set; }
 public string Genero { get; set; }
 [Required]
 public int Duracao { get; set; }
-}Copiar código
+}
+
 Com [Range], é possível incluir uma validação do intervalo para a duração do filme. O intervalo válido será de 70 a 600 minutos:
 
 using System.ComponentModel.DataAnnotations;
@@ -774,7 +815,8 @@ public string Genero { get; set; }
 [Required]
 [Range(70, 600, ErrorMessage = "A duração deve ter entre 70 e 600 minutos")]
 public int Duracao { get; set; }
-}Copiar código
+}
+
 Testando
 Vamos executar nossa aplicação novamente e realizar mais testes. No Postman, enviaremos mais uma vez um JSON com dados inválidos:
 
@@ -782,7 +824,8 @@ Vamos executar nossa aplicação novamente e realizar mais testes. No Postman, e
 "Titulo" : " ",
 "Genero" : " ",
 "Duracao" : -120
-}Copiar código
+}
+
 Ao pressionar "Send", o resultado obtido será:
 
 Status: 400 Bad Request
@@ -803,14 +846,16 @@ Status: 400 Bad Request
 "A duração deve ter entre 70 e 600 minutos"
 ]
 }
-}Copiar código
+}
+
 As validações estão funcionando e as mensagens de erros ficaram um pouco mais claras para o usuário. Por fim, vamos testar se o nosso sistema continua funcionando normalmente, adicionando informações válidas:
 
 {
 "Titulo" : "Avatar",
 "Genero" : "Ação",
 "Duracao" : 162
-}Copiar código
+}
+
 Ao enviar, a inserção será bem-sucedida:
 
 Status: 200 OK
@@ -820,3 +865,834 @@ Sendo assim, validamos os dados enviados pelo usuário de maneira descomplicada,
 Agora, já conseguimos cadastrar filmes no sistema de forma parcialmente robusta. Na sequência, estudaremos as outras operações para consultar, atualizar e remover filmes da API.
 
 ## Retornando filmes da API
+
+Já conseguimos inserir dados no nosso sistema, realizando a validação. Agora, vamos partir para as operações de busca para conferir os filmes cadastrados!
+
+Como não estamos usando um banco de dados, vamos reiniciar a nossa aplicação para limpar os dados em memória. Uma vez reiniciada, nossa lista de filmes estará vazia novamente.
+
+No Postman, enviaremos duas requisições POST para https://localhost:7106/filme com os dados de filmes, para popular nossa lista. Primeiro, o "Avatar":
+
+{
+"Titulo" : "Avatar",
+"Genero" : "Ação",
+"Duracao" : 162
+}
+
+Depois, "Star Wars":
+
+{
+"Titulo" : "Star Wars",
+"Genero" : "Aventura",
+"Duracao" : 100
+}
+
+Abrindo o console da aplicação, saberemos que as inserções foram feitas, pois temos as seguintes mensagens impressas:
+
+Avatar
+
+162
+
+Star Wars
+
+100
+
+Recuperando filmes
+Nós já criamos o método AdicionaFilme() que, com o verbo HTTP POST executa a operação de inserção de recurso no sistema. Agora, para realizar uma operação de leitura, vamos desenvolver outro método e usar o verbo HTTP GET. No controlador, abaixo de AdicionaFilme(), vamos incluir o método RecuperaFilmes(). Inicialmente, deixaremos o tipo de retorno como void:
+
+// ...
+
+public void RecuperaFilmes()
+{
+
+}
+
+Vamos retornar a lista filmes:
+
+// ...
+
+public void RecuperaFilmes()
+{
+return filmes;
+}
+
+Em seguida, posicionaremos o cursor sobre a palavra return, pressionaremos "Alt + Enter" e selecionar "Corrigir tipo de retorno". Dessa forma, o void na assinatura do método será substituído por List<Filme>:
+
+// ...
+
+public List<Filme> RecuperaFilmes()
+{
+return filmes;
+}
+
+Na sequência, precisamos definir o verbo HTTP utilizado. Para uma operação de leitura, o verbo mais semântico é o GET:
+
+// ...
+
+[HttpGet]
+public List<Filme> RecuperaFilmes()
+{
+return filmes;
+}
+
+Vale lembrar que os verbos HTTP são convenções. Como estamos seguindo o padrão arquitetural REST, é comum usar esse padrão para facilitar a interpretação do código. Ao se deparar com o [HttpPost], uma pessoa rapidamente identifica que o método AdicionaFilme() é responsável pela inserção de recursos no sistema, por exemplo.
+
+Testando
+Vamos salvar essas alterações e reiniciar nossa aplicação. No Postman, enviaremos duas requisições POST novamente, para popular nossa lista de filmes, com os seguintes dados:
+
+{
+"Titulo" : "Avatar",
+"Genero" : "Ação",
+"Duracao" : 162
+}
+
+{
+"Titulo" : "Star Wars",
+"Genero" : "Aventura",
+"Duracao" : 100
+}
+
+À direita da aba atual do Postman, clicaremos no ícone de "+" para criar outra aba. Nela, selecionaremos o verbo GET e digitaremos a seguinte URL:
+
+https://localhost:7106/filme
+
+Ao pressionar o botão "Send", obtemos o seguinte resultado:
+
+Status: 200 OK
+
+[
+{
+"titulo": "Avatar",
+"genero": "Ação",
+"duracao": 162
+},
+{
+"titulo": "Star Wars",
+"genero": "Aventura",
+"duracao": 100
+}
+]
+
+Conseguimos recuperar os filmes cadastrados! A seguir, vamos voltar à aba da requisição POST e tentar inserir um recurso com informações inválidas. Por exemplo, com o tempo de duração igual a -1:
+
+{
+"Titulo" : "Star Wars",
+"Genero" : "Aventura",
+"Duracao" : -1
+}
+
+Ao enviar, receberemos um erro no painel inferior:
+
+Status: 400 Bad Request
+
+{
+"type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+"title": "One or more validation errors occurred.",
+"status": 400,
+"traceId": "00-9b23f53c18b421f70c3aa9ac33f390e0-aca586ca9aecf4b0-00",
+"errors": {
+"Duracao": [
+"A duração deve ter entre 70 e 600 minutos"
+]
+}
+}
+
+Uma vez que houve falha na validação, esperamos que esse último filme não tenha sido inserido na nossa lista. Vamos voltar à aba da requisição GET e pressionar o botão "Send" novamente para conferir a nossa listagem. O resultado será o seguinte:
+
+Status: 200 OK
+
+[
+{
+"titulo": "Avatar",
+"genero": "Ação",
+"duracao": 162
+},
+{
+"titulo": "Star Wars",
+"genero": "Aventura",
+"duracao": 100
+}
+]
+
+Continuamos apenas com o filme "Avatar" e "Star Wars", não consta o filme cujos dados não passaram pela validação. Nosso sistema está funcionando perfeitamente!
+
+Considerações sobre a classe List<T>
+Por fim, comentaremos alguns pontos que envolvem conceitos de polimorfismo. No método RecuperaFilmes(), estamos retornando uma lista de filmes. Vamos fazer um "Ctrl + Clique" sobre List<> para explorar como a classe List<T> funciona.
+
+A classe List<T> faz a extensão e implementação de algumas classes e interfaces, como ICollection<T>, IEnumerable<T> e IEnumerable.
+
+Voltando ao método RecuperaFilmes(), em vez de definir o retorno como uma lista de filmes (List<Filme>), vamos usar um enumerável de filmes (IEnumerable<Filme>). Posteriormente, se a implementação da nossa lista for alterada e deixar de utilizar a classe List<> por outra classe que implemente IEnumerable, não precisaremos trocar a assinatura do nosso método:
+
+// ...
+
+[HttpGet]
+public IEnumerable<Filme> RecuperaFilmes()
+{
+return filmes;
+}
+
+Ou seja, estamos deixando nosso código mais abstrato possível. Quanto menos dependermos de classes concretas, melhor para o nosso código.
+
+Assim, desenvolvemos mais uma operação no nosso sistema. Agora, os usuários conseguem verificar a lista de filmes cadastrados. A seguir, exploraremos como retornar filmes com critérios mais específicos.
+
+## Recuperando filmes por ID
+
+Nesta aula, vamos aprimorar a busca por filmes no nosso sistema. De início, pensaremos em alguns casos peculiares que poderiam ser problemáticos na nossa API.
+
+Digamos que um dos itens cadastrados é "Planeta dos Macacos", filme de 1968, do diretor Franklin J. Schaffner:
+
+{
+"Titulo" : "Planeta dos Macacos",
+"Genero" : "Ação",
+"Duracao" : 112
+}
+
+Além disso, também consta no nosso sistema o remake desse filme — "Planeta dos Macacos", de 2011, do diretor Tim Burton:
+
+{
+"Titulo" : "Planeta dos Macacos",
+"Genero" : "Ação",
+"Duracao" : 119
+}
+
+Ao buscar a listagem de filmes, teremos dois filmes com o mesmo nome, ainda que os tempos de durações sejam diferentes:
+
+[
+{
+"titulo": "Avatar",
+"genero": "Ação",
+"duracao": 162
+},
+{
+"titulo": "Star Wars",
+"genero": "Aventura",
+"duracao": 100
+},
+{
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 112
+},
+{
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 119
+}
+]
+
+Como podemos diferenciar esses filmes? Para esse caso em específico, uma opção seria adicionar um campo para data de lançamento ou nome dos diretores, mas eventualmente poderíamos nos deparar com outros cenários de conflitos semelhantes. O ideal, então, é ter um identificador para cada filme, um critério que garanta que todo filme seja único no sistema.
+
+Uma maneira bem simples e tradicional é inserir o atributo de identificador, o famoso ID.
+
+Adicionando o ID
+No controlador, criaremos um campo do tipo inteiro, chamado id, cujo valor inicial é 0:
+
+using FilmesApi.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace FilmesApi.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class FilmeController : ControllerBase
+{
+
+    private static List<Filme> filmes = new List<Filme>();
+    private static int id = 0;
+
+    [HttpPost]
+    public void AdicionaFilme([FromBody] Filme filme)
+    {
+        filmes.Add(filme);
+        Console.WriteLine(filme.Titulo);
+        Console.WriteLine(filme.Duracao);
+    }
+
+    [HttpGet]
+    public IEnumerable<Filme> RecuperaFilmes()
+    {
+        return filmes;
+    }
+
+}
+
+Ao inserir um filme no sistema, vamos definir o ID do filme como id++. Assim, a cada novo filme, o ID será incrementado:
+
+// ...
+
+[HttpPost]
+public void AdicionaFilme([FromBody] Filme filme)
+{
+filme.Id = id++;
+filmes.Add(filme);
+Console.WriteLine(filme.Titulo);
+Console.WriteLine(filme.Duracao);
+}
+
+// ...
+
+Além disso, é preciso inserir a propriedade Id no nosso modelo. No método AdicionaFilme(), basta posicionar o cursor sobre Id (em filme.Id), pressionar "Alt + Enter" e selecionar "Gerar propriedade 'Id'".
+
+Acessando o arquivo Filme.cs, a propriedade Id foi gerada abaixo da propriedade Duracao. Para facilitar a visualização desse campo, vamos colocá-lo antes da propriedade Titulo. Além disso, substituiremos o internal set por apenas set:
+
+using System.ComponentModel.DataAnnotations;
+
+namespace FilmesApi.Models;
+
+public class Filme
+{
+public int Id { get; set; }
+[Required(ErrorMessage = "O título do filme é obrigatório")]
+public string Titulo { get; set; }
+[Required(ErrorMessage = "O gênero do filme é obrigatório")]
+[MaxLength(50, ErrorMessage = "O tamanho do gênero não pode exceder 50 caracteres")]
+public string Genero { get; set; }
+[Required]
+[Range(70, 600, ErrorMessage = "A duração deve ter entre 70 e 600 minutos")]
+public int Duracao { get; set; }
+}
+
+Não precisamos nos preocupar em colocar a anotação [Required], pois é o nosso próprio sistema que insere esse ID, não um usuário.
+
+Vamos salvar todas as alterações e reexecutar nossa aplicação. Ao reiniciá-la, perderemos a nossa listagem de filmes novamente, então vamos enviar alguns dados pelo Postman, mais uma vez:
+
+{
+"Titulo" : "Planeta dos Macacos",
+"Genero" : "Ação",
+"Duracao" : 115
+}
+
+{
+"Titulo" : "Planeta dos Macacos",
+"Genero" : "Ação",
+"Duracao" : 120
+}
+
+{
+"Titulo" : "Star Wars",
+"Genero" : "Aventura",
+"Duracao" : 120
+}
+
+Em seguida, vamos fazer uma requisição GET para verificar a listagem. Como resultado, notaremos que agora cada filme tem um ID:
+
+[
+{
+"id": 0,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 115
+},
+{
+"id": 1,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+{
+"id": 2,
+"titulo": "Star Wars",
+"genero": "Aventura",
+"duracao": 120
+}
+]
+
+Buscando por ID
+Agora, conseguimos diferenciar nossos filmes pelo ID. O próximo passo é desenvolver uma maneira de recuperar um elemento pelo ID, independentemente do seu título, para ter um retorno único!
+
+No controlador, já temos um POST para fazer a inserção de recursos e um GET para recuperar todos os filmes cadastrados no sistema. Que verbo utilizaremos agora para recuperar um filme só? Será que podemos repetir o GET?
+
+Podemos, porém com algumas condições! Antes de nos aprofundar nessa questão, vamos desenvolver um método de busca por ID.
+
+Ao final do controlador, vamos criar o método RecuperaFilmePorId(), inicialmente com retorno do tipo void. Assim como recebemos o filme por parâmetro no método AdicionaFilmes(), agora receberemos o ID:
+
+// ...
+
+public void RecuperaFilmePorId(int id)
+{
+
+}
+
+Em seguida, utilizaremos o LINQ para fazer uma solução bem elegante. Com o método .FirstOfDefault(), buscaremos o primeiro resultado cujo ID é igual ao recebido via parâmetro:
+
+// ...
+
+public void RecuperaFilmePorId(int id)
+{
+return filmes.FirstOrDefault(filme => filme.Id == id);
+}
+
+Assim, para cada elemento da lista filmes, verificaremos se seu ID é igual ao ID recebido por parâmetro. Se for igual, esse filme será retornado. Porém, se iterarmos por toda a lista e não encontrarmos nenhum elemento que preencha esse requisito, retornaremos o valor default (padrão) — nesse caso, nulo.
+
+Posicionando o cursor sobre a palavra return nesse método, pressionaremos "Alt + Enter" e selecionaremos "Corrigir tipo de retorno":
+
+// ...
+
+public Filme? RecuperaFilmePorId(int id)
+{
+return filmes.FirstOrDefault(filme => filme.Id == id);
+}
+
+Note que o Visual Studio indicou o tipo de retorno como Filme?, com um ponto de interrogação ao final, porque o Filme pode ser nulo. Sabemos que, caso não haja nenhum filme com o ID informado, o retorno será nulo, então vamos manter o ponto de interrogação. Se o removêssemos, estaríamos assumindo que o retorno nunca será nulo.
+
+Por fim, faremos a indicação do verbo GET:
+
+// ...
+
+[HttpGet]
+public Filme? RecuperaFilmePorId(int id)
+{
+return filmes.FirstOrDefault(filme => filme.Id == id);
+}
+
+Agora, tanto o método RecuperaFilmes() quando o método RecuperaFilmePorId() usam o verbo GET. Ao receber uma requisição GET em /filmes, como nosso sistema saberá qual deles acionar? A diferença está no recebimento do parâmetro id! Portanto, junto do verbo HttpGet, vamos informar que ele receberá o parâmetro id:
+
+// ...
+
+[HttpGet("{id}")]
+public Filme? RecuperaFilmePorId(int id)
+{
+return filmes.FirstOrDefault(filme => filme.Id == id);
+}
+
+Quando passarmos um ID no GET, o sistema executará o RecuperaFilmePorId(). Do contrário, o método RecuperaFilmes() será acionado.
+
+Sendo assim, será feito um bind automaticamente e o valor passado na requisição será passado como parâmetro ao método.
+
+Testando
+Vamos reiniciar nossa aplicação e popular nossa lista com dois filmes, usando o Postman para enviar requisições com os seguintes dados:
+
+{
+"Titulo" : "Star Wars",
+"Genero" : "Aventura",
+"Duracao" : 120
+}
+
+{
+"Titulo" : "Planeta dos Macacos",
+"Genero" : "Ação",
+"Duracao" : 120
+}
+
+Em seguida, enviaremos uma requisição GET para verificar os itens cadastrados. Como resultado, temos a seguinte lista:
+
+[
+{
+"id": 0,
+"titulo": "Star Wars",
+"genero": "Aventura",
+"duracao": 120
+},
+{
+"id": 1,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+}
+]
+
+Para recuperar o filme com ID igual a 1, basta realizar uma requisição GET com o parâmetro 1:
+
+https://localhost:7106/filme/1
+
+Ao pressionar o botão "Send", o retorno no painel inferior do Postman será o filme "Planeta dos Macacos", cujo ID é 0:
+
+{
+"id": 1,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+}
+
+Conseguimos adicionar um novo critério de busca! Agora, é possível pesquisar filmes a partir de seu ID e identificar os recursos do nosso sistema de maneira única!
+
+No entanto, vamos assumir que eventualmente nossa lista pode ficar bastante extensa, por exemplo, com milhares de filmes. Não é interessante que o usuário fique restrito a recuperar apenas um filme pelo ID ou carregar todos os filmes de uma vez. Na próxima aula, vamos pensar em alternativas de carregamento desses dados.
+
+## Paginando resultados
+
+No início desta aula, o instrutor preenche a lista com 100 filmes, do ID 0 ao 99, para demonstrar possíveis problemas com bases de dados muito grandes. Se quiser, você pode reproduzir esse cenário no seu computador com várias requisições POST, mas isso não é obrigatório para acompanhar o curso.
+
+Atualmente, nosso sistema conta com apenas duas opções de carregamento de dados:
+
+carregar um único filme, a partir de seu ID
+carregar a lista completa de filmes de uma única vez
+Considerando uma base de dados vasta, poderíamos nos deparar com problemas de consumo de memória ou de vazamento de memória ao carregar todos os elementos ao mesmo tempo. Se estivéssemos usando uma máquina da AWS, por exemplo, precisaríamos aumentar custos com a memória para evitar essas questões!
+
+Em vez disso, seria interessante encontrar um meio-termo entre carregar apenas um filme ou todos eles simultaneamente. Podemos obter esse resultado com a paginação, um conceito bastante difundido em programação para Web.
+
+Paginação
+A paginação nos permite retornar trechos da nossa lista, em lugar de sua totalidade. Para aplicar esse conceito no .NET, utilizaremos os métodos .Skip() e Take().
+
+O método Skip() indica quantos elementos da lista pular, enquanto o Take() define quantos serão selecionados. Vamos conferir na prática como eles funcionam, no método RecuperaFilmes():
+
+// ...
+
+[HttpGet]
+public IEnumerable<Filme> RecuperaFilmes()
+{
+return filmes.Skip(50).Take(10);
+}
+
+Com esse código, especificamos que queremos pular 50 elementos e, em seguida, selecionar 10 elementos. Vamos salvar essa alteração.
+
+Se reiniciássemos a aplicação, perderíamos os 100 filmes que inserimos na lista. Em vez disso, vamos utilizar o recurso de hot reload do .NET 6! No menu superior do Visual Studio, basta clicar no botão de recarga dinâmica com o símbolo de uma chama vermelha. Alternativamente, podemos usar o atalho "Alt + F10". Assim, recarregamos a aplicação dinamicamente e não perdemos os dados que cadastramos!
+
+Agora, ao realizar uma requisição GET para https://localhost:7106/filme, o retorno será uma lista dos filmes do ID 50 ao 59:
+
+[
+{
+"id": 50,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+{
+"id": 51,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+
+// ...
+
+    {
+        "id": 59,
+        "titulo": "Planeta dos Macacos",
+        "genero": "Ação",
+        "duracao": 120
+    },
+
+]
+
+Já reduzimos a quantidade de dados retornada ao usuário, evitando problemas de memória. O próximo passo é parametrizar o método RecuperaFilmes() para o usuário informar quantos elementos pular e quantos exibir.
+
+Parametrizando
+No método RecuperaFilmes(), receberemos como parâmetros os números inteiros skip e take, que serão usados nos métodos Skip() e Take(), respectivamente:
+
+// ...
+
+[HttpGet]
+public IEnumerable<Filme> RecuperaFilmes(int skip, int take)
+{
+return filmes.Skip(skip).Take(take);
+}
+
+Ao reexecutar dinamicamente a aplicação, surgirá uma caixa de diálogo explicando que a "recarga dinâmica não pode aplicar automaticamente suas alterações". Vamos clicar em "Recriar e Aplicar Alterações".
+
+Enviando uma requisição GET, o resultado será um erro, porque não definimos o valor de skip e take. É preciso explicitar que o próprio usuário informará esses dados, por meio da consulta (query). Para tanto, usaremos a anotação [FromQuery]:
+
+// ...
+
+[HttpGet]
+public IEnumerable<Filme> RecuperaFilmes([FromQuery]int skip,
+[FromQuery]int take)
+{
+return filmes.Skip(skip).Take(take);
+}
+
+Vamos reexecutar dinamicamente a aplicação. No Postman, enviaremos uma requisição GET com os parâmetros skip e take. Basta adicionar um ponto de interrogação ao final da URL e informá-los, separados pelo símbolo "&":
+
+https://localhost:7106/filme?skip=10&take=5
+
+O retorno será uma lista vazia, porque quando pressionamos o botão "Recriar e Aplicar Alterações" perdemos nossos dados. Para continuar nossos testes, precisamos inserir alguns filmes na lista, enviando 20 requisições com dados do filme "Planeta dos Macacos":
+
+{
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+}
+
+Depois, vamos repetir a última requisição GET. Dessa vez, o resultado será uma lista de filme com ID de 10 a 14, pois passamos por parâmeotro que queremos pular 10 elementos e selecionar 5:
+
+[
+{
+"id": 10,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+{
+"id": 11,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+{
+"id": 12,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+{
+"id": 13,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+{
+"id": 14,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+},
+]
+
+Valores padrões
+A seguir, vamos definir valores padrões para skip e take. Caso o usuário não informe quantos elementos pular, vamos assumir que o valor de skip é 0:
+
+// ...
+
+[HttpGet]
+public IEnumerable<Filme> RecuperaFilmes([FromQuery]int skip = 0,
+[FromQuery]int take)
+{
+return filmes.Skip(skip).Take(take);
+}
+
+Quanto ao parâmetro take, vamos determinar que seu valor padrão é 50, pois é um número razoável de itens para serem carregados em memória. Vale lembrar que essa quantia depende do tipo de conteúdo que estamos carregando. É importante sempre fazer uma avaliação:
+
+// ...
+
+[HttpGet]
+public IEnumerable<Filme> RecuperaFilmes([FromQuery]int skip = 0,
+[FromQuery]int take = 50)
+{
+return filmes.Skip(skip).Take(take);
+}
+
+Vamos fazer a recarga dinâmica novamente ("Alt + F10") e clicar em "Recriar e Aplicar Alterações". No Postman, vamos enviar 70 requisições POST para popular nossa lista. Em seguida, enviaremos uma requisição GET sem os parâmetros skip e take:
+
+https://localhost:7106/filme
+
+No painel inferior do Postman, o retorno será uma lista de filmes do ID 0 ao 49, pois não pulamos nenhum elemento e selecionamos apenas 50.
+
+Por fim, podemos realizar uma requisição GET apenas com o parâmetro take, especificando o número 60:
+
+https://localhost:7106/filme?take=60
+
+O retorno será uma lista dos filmes do ID 0 ao 59!
+
+Assim, conseguimos aplicar o conceito de paginação na nossa aplicação com os métodos Skip() e Take(). Agora, não precisamos mais carregar todas as instâncias de uma única vez. Em lugar disso, podemos informar quantos elementos queremos pular e quantos pretendemos recuperar. Caso nenhum valor seja passado, temos valores padrões definidos para esses parâmetros.
+
+Na sequência, vamos adequar nossa aplicação aos padrões REST.
+
+## Padronizando o retorno
+
+Nesta aula, padronizaremos nossa aplicação a nível de REST.
+
+No Postman, vamos enviar uma requisição GET e buscar pelo filme com ID igual a 1:
+
+https://localhost:7106/filme/1
+
+No painel inferior, temos o seguinte resultado:
+
+Status: 200 OK
+
+{
+"id": 1,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+}
+
+Posicionando o cursor sobre "200 OK", aparecerá um menu suspenso explicando o que esse status significa: "resposta padrão para requisições HTTP realizadas com sucesso", entre outras informações. Aparentemente, a resposta obtida ao receber uma resposta de uma consulta bem-sucedida está boa.
+
+Agora, vamos buscar por um filme com o ID que não consta na nossa lista, por exemplo, 1000:
+
+https://localhost:7106/filme/1000
+
+O resultado mostrará o status, mas não terá nada o corpo da resposta:
+
+Status: 204 No Content
+
+Posicionando o cursor sobre "204 No Content", temos a explicação: "o servidor processou a requisição com sucesso, mas não retornou nenhum conteúdo".
+
+Essa resposta parece válida, porém há uma resposta mais semanticamente correta e aceita por quem consome APIs RESTful e não encontra o resultado procurado. Quando estamos navegando por sites e acessamos uma página que não é encontrada, recebemos o famoso 404 Not Found.
+
+Para exemplificar, vamos tentar entrar no site da Alura em uma página que não existe:
+
+https://www.alura.com.br/abc
+
+No front-end, temos a mensagem "Acho que nos perdemos".
+
+Nessa página, vamos pressionar "F12" para abrir o menu de inspeção na lateral direita do navegador. Após abrir a aba "Console", vamos atualizar a página com a tecla "F5". Na primeira linha, recebemos o erro 404:
+
+GET https://www.alura.com.br/abc 404
+
+Abrindo a aba "Network", vamos selecionar o item "abc" no início da lista à esquerda. No painel à direita, temos as seguintes informações da requisição:
+
+Request URL: https://www.alura.com.br/abc
+Request Method: GET
+Status Code: 404
+Se acessarmos uma página que existe, receberíamos o status 200.
+
+Métodos NotFound() e Ok()
+A seguir, vamos adequar nossa aplicação a este padrão, de modo a receber o status 404 quando algum recurso não for encontrado.
+
+No controlador, no método RecuperaFilmePorId(), não vamos mais simplesmente retornar o resultado do .FirstOfDefault(). Em vez disso, vamos salvar o retorno na variável filme:
+
+// ...
+
+[HttpGet("{id}")]
+public Filme? RecuperaFilmePorId(int id)
+{
+var filme = filmes.FirstOrDefault(filme => filme.Id == id);
+}
+
+Em seguida, vamos desenvolver um bloco if. Se a variável filme for nula, significa que não encontramos o filme com o ID informado. Nesse caso, vamos retornar um NotFound():
+
+// ...
+
+[HttpGet("{id}")]
+public Filme? RecuperaFilmePorId(int id)
+{
+var filme = filmes.FirstOrDefault(filme => filme.Id == id);
+if (filme == null) return NotFound();
+}
+
+Se o filme for encontrado, retornamos um Ok(), passando o filme como parâmetro:
+
+// ...
+
+[HttpGet("{id}")]
+public Filme? RecuperaFilmePorId(int id)
+{
+var filme = filmes.FirstOrDefault(filme => filme.Id == id);
+if (filme == null) return NotFound();
+return Ok(filme);
+}
+
+Além disso, é necessário corrigir o tipo de retorno, pois passamos a retornar NotFound() ou Ok(), que são métodos do ControllerBase. Na assinatura do método, vamos substituir Filme? por IActionResult — resultado de uma ação da interface:
+
+// ...
+
+[HttpGet("{id}")]
+public IActionResult RecuperaFilmePorId(int id)
+{
+var filme = filmes.FirstOrDefault(filme => filme.Id == id);
+if (filme == null) return NotFound();
+return Ok(filme);
+}
+
+Vamos reexecutar nossa aplicação. No Postman, enviaremos algumas requisições POST para popular nossa lista de filmes novamente. Em seguida, faremos uma requisição GET, buscando um ID que existe na nossa base de dados:
+
+https://localhost:7106/filme/1
+
+O resultado terá status 200, com os dados do filme:
+
+Status: 200 OK
+
+{
+"id": 1,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+}
+
+Depois, testaremos buscar por um ID que não existe na lista:
+
+https://localhost:7106/filme/1000
+
+Agora, o retorno será um 404 Not Found:
+
+Status: 404 Not Found
+
+{
+"type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+"title": "Not Found",
+"status": 404,
+"traceId": "00-6adc20b80b8ddcfb5e5bc0179527ab92-763762aad5622bdc-00"
+}
+
+Na sequência, vamos adaptar os demais métodos da nossa aplicação.
+
+Outros cenários
+O método RecuperaFilmes() possui dois cenários. Se tivermos filmes em memória, a resposta tem status 200 OK e obtemos a lista de filmes. Mas e se nossa lista estiver vazia?
+
+Vamos reexecutar nossa aplicação para limpar os dados em memória. Ao enviar um GET, continuamos obtendo status 200. A única diferença é que a lista está vazia:
+
+Status: 200 OK
+
+[]
+
+Será que, nesse caso, seria interessante retornarmos um 404 também? Não, porque pedimos pela lista de filmes e recebemos a lista de filmes. Trata-se de uma lista vazia e não de um recurso que não foi encontrado.
+
+Quanto ao método AdicionaFilme(), vamos remover os dois Console.WriteLine(), pois já validamos e tudo está funcionando como esperado.
+
+Seguindo o REST, o padrão para requisições POST é retornar o objeto que foi criado ao usuário. No nosso caso, o filme que foi cadastrado. Além disso, devemos informar ao usuário o caminho em que ele pode encontrar esse filme que acaba de ser cadastrado.
+
+Ao final do método AdicionaFilme(), vamos retornar um CreatedAtAction():
+
+// ...
+
+[HttpPost]
+public void AdicionaFilme([FromBody] Filme filme)
+{
+filme.Id = id++;
+filmes.Add(filme);
+return CreatedAtAction();
+}
+
+Seu primeiro parâmetro será o método utilizado para retornar o elemento que acabamos de criar. No nosso caso, o método RecuperaFilmePorId().
+
+O segundo parâmetro são os parâmetros que o RecuperaFilmePorId() precisa para retornar o elemento que acabamos de criar. No caso, é o ID do filme.
+
+O terceiro parâmetro é o objeto que foi criado:
+
+// ...
+
+[HttpPost]
+public void AdicionaFilme([FromBody] Filme filme)
+{
+filme.Id = id++;
+filmes.Add(filme);
+return CreatedAtAction(nameof(RecuperaFilmePorId),
+new { id = filme.Id },
+filme);
+}
+
+Por fim, vamos corrigir o tipo de retorno do método AdicionaFilme(), substituindo void por IActionResult:
+
+// ...
+
+[HttpPost]
+public IActionResult AdicionaFilme([FromBody] Filme filme)
+{
+filme.Id = id++;
+filmes.Add(filme);
+return CreatedAtAction(nameof(RecuperaFilmePorId),
+new { id = filme.Id },
+filme);
+}
+
+Vamos reexecutar nossa aplicação. No Postman, a enviar uma requisição POST, obtemos o status 201 Created e os dados do filme criado:
+
+Status: 201 Created
+
+{
+"id": 0,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+}
+
+Além disso, na aba "Headers" do painel inferior do Postman, agora temos o campo "Location" com a URL referente ao recurso criado:
+
+Location: https://localhost:7106/Filme/0
+
+Realizando uma requisição GET para esse endereço, o retorno será o objeto que acabamos de criar:
+
+Status: 200 OK
+
+{
+"id": 0,
+"titulo": "Planeta dos Macacos",
+"genero": "Ação",
+"duracao": 120
+}
+
+Conseguimos adequar nossa aplicação aos padrões REST. Futuramente, as pessoas que consumirem essa API entenderão que:
+
+ao receber um status 201, algum recurso foi criado;
+ao receber um status 200, a requisição foi bem-sucedida;
+ao receber um status 404, o recurso não foi encontrado.
+Padronizando nossa API, tanto nosso código quantos nossos resultados são mais compreensíveis para outras pessoas que venham a trabalhar com eles.
