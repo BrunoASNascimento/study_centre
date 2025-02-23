@@ -1696,3 +1696,542 @@ ao receber um status 201, algum recurso foi criado;
 ao receber um status 200, a requisição foi bem-sucedida;
 ao receber um status 404, o recurso não foi encontrado.
 Padronizando nossa API, tanto nosso código quantos nossos resultados são mais compreensíveis para outras pessoas que venham a trabalhar com eles.
+
+## Conectando ao banco de dados
+
+Inserimos os dados dos filmes na nossa aplicação e colocamos esses dados em memória.
+
+Tivemos que lidar com alguns problemas porque não tivemos uma comunicação bem efetiva com o banco de dados. Para resolver esse problema, precisamos começar a importar o que é necessário na nossa aplicação e fazer as devidas configurações para termos uma comunicação com o banco, pois precisamos ter mais robustez no nosso sistema.
+
+Para isso, precisaremos usar alguns pacotes. Vamos no menu superior em "Ferramentas > Gerenciador de Pacotes do NuGet > Gerenciar Pacotes do NuGet para a Solução". Será aberta uma nova aba e, dentro dela, clicaremos em "Procurar". No campo de pesquisa vamos procurar por "entity", que é o framework de persistência mais utilizado dentro do .NET.
+
+Utilizaremos o Microsoft.EntityFrameworkCore na versão 6.0.10, que é a versão estável mais recente durante a gravação desse vídeo.
+
+Após clicar em "Microsoft.EntityFrameworkCore", deixaremos marcadas as caixas de seleção de "Projeto" e de "FilmesAPI". Em seguida, clicaremos em "Instalar" para começar o processo de instalação.
+
+Faremos também o download de Microsoft.EntityFrameworkCore.Tools na versão 6.0.10 e deixando marcadas as caixas de seleção de "Projeto" e de "FilmesAPI".
+
+Se você usa Linux pode ver a atividade "Para Saber Mais: pacotes Nuget no Linux" para instalar pacotes do Nuget utilizando o Linux.
+
+Instalados os pacotes Microsoft.EntityFrameworkCore e Microsoft.EntityFrameworkCore.Tools vamos configurar a forma como usaremos o mapeamento entre a nossa aplicação e o banco de dados.
+
+Qual será o contexto que teremos para acessar esse banco?
+
+Se começaremos a mexer com a parte de persistência e acesso a dados, é recomendado criarmos uma pasta responsável pela questão do acesso ao banco. Então, no gerenciador de soluções, clique com o botão direito do mouse em cima do nome do nosso projeto "FilmesApi", adicionaremos uma nova pasta chamada "Data".
+
+Com um clique do botão direito do mouse sobre a pasta "Data" vamos adicionar uma classe chamada FilmeContext.cs que será responsável por fazer esse contexto entre nossa aplicação e o banco de dados.
+
+Essa classe recém-criada é um contexto de banco de dados, como especificar isso e garantir que isso vai acontecer?
+
+Assim como a classe Controller estende de ControllerBase, no caso do FilmeContext precisamos informar que ele vai estender de DbContext.
+
+using Microsoft.EntityFrameworkCore;
+
+namespace FilmesApi.Data
+{
+public class FilmeContext : DbContext
+{
+
+    }
+
+}
+
+Vamos inserir um construtor dessa classe. Podemos usar o atalho para a sintaxe de construtor, escrevendo ctor e pressionando "Tab" duas vezes.
+
+namespace FilmesApi.Data
+{
+public class FilmeContext : DbContext
+{
+public FilmeContext()
+{
+
+        }
+    }
+
+}
+
+Esse construtor vai receber uma configuração, as opções de acesso ao banco desse contexto. Como parâmetro de FilmeContext vamos inserir (DbContextoOptions<FilmeContext> opts), "opts" como abreviação de "options". Mas não faremos a utilização dele especificamente dentro desse construtor, faremos a passagem dessas opções para o construtor da classe que estamos estendendo, que é o próprio DbContext.
+
+namespace FilmesApi.Data
+{
+public class FilmeContext : DbContext
+{
+public FilmeContext(DbContextoOptions<FilmeContext> opts)
+: base(opts)
+{
+
+        }
+    }
+
+}
+
+A parte do nosso construtor já foi resolvida, agora precisamos criar a propriedade que vai dar acesso aos filmes da nossa base de dados.
+
+Para isso, criaremos um public DbSet<Filme> Filmes {get; set;}, vai ser um conjunto de dados do nosso banco e o nome da propriedade será Filmes porque ela vai conter os filmes que teremos na nossa base.
+
+Como o editor está indicando erro em <Filme>, vamos pressionar com o cursor em cima dele o atalho "Alt + Enter" para fazer o import desse modelo.
+
+public DbSet<Filme> Filmes {get; set;}
+
+Perfeito. Já declaramos o FilmeContext e o construtor, e criamos a propriedade. Mas falta o seguinte: como saberemos onde conectar? Onde está o banco de dados?
+
+No início do curso fizemos o download do MySQL, criamos também usuário e senha. Precisamos colocar isso na aplicação de alguma maneira. Como a aplicação vai se autenticar no banco e saber onde ele está? É isso que resolveremos agora.
+
+Primeiro, vamos adicionar essa informação no appsettings.json. Adicionaremos o campo "ConnectionStrings" e dentro desse campo teremos "FilmeConnection" indicando o servidor ao qual queremos nos conectar, o usuário e a senha, são diversas informações que colocaremos agora à frente do "FilmeConnection":.
+
+Qual servidor utilizaremos? Ele está rodando na nossa máquina, então server=localhost. Qual o banco de dados que queremos utilizar? O database=filme. Quando criamos o usuário e a senha definimos como root, user=root e password=root.
+
+{
+"Logging": {
+"LogLevel": {
+"Default": "Information",
+"Microsoft.AspNetCore": "Warning"
+}
+},
+"AllowedHosts": "\*",
+"ConnectionStrings": {
+"FilmeConnection": "server=localhost;database=filme;user=root;password=root"
+}
+}
+
+Fizemos as definições do servidor, do banco de dados, do usuário e senha. Mas ainda falta um detalhe. Em qual momento vamos carregar essa informação da ConnectionStrings na aplicação?
+
+A classe que define o que queremos fazer no momento de construção da aplicação é o Program.cs. Então no Program.cs vamos utilizar o builder.Services e adicionar uma conexão ao banco de dados com builder.Services.AddDbContext<FilmeContext>.
+
+using FilmesApi.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<FilmeContext>
+
+Em seguida, definiremos quais as opções para conectar a esse banco. Com essas opções quero utilizar SQL. Mas ao escrever opts => opts.use não aparece na caixa de autocompletar a opção "useMySQL" porque estamos dependendo de uma outra dependência.
+
+Precisamos baixar a biblioteca do MySQL. Vamos para a aba que abrimos no começo do vídeo, aba de "Gerenciar Pacotes do NuGet para a Solução" e vamos pesquisar por "mysql".
+
+Usaremos a Pomelo.EntityFrameworkCore.MySql, a versão 6.0.2 com as caixas de seleção para "Projeto" e "FilmesApi" selecionadas vamos clicar em "Instalar".
+
+Por fim, voltando ao Program.cs vamos inserir o UseMySql, agora temos acesso a ele. E passaremos como parâmetro dele o builder.Configuration pegando a ConnectionStrings e a string de conexão que queremos pegar é a FilmeConnection.
+
+using FilmesApi.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<FilmeContext>(opts =>
+opts.UseMySql(builder.Configuration.GetconnectionString("FilmeConnection")));
+
+A partir desse momento, como estamos usando a biblioteca da Pomelo, ele recebe um parâmetro adicional. Então, caso você esteja habituado a usar o Entity Framework diretamente, ou tem usado as versões anteriores do .NET sem a Pomelo, o que você precisa fazer agora é passar um outro parâmetro importante que é a versão do servidor que ele vai utilizar. Então, o segundo parâmetro que passaremos é ServerVersion com o AutoDetect para ele mesmo detectar qual versão vai utilizar com essa ConnectionString.
+
+using FilmesApi.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<FilmeContext>(opts =>
+opts.UseMySql(builder.Configuration.GetconnectionString("FilmeConnection"), ServerVersion.AutoDetect(connectionString));
+
+Como estamos passando a connectionString duas vezes, podemos criar na linha acima uma var connectionString e passar a connectionString como parâmetro.
+
+using FilmesApi.Data;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("FilmeConnection");
+
+builder.Services.AddDbContext<FilmeContext>(opts =>
+opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+Perfeito. Nós fizemos a definição do FilmeContext, como vamos nos conectar e acessar o banco, fizemos toda a questão de autenticação através do Program.cs.
+
+Agora precisamos verificar como vamos gerar esses dados efetivamente dentro do banco. Como vamos começar a substituir o que já temos por acesso ao banco efetivamente?
+
+## Gerando a primeira migration
+
+Nós já definimos como vamos nos conectar com o banco e qual será o contexto. Mas tem um detalhe importante: precisamos informar como o modelo FilmesApi.Models.Filme que temos na nossa aplicação será mapeado para uma tabela de banco de dados, já que estamos usando o MySQL que é um SGPD relacional, como faremos isso?
+
+No arquivo Filme.cs temos algo que vai nos ajudar nisso. As anotações de Required já valem muito também para o banco porque informam que são campos obrigatórios que devemos ter.
+
+Mas já temos o nosso id no começo do código de Filme.cs. Como informar que esse id deve ser, por exemplo, uma chave que vai identificar esse campo dentro do campo de dados? Basta inserir a chave [Key] e também informar que esse campo é Required.
+
+using System.ComponentModel.DataAnnotations;
+
+namespace FilmesApi.Models;
+
+public class Filme
+{
+[Key]
+[Required]
+public int Id { get; set; }
+[Required(ErrorMessage = "O título do filme é obrigatório")]
+public string Titulo { get; set; }
+[Required(ErrorMessage = "O gênero do filme é obrigatório")]
+[MaxLength(50, ErrorMessage = "O tamanho do gênero não pode exceder 50 caracteres")]
+public string Genero { get; set; }
+[Required]
+[Range(70, 600, ErrorMessage = "A duração deve ter entre 70 e 600 minutos")]
+public int Duracao { get; set; }
+}
+
+Mas tem um problema que abordaremos mais adiante, se esse campo é Required como vamos passá-lo para o usuário? Em breve trataremos disso.
+
+Agora, precisamos informar que o .NET deve fazer o mapeamento desse Filme que tem os campos duração, gênero, título e id para o banco de dados. Para isso, existe um comando bem útil e interessante que vamos usar agora no console do gerenciador de pacotes. Para acessá-lo vamos no menu "Ferramentas > Gerenciador de Pacotes do NuGet > Console do Gerenciador de Pacotes" e será aberto um console na área inferior da tela.
+
+Nesse console vamos executar o comando Add-Migration. Esse comando vai gerar uma migração de dados da nossa aplicação para o banco. Então vamos colocar CriandoTabelaDeFilme:
+
+Add-Migration CriandoTabelaDeFilme
+
+Precisamos ter essa tabela criada no banco de dados para conseguirmos armazenar dados lá.
+
+Ao executarmos o comando acima ele vai buildar todo o nosso código. Note que ele criou uma pasta chamada "Migration" com um arquivo com o nome "CriandoTabelaDeFilme" e um arquivo chamado FilmeContextModelSnapshot.cs, em breve entenderemos do que isso se trata.
+
+Repare que no código do arquivo 20221016170122_CriandoTabelaDeFilme.cs ele gerou uma classe que faz o processo de converter a informação do nosso modelo de filme para uma tabela no banco de dados.
+
+código de 20221016170122_CriandoTabelaDeFilme.cs
+
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace FilmesApi.Migrations;
+
+public partial class CriandoTabelaDeFilme : Migration
+{
+protected override void Up(MigrationBuilder migrationBuilder)
+{
+migrationBuilder.AlterDatabase()
+.Annotation("MySql:CharSet", "utf8mb4");
+
+        migrationBuilder.CreateTable(
+            name: "Filmes",
+            columns: table => new
+            {
+                Id = table.Column<int>(type: "int", nullable: false)
+                    .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                Titulo = table.Column<string>(type: "longtext", nullable: false)
+                    .Annotation("MySql:CharSet", "utf8mb4"),
+                Genero = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    .Annotation("MySql:CharSet", "utf8mb4"),
+                Duracao = table.Column<int>(type: "int", nullable: false)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Filmes", x => x.Id);
+            })
+            .Annotation("MySql:CharSet", "utf8mb4");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropTable(
+            name: "Filmes");
+    }
+
+}
+
+Mas você pode se perguntar se poderíamos ter feito isso manualmente. Sim, poderíamos, mas seria um trabalho desnecessário dado que é possível criar o código dessa conversão de maneira automática.
+
+Após gerar essa migração, devemos aplicar essa mudança efetivamente no banco de dados.
+
+Vamos abrir o MySQL Workbench e entrar na conexão que temos Local Instance MySQL80.
+
+Agora vamos mostrar quais são as bases de dados que efetivamente temos no nosso SGBD.
+
+Ao executarmos a query
+
+show databases;
+
+Ele retorna que temos as seguintes tabelas;
+
+information
+mysql
+performance
+sys
+Ele ainda não tem o banco de dados de filmes que criamos. Então, precisamos criar esse banco junto com as tabelas que usaremos. Para fazer isso, agora que temos a migration gerada, vamos digitar o seguinte comando no console do gerenciador de pacotes:
+
+Update-Database
+
+Com esse comando ele vai pegar todas as configurações de conexão que já definimos e aplicar nesse banco de dados. Após executarmos esse comando, vamos voltar ao MySQL Workbench e executarmos novamente o comando show databases; o banco de dados filme estará listado.
+
+Agora vamos executar o comando use filme;. E em seguida faremos o comando show tables. Ele vai exibir duas tabelas, uma de migração gerada pelo próprio .Net e a tabela de filmes.
+
+Tables_in_filme
+efmigrationhistory
+filmes
+Podemos usar o comando describe filmes para exibir a composição dessa tabela.
+
+describe filmes;
+
+Field Type Null Key Default Extra
+Id int NO PRI auto_increment
+Titulo longtext NO
+Genero varchar(50) NO
+Duracao int NO
+A chave primária é o id e ele já faz automaticamente a definição de que o id é autoincrementado. Então, não precisamos nos preocupar em ficar criando id para o filme. A conexão do Entity vai ser responsável por fazer isso.
+
+Recapitulando, o que fizemos foi criar o banco de dados e tabelas automaticamente através dos comandos do .NET com o Entity Framework.
+
+Agora precisamos analisar como usaremos esse contexto, que nós criamos, para inserir e consultar os dados do nosso banco.
+
+A partir de agora teremos mais robustez na nossa aplicação e poderemos pensar em como realizar outras operações dentro da base de dados.
+
+## Realizando operações no banco
+
+Agora, no código de FilmeController.cs, vamos remover a parte de lista que criamos manualmente. Para em seguida fazer a conexão e utilização do banco de dados.
+
+Podemos apagar este trecho de código de lista que está abaixo de public class FilmeController : ControllerBase:
+
+private static List<Filme> filmes = new List<Filme();
+private static int id = 0;
+
+Após apagar o trecho acima, a IDE vai indicar alguns pontos de erro porque não existe mais a lista de filmes nem o id que criamos manualmente.
+
+O que queremos fazer agora? Queremos fazer com que o nosso controlador utilize o contexto que será responsável por acessar o banco de dados e conectar a aplicação e os dados do banco.
+
+A partir de agora estamos falando que nosso controlador de filme depende da funcionalidade e da injeção do nosso contexto.
+
+Para fazer a injeção de dependência basta definir o campo, será o private FilmeContext \_context e com o cursor em cima de \_context podemos usar o atalho "Alt + Enter" e na lista que vai aparecer vamos selecionar "Gerar construtor" para gerar o código do construtor.
+
+public FilmeController(FilmeContext context)
+{
+\_context = context;
+}
+
+A partir de agora ele vai fazer a injeção de dependência e o \_context será uma instância do contexto que vamos utilizar.
+
+Podemos utilizar o \_context em cada um dos métodos que já temos. Apagaremos o código filmes.Id = id++; filmes.Add(filme;), não precisamos mais delas. E usaremos \_context.Filmes.Add(filme);.
+
+public FilmeController(FilmeContext context)
+{
+\_context = context;
+}
+
+[HttpPost]
+
+public IActionResult AdicionarFilme([FromBody]) Filme filme)
+{
+\_context.Filmes.Add(filme);
+return CreatedAction(nameof(RecuperaFilmePorId),
+new { id = filme.Id },
+filme);
+
+}
+
+É isso. Em breve veremos se isso vai funcionar. Agora, no HttpGet vamos retornar a nossa lista de filmes inserindo return \_context.Filmes.Skip(skip).Take(take);
+
+    [HttpGet]
+    public IEnumerable<Filme> RecuperaFilmes([FromQuery] int skip = 0,
+        [FromQuery] int take = 50)
+    {
+        return _context.Filmes.Skip(skip).Take(take);
+    }
+
+Por fim, vamos também fazer, no bloco de código de HttpGet("{id}")] inserir \_context.Filmes:
+
+        [HttpGet("{id}")]
+    public IActionResult RecuperaFilmePorId(int id)
+    {
+        var filme = _context.Filmes
+            .FirstOrDefault(filme => filme.Id == id);
+        if (filme == null) return NotFound();
+        return Ok(filme);
+    }
+
+E ainda falta um detalhe no AdicionaFilme, porque estamos fazendo a adição de um filme no nosso banco, mas depois de adicionar precisamos confirmar que essa operação foi realizada, precisamos salvar essas alterações.
+
+Para isso, usaremos o comando \_context.SaveChanges().
+
+[HttpPost]
+public IActionResult AdicionaFilme(
+[FromBody] Filme filme)
+{
+\_context.Filmes.Add(filme);
+\_context.SaveChanges();
+return CreatedAtAction(nameof(RecuperaFilmePorId),
+new { id = filme.Id },
+filme);
+}
+
+Antes de executar nosso código, vamos para o código de Filmecontext.cs e vamos deixar o cursor em cima da palavra Data da linha namespace FilmesApi.Data para converter em namespace com escopo de arquivo vamos pressionar o atalho "Alt + Enter" e selecionar a opção "Converter em namespace com escopo de arquivo".
+
+Podemos fazer o mesmo procedimento com o Migrations de namespace FilmesApi.Migrations nos arquivos CriandoTabeladeFilme e FilmeContextModelSnapshot.
+
+Agora podemos salvar nossos arquivos e executar o projeto clicando no ícone "Play".
+
+Em seguida, vamos abrir o Postman e criar um filme.
+
+POST http://localhost:7106/filme
+
+{
+"Titulo" : "Planeta dos Macacos",
+"Genero" : "Ação",
+"Duracao" : 120
+}
+
+Ao clicarmos no botão "Send" ele retornou um 201 Created, o caminho criado http://localhost:7106/Filme/1 e no body retornou o os campos que acabamos de criar.
+
+Vamos cadastrar mais um filme:
+
+{
+"Titulo" : "Senhor dos anéis",
+"Genero" : "Fantasia",
+"Duracao" : 270
+}
+
+E ele também foi cadastrado corretamente.
+
+Consultando filmes
+Na outra aba do Postman vamos realizar o método GET, colocaremos a URL do filme Planeta dos Macacos: http://localhost:7106/Filme/1. Ao clicar em "Send" ele retornou no body e informou 200 OK:
+
+Agora vamos fazer uma consulta para um filme que não existe, usando o id 100, http://localhost:7106/Filme/100. Ele retornou 404 Not Found.
+
+{
+"Type" : "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+"title" : "Not Found",
+"status" : 404,
+"traceId": "00-cad7f13203e646873116c8d21d1cf85b-92ec65f70b0d17e2-00"
+}
+
+Agora vamos procurar pelo filme O senhor dos Anéis, o id 2. http://localhost:7106/Filme/2. Retornou corretamente. E podemos pesquisar todos os filmes cadastrados inserindo a URL http://localhost:7106/Filme/.
+
+Agora vamos voltar na IDE e reiniciar a aplicação para garantir que esses dados estão sendo salvos. E ao pesquisar novamente no Postman veremos que os dados continuam aparecendo.
+
+Além disso, podemos consultar as informações que estão na coluna de filmes no MySQL Workbench, usando o comando:
+
+select \* from filmes;
+
+Id Titulo Genero Duracao
+1 Planeta dos macacos Ação 120
+2 O senhor dos anéis Fantasia 270
+Os dados apareceram corretamente. Estamos inserindo e armazenando os dados no banco de dados.
+
+Lembram que comentei com você que quando criamos o filme estamos recebendo FromBody o filme , mas não passamos nenhum id. Estamos passando apenas as outras informações.
+
+Tem algumas questões que passamos a questionar. Será que o nosso modelo Filme.cs está coerente? Para o banco sim, mas para o parâmetro que estamos recebendo para o usuário adicionar esse dado no banco não está tão coerente.
+
+Porque o usuário não precisa daber do id, por mais que não esteja passando isso é um campo que está dentro do modelo recebido pelo envio do usuário. Então, precisamos nos atentar a isso: essa é a melhor maneira de receber parâmetros de requisições que vamos inserir no banco?
+
+## Utilizando DTOs
+
+Agora vamos dar uma atenção ao parâmetro que estamos recebendo em AdicionaFilme([FromBody] Filme filme). Porque nesse momento estamos recebendo uma informação que, na verdade, diz respeito ao banco de dados.
+
+Podemos ver no modelo Filme.cs que ele tem a propriedade de id, tem o Maxlength também sendo utilizado. Mas qual é o problema de nosso usuário enviar esse modelo de filme se atualmente está funcionando?
+
+Acontece que não é uma prática muito boa deixarmos o nosso modelo de banco muito exposto, principalmente na nossa camada de controlador. Porque essa é uma informação interna.
+
+Já comentamos que não importa como vamos tratar os dados, só importa que o usuário deve seguir um padrão de regras para se comunicar com a API. No caso, a informação do modelo de banco de dados é uma informação que não deveria estar tão exposta assim.
+
+Não é necessário que a informação que o usuário está enviando tenha um id, ou o Maxlength que, no fim das contas, esse Maxlength especifica o tamanho máximo de qual é o tamanho que deve ser alocado para a string do campo de gênero no banco de dados que está como varchar(50).
+
+Mas, como vamos receber um filme sem efetivamente receber um filme?
+
+Uma boa prática nesse caso é criar classes que vão instanciar objetos que são responsáveis por trafegar dados em diferentes camadas. Como, por exemplo, a camada de apresentação, o HttpPost, que é onde o usuário interage com nossa aplicação, e esse dado vai ser trafegado, por exemplo, para uma camada de persistência que é onde vamos gravar o dado no banco.
+
+Como usar o DTO (Data Transfer Object)
+Agora vamos criar uma classe que vai ser bem parecida com a classe de Filme, mas vai conter apenas as validações que devem ser feitas a partir do que o usuário vai mandar e das informações que o usuário vai mandar efetivamente.
+
+Vamos criar uma nova pasta dentro da pasta "Data" chamada "Dtos". Dentro da pasta "Dtos" vamos criar uma nova classe chamada CreateFilmeDto. Usaremos o create em inglês para manter o padrão do CRUD (Create, Read, Update e Delete); o filme porque esse é o nome do nosso modelo; e Dto para indicar que é um Data Transfer Object.
+
+Agora vamos copiar o seguinte trecho de Filme.cs e colar no CreateFilmeDto:
+
+[Key]
+[Required]
+public int Id { get; set; }
+[Required(ErrorMessage = "O título do filme é obrigatório")]
+public string Titulo { get; set; }
+[Required(ErrorMessage = "O gênero do filme é obrigatório")]
+[MaxLength(50, ErrorMessage = "O tamanho do gênero não pode exceder 50 caracteres")]
+public string Genero { get; set; }
+[Required]
+[Range(70, 600, ErrorMessage = "A duração deve ter entre 70 e 600 minutos")]
+public int Duracao { get; set; }
+
+Primeiro, vamos usar o atalho "Alt + Enter" em cima do termo "Data" do namespace FilmesApi.Data.Dtos para converter em namespace com escopo de arquivo.
+
+Vamos tirar a propriedade de id porque o usuário não precisa enviar id. Comentei com você que o MaxLength é usado para definir a alocação do tamanho da string no banco de dados. Mas qual seria a notação mais aconselhada a fim apenas de validação?
+
+Existe a StringLength, que faz esse mesmo papel mas sem o poder de fazer alocação de memória dentro do banco de dados, tornando também o nosso código mais semântico.
+
+using System.ComponentModel.DataAnnotations;
+
+namespace FilmesApi.Data.Dtos;
+
+public class CreateFilmeDto
+{
+[Required(ErrorMessage = "O título do filme é obrigatório")]
+public string Titulo { get; set; }
+[Required(ErrorMessage = "O gênero do filme é obrigatório")]
+[StringLength(50, ErrorMessage = "O tamanho do gênero não pode exceder 50 caracteres")]
+public string Genero { get; set; }
+[Required]
+[Range(70, 600, ErrorMessage = "A duração deve ter entre 70 e 600 minutos")]
+public int Duracao { get; set; }
+}
+
+Agora, precisamos voltar ao nosso controlador e informar que não vamos mais receber um Filme e sim um CreateFilmeDto.
+
+[HttpPost]
+public IActionResult AdicionaFilme(
+[FromBody] CreateFilmeDto filmeDto)
+//código omitido
+
+Como receberemos um filmeDto, precisamos converter as informações do filmeDto em um filme. Porque o \_context guarda um filme no banco de dados.
+
+A maneira mais simples para fazer isso seria criar um filme manualmente, Filme filme = new Filme e ir passando parâmetro por parâmetro, mas isso seria mais trabalhoso.
+
+Existe uma maneira de fazer isso de forma bem mais simples e prática utilizando a lib AutoMapper. Vamos selecionar o menu "Ferramentas > Gerenciador de Pacotes do NuGet > Gerenciar Pacotes do NuGet para a Solução".
+
+No campo de pesquisa vamos procurar por "mapper" e vamos instalar o AutoMapper na sua versão 12.0.0. Instalaremos também o AutoMapper.Extension.Microsoft.dependencyInjection também a versão 12.0.0.
+
+A ideia é que o AutoMapper faça mapeamento automático de um DTO para um filme. Já que são duas classes que possuem as mesmas propriedades. Essa ferramenta conseguirá fazer isso de maneira implícita sempre que precisarmos mapear parâmetro por parâmetro.
+
+Primeiro, vamos adicionar o AutoMapper ao Program.cs.
+
+builder.Services.
+AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+A partir disso, estamos usando o AutoMapper. Agora, precisamos informar para o AutoMapper o que ele deve fazer. Vamos criar uma nova classe para informar isso para o AutoMapper.
+
+Teremos um perfil específico do AutoMapper que chamaremos de "profile". Vamos adicionar uma nova pasta ao projeto chamada "Profile" e dentro dessa pasta adicionaremos uma nova classe chamada FilmeProfile.cs. Nesta classe teremos o construtor e o CreateMap, que usaremos para conseguirmos fazer o mapeamento.
+
+using AutoMapper;
+using FilmesApi.Data.Dtos;
+using FilmesApi.Models;
+
+namespace FilmesApi.Profiles;
+
+public class FilmeProfile : Profile
+{
+public FilmeProfile()
+{
+CreateMap<CreateFilmeDto, Filme>();
+}
+}
+
+Por fim, precisamos chamar o AutoMapper no controlador. Primeiro, vamos declarar um campo para o AutoMapper.
+
+private FilmeContext \_context;
+private IMapper \_mapper;
+
+Vamos usar o atalho "Alt + Enter" sobre \_mapper e o parâmetro ao construtor. Em seguida, vamos inserir a linha que fará referência ao AutoMapper. Filme filme = \_mapper.Map<Filme>(filmeDto);.
+
+public FilmeController(FilmeContext context, IMapper mapper)
+{
+\_context = context;
+\_mapper = mapper;
+}
+
+[HttpPost]
+public IActionResult AdicionaFilme(
+[FromBody] CreateFilmeDto filmeDto)
+{
+Filme filme = \_mapper.Map<Filme>(filmeDto);
+\_context.Filmes.Add(filme);
+\_context.SaveChanges();
+return CreatedAtAction(nameof(RecuperaFilmePorId),
+new { id = filme.Id },
+filme);
+}
+
+Pronto. Agora podemos executar nosso código e testar uma inserção no Postman. Tudo continua funcionando corretamente. Tornamos o nosso código um pouco mais bem escrito, pois não estamos mais expondo informações desnecessárias.
+
+Estamos começando a dar passos importantes dentro do nosso projeto. Nós criamos os nossos DTOs para a parte de criação. E para a parte de leitura? Será que devemos retornar o modelo diretamente? Ainda faltam as operações também, como atualizar e remover um filme? Veremos isso nos próximos vídeos.
