@@ -10,3 +10,9 @@ ggbr4, 15.76
 petr4, 28.4
 vale3, 31.3
 ggbr4, 15.76
+petr4, 28.4
+vale3, 31.3
+ggbr4, 15.76
+petr4, 28.4
+vale3, 31.3
+ggbr4, 15.76
