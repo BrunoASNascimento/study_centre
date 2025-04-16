@@ -745,9 +745,9 @@ Inclusive, o Daniel comentou sobre os asteriscos anteriormente. Vamos colocar um
 void RegistrarBanda()
 {
 Console.Clear();
-Console.WriteLine("**********\*\***********");
+Console.WriteLine("****\*\*****\*\*****\*\*****");
 Console.WriteLine("Registro de bandas");
-Console.WriteLine("**********\*\***********");
+Console.WriteLine("****\*\*****\*\*****\*\*****");
 Console.Write("Digite o nome da banda que deseja registrar: ");
 string nomeDaBanda = Console.ReadLine()!;
 
@@ -759,9 +759,9 @@ Queremos esse mesmo comportamento para a função que vai exibir as bandas. Por 
 void MostrarBandasRegistradas()
 {
 Console.Clear();
-Console.WriteLine("****************\*\*\*\*****************");
+Console.WriteLine("******\*\*\*\*******\*\*\*\*******\*\*\*\*******");
 Console.WriteLine("Exibindo todas as bandas registradas");
-Console.WriteLine("****************\*\*\*\*****************");
+Console.WriteLine("******\*\*\*\*******\*\*\*\*******\*\*\*\*******");
 }Copiar código
 Agora, o desafio é o seguinte: precisamos pegar a listaDasBandas e exibir na tela cada banda que temos dentro dessa lista.
 
@@ -882,9 +882,9 @@ Além disso, vamos acrescentar o \n após os asteriscos do terceiro Console.Writ
 void MostrarBandasRegistradas()
 {
 Console.Clear();
-Console.WriteLine("****************\*\*\*\*****************");
+Console.WriteLine("******\*\*\*\*******\*\*\*\*******\*\*\*\*******");
 Console.WriteLine("Exibindo todas as bandas registradas");
-Console.WriteLine("****************\*\*\*\*****************\n");
+Console.WriteLine("******\*\*\*\*******\*\*\*\*******\*\*\*\*******\n");
 
     for (int i = 0; i < listaDasBandas.Count; i++)
     {
@@ -902,9 +902,9 @@ Vamos fazer essa mesma alteração para a função de cima, RegistrarBanda(). Co
 void RegistrarBanda()
 {
 Console.Clear();
-Console.WriteLine("**********\*\***********");
+Console.WriteLine("****\*\*****\*\*****\*\*****");
 Console.WriteLine("Registro de bandas");
-Console.WriteLine("**********\*\***********\n");
+Console.WriteLine("****\*\*****\*\*****\*\*****\n");
 Console.Write("Digite o nome da banda que deseja registrar: ");
 string nomeDaBanda = Console.ReadLine()!;
 listaDasBandas.Add(nomeDaBanda);
@@ -974,9 +974,9 @@ Program.cs:
 void MostrarBandasRegistradas()
 {
 Console.Clear();
-Console.WriteLine("****************\*\*\*\*****************");
+Console.WriteLine("******\*\*\*\*******\*\*\*\*******\*\*\*\*******");
 Console.WriteLine("Exibindo todas as bandas registradas");
-Console.WriteLine("****************\*\*\*\*****************\n");
+Console.WriteLine("******\*\*\*\*******\*\*\*\*******\*\*\*\*******\n");
 
     //for (int i = 0; i < listaDasBandas.Count; i++)
     //{
@@ -1041,3 +1041,233 @@ Daniel: Conhecemos mais um recurso muito utilizado: o foreach. Com ele, guardamo
 Por isso, você precisa considerar o que você quer fazer com o loop.
 
 Guilherme: Visualmente, o comprimento da linha de asteriscos está maior do que a frase "Exibindo todas as bandas registradas". Podemos arrumá-lo na função MostrarBandasRegistradas(), caso queiramos.
+
+## Ajustando exibição do título
+
+Guilherme: Nosso projeto está legal, mas tem um ponto preocupante. À medida que nossa aplicação cresce, algumas ações estão adquirindo o chamado Code Smells.
+
+Daniel: Um "cheiro estranho".
+
+Guilherme: Exatamente. Vamos mostrar.
+
+No Visual Studio, selecionaremos a opção 2 do nosso projeto e pressionaremos "Enter". Veremos o seguinte retorno:
+
+Exibindo todas as bandas registradas
+
+Banda: U2
+
+Banda: The Beatles
+
+Banda: Calypso
+
+Digite uma tecla para voltar ao menu principal
+
+Existe uma ênfase com os asteriscos entre a frase, ficou bem legal.
+
+Se digitarmos qualquer tecla e selecionarmos a opção 1, veremos no retorno do Registro de Bandas que existem asteriscos a mais.
+
+Exibindo todas as bandas registradas
+
+Digite o nome da banda que deseja registrar:
+
+Neste menu, registraremos uma nova banda chamada "Nova banda" e pressionaremos "Enter". Veremos um aviso informando que a nova banda foi registrada.
+
+Queremos exibir para todas as opções (exceto para a 1, que sai do sistema) um texto envolto pelos caracteres compatíveis com ele. Não queremos passar manualmente estes caracteres.
+
+Vamos mostrar no arquivo Program.cs as duas opções. No registro de banda, temos três linhas, uma com o texto do registro, e duas com linhas de asteriscos.
+
+void RegistrarBanda()
+{
+Console.Clear();
+Console.WriteLine("**********\*\***********");
+Console.WriteLine("Registro de bandas");
+Console.WriteLine("**********\*\***********\n");
+Console.Write("Digite o nome da banda que deseja registrar: ");
+string nomeDaBanda = Console.ReadLine()!;
+listaDasBandas.Add(nomeDaBanda);
+Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso!");
+Thread.Sleep(2000);
+Console.Clear();
+ExibirOpcoesDoMenu();
+}Copiar código
+Vamos tirar manualmente três asteriscos da linha superior para manter ambos com a mesma quantidade de caracteres.
+
+void RegistrarBanda()
+{
+Console.Clear();
+Console.WriteLine("********\*\*\*********");
+Console.WriteLine("Registro de bandas");
+Console.WriteLine("********\*\*\*********\n");
+Console.Write("Digite o nome da banda que deseja registrar: ");
+string nomeDaBanda = Console.ReadLine()!;
+listaDasBandas.Add(nomeDaBanda);
+Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso!");
+Thread.Sleep(2000);
+Console.Clear();
+ExibirOpcoesDoMenu();
+}Copiar código
+Já no código que exibe as bandas, temos muitos caracteres.
+
+void MostrarBandasRegistradas()
+{
+Console.Clear();
+Console.WriteLine("****************\*\*\*\*****************");
+Console.WriteLine("Exibindo todas as bandas registradas");
+Console.WriteLine("****************\*\*\*\*****************\n");
+
+// Código omitido
+
+}Copiar código
+Vamos reparar que as três linhas deste código e do anterior são praticamente iguais. A única coisa que muda é o texto.
+
+Daniel: E a quantidade de asteriscos, que é uma função do tamanho desse título.
+
+Guilherme: Exatamente. E pensando bem, nosso projeto tem duas opções já feitas, mas não sabemos quantas opções poderemos ter no futuro. Poderão ser quatro, poderão ser cinquenta.
+
+Queremos manter um padrão para a nossa aplicação. Quando chegamos em cenários como este, em que temos que contar manualmente caracteres e utilizar "Ctrl+C" e "Ctrl+V" com frequência, temos que refletir e refatorar nossa aplicação. Vamos fazer isso agora.
+
+Para isso, criaremos uma função onde enviamos um título, seja ele "Registro das bandas", "Classificando as bandas", "Exibindo a média das bandas" ou qualquer outro. Não importará se alterarmos esse registro, pois ele contará sozinho a quantidade de caracteres e criará esse layout para nós com o Console.Write().
+
+Daniel: Boa.
+
+Guilherme: Para fazer isso, vamos até o final do arquivo e posicionaremos o cursor abaixo do bloco MostrarBandasRegistradas()(). Pressionaremos "Enter" duas vezes para abrir espaço e criaremos uma função void chamada ExibirTituloDaOpcao() que receberá um parâmetro titulo do tipo string.
+
+Abriremos um bloco de chaves e daremos "Enter".
+
+void ExibirTituloDaOpcao(string titulo)
+{
+
+}Copiar código
+Vamos entender o que estamos fazendo: precisamos de um Console.Write() com a quantidade de caracteres correspondente ao título que informamos. Para isso, no interior do bloco de chaves recém-aberto, criaremos uma variável chamada quantidadeDeLetras que será igual a esse titulo (independente de qual seja).
+
+Queremos pegar a quantidade de caracteres do titulo, então, à sua esquerda, vamos adicionar um ponto junto à palavra Length.
+
+void ExibirTituloDaOpcao(string titulo)
+{
+int quantidadeDeLetras = titulo.Length;
+}Copiar código
+Já sabemos quantas letras temos. Agora, precisamos criar a linha com os asteriscos. O que podemos fazer, Daniel?
+
+Daniel: Poderíamos fazer um loop (laço), que aprendemos anteriormente, onde faríamos um for de 1 até a quantidade de letras do titulo e imprimiríamos os asteriscos, um por um, usando o Console.Write().
+
+Entretanto, há uma maneira mais elegante de fazer isso. Podemos criar uma variável que será essa linha de asteriscos, que será do tipo string.
+
+Guilherme: Qual nome podemos dar a ela?
+
+Daniel: Pode ser asteriscos.
+
+Guilherme: Vamos adicionar o sinal de igual. O que colocamos à frente dele?
+
+void ExibirTituloDaOpcao(string titulo)
+{
+int quantidadeDeLetras = titulo.Length;
+string asteriscos =
+}Copiar código
+Daniel: Queremos pegar determinada quantidade de asteriscos e adicioná-la numa string que será inicialmente vazia. Adicionaremos à sua esquerda uma quantidade de asteriscos com este valor de quantidade de letras.
+
+Pode criar uma string vazia com aspas simples ('') ou com string.Empty. Dá na mesma.
+
+void ExibirTituloDaOpcao(string titulo)
+{
+int quantidadeDeLetras = titulo.Length;
+string asteriscos = string.Empty;
+}Copiar código
+Guilherme: Com este comando, estamos pedindo que seja recolhida uma string vazia.
+
+Daniel: Isso. Ela tem a função de colocar uma quantidade de caracteres à esquerda com o PadLeft() ou à direita com o PadRight().
+
+Guilherme: Se acrescentarmos um ponto à direita do string.Empty, será exibida uma lista flutuante do Visual Studio com diversas opções de ações que podemos executar. Vamos adicionar o PadLeft() para adicionarmos caracteres à esquerda.
+
+Daniel: Isso.
+
+Guilherme: Abriremos um par de parênteses, e veremos outra lista flutuante com mais opções.
+
+void ExibirTituloDaOpcao(string titulo)
+{
+int quantidadeDeLetras = titulo.Length;
+string asteriscos = string.Empty.PadLeft();
+}Copiar código
+Daniel: A função PadLeft() pede dois argumentos: a quantidade de caracteres a serem inseridos à esquerda e qual caractere será.
+
+Guilherme: Boa. No nosso caso, o primeiro será quantidadeDeLetras, como já sabemos. E qual será o segundo?
+
+Daniel: Agora, entra em cena a observação que tratamos anteriormente: não queremos uma string e sim um caractere. Para estes casos, utilizaremos aspas simples ('') e entre elas, o asterisco.
+
+Guilherme: Certo. Vamos colocar ponto e vírgula no final.
+
+void ExibirTituloDaOpcao(string titulo)
+{
+int quantidadeDeLetras = titulo.Length;
+string asteriscos = string.Empty.PadLeft(quantidadeDeLetras, '\*');
+}Copiar código
+Teoricamente, já temos o que precisamos exibir no console: a quantidadeDeLetras passada para asteriscos e o título que aparecerá de fato.
+
+Adicionaremos três ConsoleWriteLine()s: no primeiro, adicionaremos o asteriscos no segundo, colocaremos o titulo e no terceiro adicionaremos novamente o asteriscos.
+
+No final da última linha de asteriscos, precisamos pular uma linha. Temos duas opções para realizar esta operação:
+
+Adicionar um ConsoleWriteLine() vazio abaixo da última linha de asteriscos
+Adicionar dentro dos parênteses, à direita de asteriscos, um sinal de mais e concatenar junto ao caracter de quebra de linha \n entre aspas duplas.
+Vamos realizar a segunda opção.
+
+void ExibirTituloDaOpcao(string titulo)
+{
+int quantidadeDeLetras = titulo.Length;
+string asteriscos = string.Empty.PadLeft(quantidadeDeLetras, '\*');
+ConsoleWriteLine(asteriscos);
+ConsoleWriteLine(titulo);
+ConsoleWriteLine(asteriscos + "\n");
+}Copiar código
+Antes de testar, vamos alterar as duas funções que temos para que tenham esta nova estrutura.
+
+Começando com o RegistrarBanda(). Vamos substituir as duas linhas de asteriscos e a linha do título pela função ExibirTituloDaOpcao(), que conterá entre parênteses a string do título anterior ("Registro das bandas").
+
+void RegistrarBanda()
+{
+Console.Clear();
+ExibirTituloDaOpcao("Registro das bandas");
+Console.Write("Digite o nome da banda que deseja registrar: ");
+string nomeDaBanda = Console.ReadLine()!;
+bandasRegistradas.Add(nomeDaBanda, new List<int>());
+Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso!");
+Thread.Sleep(4000);
+Console.Clear();
+ExibirOpcoesDoMenu();
+}Copiar código
+Faremos o mesmo processo em MostrarBandasRegistradas().
+
+void MostrarBandasRegistradas()
+{
+Console.Clear();
+ExibirTituloDaOpcao("Exibindo todas as bandas registradas");
+
+// Código omitido
+
+}Copiar código
+Vamos testar o código e fazer um teste extra. Vamos alterar esse texto depois para ver se ele imprimirá de fato a quantidade de caracteres que esperamos.
+
+Vamos clicar no botão de rodar a aplicação, na barra superior do Visual Studio. Após a execução, veremos a tela da aplicação. Qual opção testaremos primeiro?
+
+Daniel: A 2. Já temos bandas registradas.
+
+Guilherme: Digitaremos "2" e pressionaremos "Enter". No retorno, veremos que, visualmente, a quantidade de asteriscos parece se igualar à quantidade de caracteres do título.
+
+Pressionaremos qualquer tecla e voltaremos à tela anterior, onde escolheremos a opção 1. No retorno, teremos a mesma impressão.
+
+Somos pessoas céticas, portanto, mudaremos o título da função MostrarBandasRegistradas() de "Exibindo todas as bandas registradas" para "Exibindo todas as bandas registradas na nossa aplicação".
+
+void MostrarBandasRegistradas()
+{
+Console.Clear();
+ExibirTituloDaOpcao("Exibindo todas as bandas registradas na nossa aplicação");
+
+// Código omitido
+
+}Copiar código
+Vamos rodar a aplicação novamente e selecionar a opção 2. O resultado será conforme esperado.
+
+Nossos menus estão funcionando.
+
+Após refatorar o código para deixá-lo mais bonito, nosso desafio é trabalhar na opção 3, na qual avaliaremos uma banda e determinar uma nota para ela.
+
+Daniel: Boa. Vamos lá.
