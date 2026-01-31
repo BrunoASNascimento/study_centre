@@ -873,3 +873,1109 @@ A CDN ensures it loads lightning fast, no matter their location. Azure Load Bala
 Let's examine some key Azure features that can empower your cloud journey. First, there's DevOps integration. Azure DevOps provides development tools for planning, collaboration, and software delivery. It supports version control, agile planning, continuous integration, and deployment automation. Azure offers a range of AI and machine learning services, including Azure Cognitive Services for adding vision, speech, language, and decision capabilities to applications and Azure Machine Learning for building, training, and deploying machine learning models at scale. Azure IoT Hub enables secure and scalable communication between IoT devices and cloud applications. It provides device management, data ingestion, and real-time analytics for IOT solutions.
 Regarding data analytics and business intelligence, Azure Synapse Analytics, formerly known as SQL Data Warehouse, integrates big data and data warehousing capabilities for large scale data analytics. Additionally, Azure Analytics Services offers tools like Power BI for interactive data visualization and analysis. Beyond these categories, Azure boasts several other key features that elevate your cloud experience to enable you to build robust, resilient cloud solutions. These include scalability on-demand, which allows you to adjust resources up or down based on your needs quickly. Do you need more processing power during peak seasons? Azure's unwavering security prioritizes data security with robust features like encryption at rest and in transit, multi-factor authentication, and access control. Sleep soundly, knowing your data is protected.
 Finally, there's always-on reliability. High availability and disaster recovery solutions keep your applications running smoothly, even in unforeseen circumstances. Azure replicates your data across geographically dispersed locations. This video gave you an overview of the core Azure service categories and their fundamental characteristics. Remember, these are just the building blocks. Azure offers a much more comprehensive range of services to cater to specific needs, from artificial intelligence to machine learning and beyond.
+Microsoft Azure is your cloud computing platform, a digital playground where you can build, deploy, and manage applications without needing your own physical data centers. Think of it as a universe of possibilities ready for you to explore and innovate. Before beginning, let's get familiar with some key terms. A tenant refers to your team or organization sharing access to Azure services. Your account is your login for managing your Azure subscription whether work, school, or personal. Subscription is the agreement with Microsoft for Azure Services. Next is region, which refers to a data center location within Azure and geography is a defined boundary for data residency, typically containing multiple regions.
+Then there's the difference between a resource and a resource group. A resource is any element of your Azure solution, like databases or virtual machines, whereas a resource group is a container holding related resources. For an application within resource manager, your role is to control access to Azure resources. With your storage account, you can access Azure blob, queue, table and file services in Azure storage. Next is an image. It's a file containing the operating system and application configuration used to create virtual machines. A reference to offer relates to pricing credits and terms applicable to an Azure subscription.
+A portal is a secure web directory that deploys and manages Azure services. Finally, a service level agreement, or SLA, describes Microsoft's commitments for uptime and connectivity. Now that that is covered, let's dive in and discover what you can do with Azure. If you think of the future, then artificial intelligence or Aihdenhe, and machine learning or ML, come into play. Azure offers a variety of tools to help you build intelligent applications. Even beginners can create AI models with services like Azure AI bot service, Azure machine learning, and custom vision. No coding knowledge is required at all.
+Perhaps you need a place to host and manage your applications. Azure once again has you covered. It offers serverless computing with Azure functions through to traditional hosting with virtual machines or vms. Azure provides flexibility for any developer. Beginner or professional containers are a popular way to deploy applications consistently and efficiently. Azure offers services like Azure Kubernetes service or AKS for short and Azure container instances. To easily manage your centralized applications even if you're new to containers.
+Databases are the backbone of many applications, and Azure has a variety of managed database services to fit your needs. Whether you need a relational database like Azure SQL database or NoSQL solution like Azure Cosmos DB, Azure has it. Modern software development is all about DevOps practices. Azure provides tools to support your journey from managing development pipelines with Azure DevOps to tracking application performance with Azure Monitor. So essentially, Azure helps you adopt DevOps best practices, even if you're just starting out. As IT landscapes become more complex, hybrid and multi cloud environments are increasingly common. Azure offers solutions to manage these deployments with services like Azure Arc and Azure Stack.
+So you can extend Azure's capabilities to your on premises infrastructure or other cloud providers. Security is vital, and managing user identities and access permissions is crucial. Services like entraid, formerly known as Azure Active Directory, and Azure key Vault make it easy to secure your applications and data even if you're new to identity management. Connecting your applications and services is critical for efficiency. Azure offers a range of tools to help you integrate your system seamlessly. Whether you build APIs with Azure API management or automate workflows with Azure logic apps. The Internet of Things, or IoT, is transforming industries by connecting devices and collecting data from the physical world.
+Azure provides a comprehensive IoT platform to help you build and manage your IoT solutions such as device connectivity with Azure IoT hub or data analytics with Azure time series insights. When it comes to management and governance, maintaining security and compliance is essential for managing your Azure resources effectively. Azure offers tools like Azure policy and Defender for cloud, which allow you to enforce governance policies and monitor your resources for potential security threats. Azure provides a range of networking services to build secure and scalable networks. Whether you want to set up virtual networks with Azure virtual network or secure your web applications with Azure web application firewall. Azure assists you in every step of the way for organizational security. Azure offers a range of services to help you protect your applications and data from from cyber threats.
+Azure DDoS protection to Microsoft Defender for cloud is an example of a service that keeps your infrastructure secure. Moving on to storage storage is a huge consideration for application development. Azure storage services help you store and manage your data effectively. Whether you need object storage with Azure Blob storage or file storage with Azure files, Azure provides scalable and reliable storage solutions to suit your needs. You may need to provide virtual desktops to your users from the cloud. Virtual desktop infrastructure, commonly called VDI for short, enables remote access to applications and data. Azure offers services like Azure Virtual desktop to help you seamlessly deploy and manage this process.
+Finally, let's discuss web services. Azure offers a range of tools to help you build and deploy web applications quickly and easily. You might be required to host a static website, which can be done with Azure static web app. You can also build a scalable web application with Azure app service. Microsoft Azure provides the tools you need to bring your web projects to life. In this video, you learned about the Azure offerings that make up its ecosystem of services. You familiarize yourself with essential terms before unpacking each of the essential service categories available to you.
+You can rest assured that Azure covers all your development needs.
+
+Azure Compute services
+Introduction
+The cloud offers a large variety of computing resources. Navigating the options can be overwhelming. However, you can rest assured and rely on Microsoft Azure because of its comprehensive suite of computing services designed to meet diverse application needs.
+
+In this reading, you’ll explore some of the most popular Azure compute services and their functionalities. You’ll examine some relevant use cases to empower you to choose the right tool for your project.
+
+The following table highlights the top ten Azure compute services.
+
+1
+
+Azure Virtual Machines (VMs)
+
+6
+
+Azure Container Instances
+
+2
+
+Azure App Service
+
+7
+
+Azure Red Hat OpenShift
+
+3
+
+Azure Functions
+
+8
+
+Azure Spring Apps
+
+4
+
+Azure Kubernetes Service (AKS)
+
+9
+
+Azure Service Fabric
+
+5
+
+Azure Container Apps
+
+10
+
+Azure Batch
+
+Let’s expand upon each one of these services in more detail.
+
+Azure Compute services
+
+1. Azure Virtual Machines (VMs)
+   Azure Virtual Machines (VMs) represent one of the foundational services in Azure's compute ecosystem. At its core, Azure VMs provide users with a virtualized computing environment in the cloud. This means you can create and operate virtual machines that run on Microsoft's Azure cloud infrastructure. Think of it as having your own computer but in the cloud.
+
+One of the key advantages of Azure VMs is their flexibility. Users can choose their preferred operating system (Windows or Linux) and install any necessary software just as they would on a physical machine. This capability makes Azure VMs incredibly versatile and suitable for various applications and workloads.
+
+Furthermore, Azure VMs offer scalability and on-demand availability, which are fundamental characteristics of cloud computing. This means users can quickly scale their computing resources up or down based on demand, allowing for efficient resource utilization and cost management.
+
+Use cases:
+Some of the relevant use cases relating to Azure VMs include:
+
+Hosting mission-critical applications requiring full control over the environment.
+
+Running legacy applications that aren't easily migrated to other platforms.
+
+Creating development and testing environments that mirror production settings.
+
+2. Azure App Service
+   Next is Azure App Service, which is a fully managed platform for building, deploying, and scaling web applications, mobile app backends, and APIs. At its core, Azure App Service removes the complexities of server management, allowing developers to focus on writing code and delivering value to their users.
+
+One of the primary benefits of Azure App Service is its simplicity. App Service allows developers to deploy their applications without worrying about managing servers, infrastructure, or scaling challenges.
+
+Another key advantage of Azure App Service is its scalability. Applications deployed on App Service can automatically scale based on demand, ensuring optimal performance and availability during peak usage periods.
+
+Use Cases:
+Some of the relevant use cases relating to Azure App Service include:
+
+Building and deploying web applications such as e-commerce stores or company websites.
+
+Creating APIs to connect mobile apps, web apps, or other services.
+
+Hosting serverless logic for web applications without managing servers.
+
+3. Azure Functions
+   Azure Functions is a serverless compute service that enables developers to build and deploy event-driven applications without managing infrastructure. With Azure Functions, developers can write small pieces of code, known as functions, and execute them in response to various triggers or events.
+
+One of the key benefits of Azure Functions is its simplicity. Developers can write functions in their preferred programming language, such as C#, JavaScript, or Python, without worrying about infrastructure management or scalability concerns. Azure Functions automatically scales to handle incoming requests, ensuring optimal performance and cost efficiency.
+
+Another advantage of Azure Functions is its pay-as-you-go pricing model. With Azure Functions, developers only pay for the resources consumed by their functions, making it a cost-effective solution for event-driven workloads.
+
+Use Cases:
+Some of the relevant use cases relating to Azure Functions include:
+
+Reacting to data changes in Azure storage or databases.
+
+Processing images or videos uploaded to the cloud.
+
+Automating tasks triggered by events like HTTP requests or IoT sensor data.
+
+4. Azure Kubernetes Service (AKS)
+   Azure Kubernetes Service (AKS) is a managed Kubernetes service that simplifies the deployment, management, and scaling of containerized applications. Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+
+One of the key benefits of Azure Kubernetes Service is its flexibility. AKS supports a wide range of containerized applications, including microservices, monolithic applications, and stateful applications, making it suitable for diverse workloads and use cases.
+
+Another advantage of Azure Kubernetes Service is its scalability. AKS automatically scales to handle incoming traffic, ensuring optimal performance and availability during peak usage periods. Additionally, AKS integrates with other Azure services, such as Azure Monitor and Azure DevOps, to provide a comprehensive solution for containerized application development and management.
+
+Use Cases:
+Some of the relevant use cases relating to Azure Kubernetes Service include:
+
+Deploying and scaling microservices architectures.
+
+Modernizing existing applications by containerizing them.
+
+Building and managing complex, stateful containerized applications.
+
+Azure Kubernetes Service (AKS) microservices architecture 5. Azure Container Apps
+Next is Azure Container Apps, which is a fully managed service for deploying and running containerized applications in the cloud. It simplifies the deployment and management of containerized applications by taking away the underlying infrastructure and providing a serverless environment for running containerized workloads.
+
+One of the key benefits of Azure Container Apps is its simplicity. With Container Apps, developers can deploy containerized applications with just a few clicks, without worrying about managing infrastructure or scaling challenges. Azure takes care of these aspects, allowing developers to focus on writing code and delivering value to their users.
+
+Another advantage of Azure Container Apps is its cost-effectiveness. With Container Apps, developers only pay for the resources consumed by their applications, making it a cost-effective solution for running containerized workloads in the cloud.
+
+Use Cases:
+Some of the relevant use cases relating to Azure Container Apps include:
+
+Quickly deploying containerized web applications or APIs.
+
+Running event-driven applications triggered by HTTP requests or other events.
+
+Simplifying container management for developers new to containerization.
+
+6. Azure Container Instances
+   Azure Container Instances is a serverless compute service that enables developers to run containerized workloads in the cloud without managing underlying infrastructure. With Container Instances, developers can deploy containers with just a few simple steps, without worrying about provisioning virtual machines or managing Kubernetes clusters.
+
+One of the key benefits of Azure Container Instances is its simplicity. With Container Instances, developers can deploy containers in seconds, without any additional configuration or setup required. Azure takes care of provisioning and managing the underlying infrastructure, allowing developers to focus on writing code and delivering value to their users.
+
+Another advantage of Azure Container Instances is its cost-effectiveness. With Container Instances, developers only pay for the resources consumed by their containers, making it a cost-effective solution for running containerized workloads in the cloud.
+
+Use Cases:
+Some of the relevant use cases relating to Azure Container Instances include:
+
+Quickly deploying containerized web applications or APIs.
+
+Running event-driven applications triggered by HTTP requests or other events.
+
+Simplifying container management for developers new to containerization.
+
+7. Azure Red Hat OpenShift
+   Azure Red Hat OpenShift is a fully managed service for running Red Hat OpenShift, a popular container orchestration platform built on top of Kubernetes, in the cloud. With Red Hat OpenShift, developers can build, deploy, and manage containerized applications with ease, leveraging the power of Kubernetes and the simplicity of Azure management.
+
+One of the key benefits of Azure Red Hat OpenShift is its simplicity. With OpenShift, developers can deploy containerized applications with just a few steps, without the stress of managing infrastructure or scaling challenges. Azure takes care of these aspects, once again allowing developers to focus on writing code and delivering value to their users.
+
+Another advantage of Azure Red Hat OpenShift is its compatibility with existing Kubernetes ecosystems. With OpenShift, developers can leverage existing Kubernetes tools, APIs, and integrations, making it easy to migrate existing workloads to Azure and integrate with other Azure services.
+
+Azure Red Hat OpenShift reference architecture
+Use Cases:
+Some of the relevant use cases relating to Azure Red Hat OpenShift include:
+
+Running short-lived background tasks or batch jobs.
+
+Executing one-time containerized processes.
+
+Experimenting with containers without managing infrastructure.
+
+8. Azure Spring Apps
+   Azure Spring Apps is a managed service for deploying and running Spring Boot applications in the cloud. It provides a familiar and optimized environment for building, deploying, and scaling Spring Boot applications, enabling developers to streamline their development and operations processes.
+
+One of the key benefits of Azure Spring Apps is its simplicity. With Spring Apps, developers can deploy Spring Boot applications with just a few clicks, without worrying about managing infrastructure or scaling challenges. Azure takes care of these aspects, allowing developers to focus on writing code and delivering value to their users.
+
+Another advantage of Azure Spring Apps is its compatibility with existing Spring Boot ecosystems. With Spring Apps, developers can leverage existing Spring Boot tools, libraries, and frameworks, making it easy to migrate existing applications to Azure and integrate with other Azure services.
+
+Use Cases:
+Some of the relevant use cases relating to Azure Spring Apps include:
+
+Deploying and managing containerized applications for organizations already using Red Hat OpenShift.
+
+Leveraging OpenShift features like centralized authentication and role-based access control.
+
+Benefiting from a familiar development and operational experience with OpenShift in the Azure cloud.
+
+Some of the relevant use cases relating to Spring Boot applications include:
+
+Deploying and scaling Spring Boot applications in a cloud-native environment.
+
+Leveraging pre-configured Spring Boot features and integrations.
+
+Simplifying management for developers familiar with the Spring Boot framework.
+
+9. Azure Service Fabric
+   Azure Service Fabric is a distributed systems platform for building and running scalable, reliable, and resilient applications. It provides a comprehensive set of tools and services for developing, deploying, and managing microservices, stateful services, and containerized applications in the cloud.
+
+One of the key benefits of Azure Service Fabric is its flexibility. Service Fabric supports a wide range of application architectures, including microservices, monolithic applications (Monolithic applications are software applications built as a single, indivisible unit where all components are interconnected and interdependent.), and stateful services, making it suitable for diverse workloads and use cases.
+
+Another advantage of Azure Service Fabric is its scalability. Service Fabric automatically scales to handle incoming traffic, ensuring optimal performance and availability during peak usage periods. Additionally, Service Fabric integrates with other Azure services, such as Azure Monitor and Azure DevOps, to provide a comprehensive application development and management solution.
+
+Use Cases:
+Some of the relevant use cases relating to Azure Service Fabric include:
+
+Building and deploying microservices architectures for complex applications.
+
+Running stateful services that require persistent storage and data management.
+
+Managing distributed applications across hybrid cloud environments (Azure and on-premises).
+
+10. Azure Batch
+    The last service is Azure Batch. Azure Batch is a managed service for running large-scale parallel computing jobs in the cloud. It provides a scalable and cost-effective solution for executing high-performance computing (HPC) applications across a pool of virtual machines, enabling efficient resource utilization and cost management.
+
+One of the key benefits of Azure Batch is its scalability. Batch automatically scales to handle large-scale parallel computing jobs, ensuring optimal performance and availability during peak usage periods. Additionally, Batch integrates with other Azure services, such as Azure Storage and Azure Virtual Machines, to provide a comprehensive solution for running HPC applications in the cloud.
+
+Use Cases:
+Some of the relevant use cases relating to Azure Batch include:
+
+Running scientific simulations and data analysis requires parallel processing.
+
+Processing large datasets for machine learning or artificial intelligence applications.
+
+Scaling compute resources for batch jobs without managing individual VMs.
+
+Conclusion
+In this reading, you explored the core Azure computing services available as part of the Microsoft Azure suite. You examined each service’s fundamental characteristics as well as relevant use cases.
+
+Remember, these are just the building blocks! Azure offers much more.
+
+In our constantly connected world, even brief downtime can deal a severe blow to businesses. Picture an e-commerce platform crashing during its busiest period are a vital financial tool suddenly inaccessible. This underscores the crucial importance of high availability or HA. In this video, you will explore how Microsoft Azure offers you the tools to construct robust applications capable of weathering virtually any storm. By leveraging Azure, you can guarantee a smooth user experience and maintain uninterrupted business functions regardless of the challenges. However, you might currently be wondering, what exactly is HA? Let's explore that question now.
+Ha simply means a system or application can continue functioning despite failures. It involves eradicating single points of failure or SPoFs, which are key components whose failure could disrupt the entire system. Azure helps you achieve HA through the following first, redundancy. Azure provides various ways to create redundancy, like replicating data and deploying virtual machines across multiple resources. This ensures that if one component fails, another can seamlessly take over. Next, by implementing fast failover mechanisms. Azure can automatically detect failures and quickly switch to healthy backup resources, minimizing downtime and keeping your applications online and scalability.
+HA systems need to handle increased loads of without compromising availability. Azure's elastic cloud infrastructure allows you to scale resources up or down quickly based on demand. Azure regions are unique geographic locations where your cloud resources reside. Within each region lies an added layer of security called availability zones or AZs. These AZs consist of separate physical data centers within a region, each equipped with independent power, cooling and networking capabilities. AZs offer fault isolation. If an issue arises in one AZ, its unlikely to affect the others, so your applications across multiple AZs remain operational.
+An enhanced resilience dispersing virtual machines across various AZS establishes redundancy, bolstering your applications overall resilience. Another essential component for HA is Azure load balancer. It functions as a traffic manager, intelligently spreading incoming traffic among a group of functional virtual machines guaranteeing scalability. The load manager efficiently manages sudden increases in traffic by distributing the workload across multiple VMS. High availability. In case of a VM failure, the load balancer promptly removes it from the pool and redirects traffic to operational VMS, ensuring uninterrupted user experience and health monitoring. By continuously monitoring VM health, the load balancer can be set to take specific actions upon detecting issues, which maintains system stability.
+For web applications, Azure app service environments, or ASE provides a highly available and scalable environment. It offers several features that contribute to HA, including isolated infrastructures. ASE's creates a dedicated environment with its own virtual network and load balancers, ensuring isolation from other applications running in Azure. Automatic scaling, ASE's can automatically scale your web application up or down based on traffic demands. This ensures your application has the resources it needs to remain responsive even during peak loads. And built in load balancing ASE comes with built in load balancing that distributes traffic across multiple instances of your web application, preventing any single instance from becoming overloaded. While AZs protect within a region, what if a more extensive outage impacts the entire area?
+That's where Azure comes in, enabling you to achieve ha across geographically distant locations. Azure traffic manager is a vital tool for HA across regions. It functions like an advanced domain name system or DNS servers, by first setting up a traffic manager to direct users to your application endpoints located in different regions. Next, it continuously monitors your application endpoints health and performance across various regions. Traffic manager considers factors like availability, latency and responsiveness. Then based on health checks, the traffic manager smartly routes user traffic to the most available and efficient endpoint. In case of a region outage, it automatically diverts traffic to a healthy region reducing downtime and ensuring uninterrupted service for your users.
+Another feature of Azure is its brilliant site recovery or ASR. This disaster recovery solution takes HA a step further, enabling you to replicate your virtual machines and services to a secondary region that's geographically separate from your primary area. This replication happens continuously, keeping your data and applications synchronized. Azure front door is another tool for achieving HA in global applications with users that are spread across different locations. This global content delivery network or CDN service enhances the delivery of your web content and applications to users around the world. It offers global reach through a vast network of edge locations. And with intelligent traffic routing similar to traffic manager, the front door can intelligently route user traffic to the nearest Azure region with optimal performance and availability.
+The front door is designed with high availability in mind. It boasts geographically redundant infrastructure and the ability to automatically reroute traffic in the event of disruptions at any edge location. Now that you've seen Azure's powerful ha features, here are some best practices to consider when designing your HA. Firstly, it's imperative to design for fault tolerance by integrating redundant resources and architectures. This will help to eradicate single points of failure and enhance the system's resilience against potential disruptions. You should also automate monitoring and alerting, which helps to maintain system health. By continuously monitoring resources and configuring alerts, teams can promptly address any anomalies.
+Next, regularly testing failover and disaster recovery processes will validate their effectiveness, identify system weaknesses, and ensure smooth recovery procedures. Using Azure availability sets is strongly advised for spreading virtual machines across various fault and update domains. This approach boosts availability by reducing the effects of hardware failures or scheduled maintenance. Finally, it's crucial to include Azure-managed services like Azure SQL database, Azure Cosmos DB and Azure functions. By using these fully managed services, organizations can delegate infrastructure management tasks and maintain uninterrupted service delivery. By following these best practices and leveraging Azure's robust set of HA features, you can build highly available applications that are resilient and scalable and deliver exceptional performance to your users worldwide. Remember, a well designed HA architecture minimizes downtime and ensures your business operations remain uninterrupted even during unexpected disruptions.
+
+Glossary - Azure Load Balancer terms
+Introduction
+Shortly, you’ll be introduced to the Azure Load Balancer, which intelligently distributes incoming network traffic across a cluster of backend servers. However, before exploring that feature, study the list of definitions below for common abbreviations that are essential to the function of Azure Load Balancer.
+
+Abbreviations
+Abbreviation
+
+Full Form
+
+OSI
+
+Open Systems Interconnection
+
+VM
+
+Virtual Machine
+
+TCP
+
+Transmission Control Protocol
+
+UDP
+
+User Datagram Protocol
+
+HTTP
+
+Hypertext Transfer Protocol
+
+HTTPS
+
+Hypertext Transfer Protocol Secure
+
+NAT
+
+Network Address Translation
+
+SHA256
+
+Secure Hash Algorithm 256
+
+TLS
+
+Transport Layer Security
+
+HA
+
+High Availability
+
+NSG
+
+Network Security Group
+
+SKU
+
+Stock Keeping Unit
+
+IPv4
+
+Internet Protocol version 4
+
+IPv6
+
+Internet Protocol version 6
+
+TCP
+
+Transmission Control Protocol
+
+CLI
+
+Command-Line Interface
+
+API
+
+Application Programming Interface
+
+IP
+
+Internet Protocol
+
+Conclusion
+This item has prepared you for your exploration of the Azure Load Balancer. By familiarizing yourself with these definitions, you have provided yourself with a foundational understanding that will enhance your comprehension and effectiveness in using the Azure Load Balancer to its fullest potential.
+
+Azure Load Balancer
+Introduction
+Picture yourself at a bustling food market with diverse stalls offering a variety of foods. As customers flood in simultaneously, the risk of overwhelming the market looms. This scenario mirrors the complexities of managing network traffic in cloud computing. Enter Azure Load Balancer: a crucial service akin to a skilled market organizer. It adeptly spreads incoming network traffic across a cluster of backend servers, akin to directing customers to various stalls.
+
+This ensures not only enhanced application scalability but also robust high availability, guaranteeing seamless user experiences even amid fluctuating workloads. But how does it work?
+
+Understanding Load Balancer
+Load balancing works by distributing incoming traffic across multiple backend servers, preventing any single server from becoming overloaded, ensuring optimal application performance and responsiveness for users. Azure Load Balancer operates at layer 4 of the Open Systems Interconnection(OSI) model, acting as a single point of contact for clients. It directs incoming traffic to healthy backend instances (such as VMs) based on configured load-balancing rules and health probes. Think of health probes as a monitoring solution that continuously checks the health and availability of backend instances. They send regular requests to these instances to ensure they are responsive and functioning correctly. Suppose a backend instance fails to respond to these probes or is deemed unhealthy based on specific criteria. In that case, Azure Load Balancer will automatically stop routing traffic to it until it becomes healthy again.
+
+Types
+There are two primary Load Balancer types:
+
+Public Load Balancer: Provides outbound connections for VMs within a virtual network. It translates private IP addresses to public IP addresses, allowing internet traffic to reach your VMs.
+
+Internal Load Balancer: Distributes traffic solely within a virtual network, using private IP addresses at the frontend. This is ideal for internal line-of-business applications.
+
+The image below shows the load balancer in action, showing the difference between internal and public load balancers.
+
+Image showing how load balancer worksImage showing how load balancer works
+Benefits
+There are several benefits to using an Azure Load Balancer, including:
+
+Scalability: Easily add or remove backend VMs as traffic demands fluctuate. The load balancer automatically adapts to maintain optimal performance.
+
+High availability: Ensures application continuity by directing traffic away from unhealthy or overloaded VMs. This redundancy minimizes downtime and maximizes uptime.
+
+Low latency and high throughput: Delivers high-performance connections by efficiently distributing traffic across multiple backend servers.
+
+Inbound and outbound support: Manages both inbound and outbound traffic flows, offering comprehensive load-balancing solutions.
+
+Multi-protocol support: It supports various protocols, such as TCP, UDP, HTTP, and HTTPS, enabling load balancing for diverse applications.
+
+Health monitoring: Continuously monitors backend VMs using health probes, guaranteeing traffic reaches only healthy and responsive instances.
+
+Security: Integrates with Azure Network Security Groups (NSGs) to control inbound traffic and enhance security.
+
+Key components
+Understanding these components and their configurations empowers you to design and implement effective load-balancing solutions for your Azure applications:
+
+Frontend IP configuration: The load balancer's public or private IP address acts as the entry point for client requests.
+
+Backend pool: A group of VMs or virtual machine scale set instances that handle incoming workload.
+
+Health probes: Tools used to monitor the health of backend VMs, ensuring traffic reaches only functional instances.
+
+Load Balancer rules: Define how incoming traffic is distributed to backend VMs based on ports and protocols. The below image demonstrates how incoming traffic is distributed.
+
+Image showing how load balancer connects and manages data in Virtual machinesImage showing how load balancer connects and manages data in Virtual machines
+HA ports: The below image shows a particular load-balancing rule configuration that enables all TCP and UDP traffic to be load-balanced across multiple ports.
+
+Image showing how load balancer works with portsImage showing how load balancer works with ports
+Inbound NAT rules: The image below shows how to forward incoming traffic to specific VMs within the backend pool for port forwarding scenarios.
+
+Image showing how load balancer connects and manages data in Virtual machinesImage showing how load balancer connects and manages data in Virtual machines
+Outbound rules: The image below shows how configuring outbound Network Address Translation (NAT) for backend VMs allows them to communicate with the internet or other endpoints.
+
+Image showing how load balancer worksImage showing how load balancer works
+Azure Load Balancer distribution modes
+Azure Load Balancer offers different distribution modes to route connections to backend instances:
+
+Hash-based: The image below shows how a Load Balancer routes traffic based on a hash of a five-tuple (source IP, source port, destination IP, destination port, protocol). This provides even distribution but doesn't maintain session affinity.
+
+Image showing how load balancer works with IP'sImage showing how load balancer works with IP's
+Session persistence (Client IP): Routes traffic from the same client IP to the same backend instance, maintaining session affinity.
+
+Session persistence (Client IP and protocol): Routes traffic from the same client IP and protocol combination to the same backend instance, offering finer-grained session affinity.
+
+Global Load Balancer
+Azure Standard Load Balancer supports cross-region load balancing, enabling geo-redundant high availability scenarios such as:
+
+Incoming traffic originating from multiple regions.
+
+Instant global failover to the following optimal regional deployment.
+
+Load distribution across regions to the closest Azure region with ultra-low latency.
+
+Ability to scale up/down behind a single endpoint.
+
+Static anycast global IP address
+
+Client IP preservation
+
+Build on existing load balancer solution with no learning curve
+
+The image below shows how Load Balancer uses a cross-region function to enable high geo-redundant availability.
+
+Image showing how load balancer works with IP's and portsImage showing how load balancer works with IP's and ports
+Regional redundancy
+Regional redundancy in Azure Load Balancer is a valuable capability that entails setting up multiple load balancers across diverse regions to guarantee optimal availability and resilience. This involves seamlessly connecting a cross-region load balancer with your current regional load balancers. In the event of a region failure, traffic is seamlessly redirected to the nearest operational regional load balancer, ensuring uninterrupted service.
+
+The cross-region load balancer's health probe, demonstrated in the image below, gathers information about each regional load balancer's availability every 5 seconds. If one regional load balancer drops its availability to 0, the cross-region load balancer detects the failure and takes the regional load balancer out of rotation.
+
+Load balancer works cross-region detecting the failures and takes the regional load balanceLoad balancer works cross-region detecting the failures and takes the regional load balance
+Ultra-low latency
+The geo-proximity load-balancing algorithm is based on the geographic location of your users and your regional deployments.
+
+Traffic starts when a client hits the closest participating region and travels through the Microsoft global network backbone to arrive at the nearest regional deployment.
+
+Conclusion
+So, just like navigating our food market, managing network traffic in cloud computing can be complex. Azure Load Balancer has shown itself to be a skilled organizer by efficiently distributing incoming traffic across backend servers, just like directing customers to different stalls.
+
+This not only enhances application scalability but also ensures robust high availability, even amidst varying workloads.
+
+Azure Load Balancer and health probes
+Introduction
+Ensuring uninterrupted app availability is vital for organizations today. Consider an online commerce platform hit by a sudden surge in traffic. How can it handle this influx without crashing?
+
+This is where the Azure Load Balancer steps in by efficiently distributing incoming web traffic across servers to maintain smooth operations.
+
+This reading focuses on Azure Load Balancer health probes, which are pivotal for ensuring seamless server responsiveness. You'll explore their functionality and learn how implementing best practices empowers developers to create resilient applications on Azure. This is crucial for maintaining optimal user experiences in ever-evolving landscapes.
+
+Real-world example: Enhancing e-commerce platform availability
+Let’s start by exploring our earlier scenario a bit further; imagine a high-traffic e-commerce website experiencing traffic surges during peak seasons. Without load balancing, a single web server might become overwhelmed, causing website crashes and lost sales.
+
+Here's how Azure Load Balancer can ensure high availability:
+
+Deployment: First, configure an Azure Load Balancer in front of a backend pool containing multiple web server VMs.
+
+Traffic distribution: Then, the load balancer directs incoming customer requests to healthy VMs within the pool.
+
+Scalability: Next, during peak traffic periods, you can add additional web server VMs to the backend pool.
+
+High availability: If a VM encounters an issue, the health probe detects it, and the load balancer stops directing traffic to that VM. Traffic continues seamlessly to the remaining healthy VMs, maintaining website uptime.
+
+This scenario demonstrates how Azure Load Balancer safeguards application availability and scalability, ensuring a smooth user experience for e-commerce customers, even during traffic spikes.
+
+But where does the health probes feature fit into this?
+
+Azure Load Balancer health probes: Ensuring backend VM health
+An Azure Load Balancer health probe is a critical feature that safeguards application uptime. It acts as a monitoring mechanism, regularly checking the health and responsiveness of backend VMs within a pool. By leveraging health probes, the load balancer guarantees that it only directs traffic toward healthy and functioning VMs.
+
+Health probe protocols
+Health probes support various protocols, enabling them to interact with backend VMs using different communication methods. The availability of a specific protocol depends on the Load Balancer SKU (Stock Keeping Unit) you're using:
+
+Standard SKU: Supports TCP (Transmission Control Protocol), HTTP (Hypertext Transfer Protocol), and HTTPS (Hypertext Transfer Protocol Secure) probes.
+
+Essential SKU: Supports TCP and HTTP probes.
+
+Here's a breakdown of the probe behavior for each protocol:
+
+Scenario
+
+TCP Probe
+
+HTTP/HTTPS Probe
+
+Overview
+
+Initiates a connection with a three-way TCP handshake and terminates it with a four-way close handshake.
+
+Issues an HTTP GET request with a specified path.
+
+Both support relative paths.
+
+HTTPS probes involve an additional Transport Layer Security (TLS) layer.
+
+Probe Failure
+
+No response from the VM during the timeout period.
+
+Receives a TCP reset from the VM.
+
+Receives an HTTP response code other than 200 (e.g., 403, 404, 500).
+
+No response within the minimum probe interval and 30-second timeout period.
+
+Receives a TCP reset from the VM.
+
+Probe Up Behavior
+
+Successful probe after the VM boots mark the backend endpoint as healthy.
+
+Any healthy backend endpoint can receive new flows.
+
+VM responds with an HTTP status code 200 within the timeout period.
+
+VM marks the backend endpoint as healthy.
+
+It’s important to note that HTTPS probes require certificates with a minimum signature hash of SHA256 in the entire certificate chain.
+
+Probe down behavior
+The behavior of the load balancer when health probes fail depends on the number of instances in the backend pool and the type of connection (TCP or UDP) [Transmission Control Protocol (TCP) or User Datagram Protocol (UDP)], for example:
+
+Scenario
+
+TCP Connections
+
+UDP Datagrams
+
+Single Instance Probe Down
+
+New connections succeed in remaining healthy VMs. Established connections to the unhealthy VM continue.
+
+Existing UDP flows move to another healthy VM in the pool.
+
+All Instances Probe Down
+
+No new flows are sent to the backend pool. The standard Load Balancer allows established TCP flows to continue (if there's more than one VM in the pool), while the basic Load Balancer terminates all existing TCP flows.
+
+All existing UDP flows terminate.
+
+Probe interval & timeout
+The probe interval determines how frequently the health probe checks backend VMs. When a probe fails, it marks the corresponding VM as unhealthy. Conversely, a successful subsequent probe marks the VM as healthy again. By default, probes attempt to check the configured port every 5 seconds, but you can adjust this interval.
+
+Built-in timeouts are included in HTTP/S probes to ensure timely responses.
+
+TCP Probe Timeout: This is not applicable (the probe fails after the configured probe interval elapses and the subsequent investigation is sent).
+
+HTTP/S Probe Timeout: 30 seconds.
+
+If the configured probe interval exceeds the timeout, it times out and fails if no response is received within the timeout period.
+
+Important considerations for health probes
+It’s important to consider the following when designing your health probe model:
+
+Probe port: Select a port on the backend VM that reflects the health of both the VM and the application service running on it. The application port and probe port can be different. However, it is recommended that they be aligned.
+
+Custom health responses: Your application can generate a custom response to health probes, indicating whether the VM should receive new connections. By manipulating the probe response, you can throttle new connections or drain connections to prepare for application maintenance.
+
+UDP load-balanced applications: For UDP applications, generate a custom health probe signal from the backend VM. Use a matching TCP, HTTP, or HTTPS probe for communication.
+
+HA ports load balancing: When using HA Ports with a Standard Load Balancer, a single health probe response determines the health of the entire VM.
+
+Probe source IP: Don't translate or proxy a health probe through another VM within your virtual network, leading to cascading failures.
+
+Multiple network interfaces: If your VM has various interfaces, ensure it responds to probes on the interface where the probe request is received. You may need to configure source network address translation on a per-interface basis.
+
+Probe validation: Probe definition isn't mandatory when using Azure PowerShell, CLI, templates, or API. Validation only occurs in the Azure portal.
+
+Probe fluctuations: The load balancer implements a delay before marking a previously unhealthy VM as healthy again, helping to prevent unnecessary service disruptions due to transient glitches or momentary network issues. The delay ensures that the VM is genuinely stable and operational before resuming traffic flow.
+
+Running VMs: Ensure all VMs within the backend pool are running. The load balancer only probes active VMs.
+
+Microsoft-owned IP ranges: Avoid configuring your virtual network with the Microsoft-owned IP address range that contains 168.63.129.16. The health probe uses this range and can cause conflicts.
+
+Testing probe failures: To simulate a probe failure or isolate an individual VM, use a network security group (NSG) to block the health probe's traffic. Create an NSG rule that blocks the destination port or source IP address used by the probe.
+
+Monitoring health probes:
+Standard Load Balancer: Azure Monitor exposes per-endpoint and backend endpoint health probe status for this service. Other Azure services or partner applications can leverage these metrics. However, the Basic Load Balancer doesn't support Azure Monitor logs for health probes.
+
+Probe source IP address:
+The health probe originates from the IP address 168.63.129.16 (IPv4) and a link-local address (IPv6). Ensure this source IP is allowed through any relevant firewalls or network security groups to guarantee the probe can reach your VMs. Blocking this IP will lead to probe failures and marked-down VMs.
+
+Limitations:
+HTTPS probes: Don't support mutual authentication using client certificates.
+
+TCP timestamps: Enabling TCP timestamps on the backend VMs may cause health probes to fail.
+
+Primary SKU Load Balancer: Doesn't support health probes with virtual machine scale sets.
+
+HTTP probe restrictions: For security reasons, you cannot configure HTTP probes on ports 19, 21, 25, 70, 110, 119, 143, 220, and 993.
+
+Conclusion
+By understanding and effectively using Azure Load Balancer health probes, you can ensure the optimal health and responsiveness of your backend VMs, ultimately enhancing the availability and performance of your Azure applications.
+
+Having rock-solid apps is non-negotiable, Azure Load Balancer health probes are your secret weapon for keeping everything ticking smoothly. By understanding these, you can ensure your apps stay online and responsive, no matter what the world throws at them.
+
+Azure Traffic Manager overview
+Introduction
+In this interconnected world, delivering a smooth online experience for users worldwide is essential. Azure Traffic Manager (ATM) enables you to achieve this by intelligently distributing traffic amongst your public-facing applications hosted across different Azure regions.
+
+What is Azure Traffic Manager?
+Azure Traffic Manager is a robust DNS-based traffic load balancer offered by Microsoft Azure. It acts as a central traffic director, intelligently routing user requests to the most suitable endpoint based on a pre-defined traffic routing method. It ensures that you are connected to the geographically closest and healthiest endpoint, minimizing latency and maximizing application performance.
+
+Benefits Azure Traffic Manager offers several benefits, including:
+Enhanced User Experience: By directing users to the nearest available endpoint, Azure Traffic Manager significantly reduces latency, leading to faster page load times and a smoother user experience.
+
+Improved Availability: Azure Traffic Manager offers high availability by continuously monitoring the health of your application endpoints. If a primary endpoint becomes unavailable, Azure Traffic Manager automatically fails over to a healthy secondary endpoint, ensuring service continuity.
+
+Global Reach: Azure Traffic Manager's international network of DNS servers ensures your applications are accessible to users worldwide. Users are directed to the closest endpoint, regardless of their location.
+
+Scalability: Azure Traffic Manager seamlessly scales to accommodate fluctuations in user traffic. It can handle spikes in traffic without compromising performance.
+
+Cost Optimization: Lastly, Azure Traffic Manager helps optimize costs by directing users to the most cost-effective endpoint based on pricing tiers in different regions.
+
+Features
+Traffic Routing Methods: Azure Traffic Manager offers various traffic routing methods to suit specific application needs. These include:
+
+Priority: Routes traffic to the highest priority endpoint.
+
+Weighted: Distributes traffic based on pre-defined weights assigned to each endpoint.
+
+Geographic: Routes traffic to the endpoint closest to the user's location.
+
+Performance: And routes traffic to the endpoint with the fastest response times.
+
+Health Monitoring: Azure Traffic Manager continuously monitors the health of your application endpoints using various probes, including HTTP, TCP, and Ping, ensuring only healthy endpoints receive traffic.
+
+Failover: Azure Traffic Manager automatically fails over traffic to a healthy secondary endpoint if a primary endpoint becomes unavailable, minimizing downtime and ensuring service continuity.
+
+Metrics and Analytics: Lastly, Azure Traffic Manager provides comprehensive metrics and analytics to help you monitor traffic patterns, endpoint health, and overall application performance.
+
+Considerations
+Azure Traffic Manager oversees global traffic distribution at the DNS level, focusing on managing traffic across regions rather than load balancing within a single region. For intra-region load balancing, consider Azure Load Balancer or Application Gateway. When using Azure Traffic Manager, your application needs a public DNS name. You should also note that pricing for Azure Traffic Manager depends on the number of DNS queries processed monthly.
+
+How Traffic Manager works
+Azure Traffic Manager enables you to control traffic distribution across your application endpoints (any internet-facing service hosted inside or outside of Azure). It offers two key benefits:
+
+Traffic Distribution: It uses various traffic routing methods to distribute traffic efficiently.
+
+Health Monitoring and Failover: By continuously monitoring endpoint health and automatically switching to a healthy secondary endpoint if a primary endpoint fails.
+
+Here's a breakdown of the process:
+
+Client Initiates Connection: A client attempts to connect to your service by resolving its DNS name to an IP address.
+
+DNS Resolution: The client's DNS service queries the internet to resolve the DNS name.
+
+Traffic Manager Intervention: Azure Traffic Manager intercepts the DNS query and selects an appropriate endpoint based on the configured traffic routing method and endpoint health.
+
+DNS Response: Azure Traffic Manager returns a DNS response containing the IP address of the chosen endpoint.
+
+Client Connects to Endpoint: To access the application, the client connects directly to the selected endpoint's IP address.
+
+Azure Traffic Manager in action: A scenario
+Let’s look at this in action. Imagine Contoso Corp has developed a new partner portal accessible at https://partners.contoso.com/login.aspx. The application hosted in three Azure regions, leverages Azure Traffic Manager to distribute client traffic to the closest available endpoint, enhancing availability and global performance.
+
+Connecting to the Traffic Manager
+Now let’s explore how a client requests the page https://partners.contoso.com/login.aspx; this is performed through the following steps to resolve the DNS name and establish a connection:
+
+DNS Inquiry: The user's device sends a question to its local DNS service, asking it to find the address (IP) for "partners.contoso.com." This regional service acts as a middleman and does not directly store the answer.
+
+CNAME Chase: The local DNS service starts the chase by contacting the name servers for "contoso.com." These servers respond with a clue: a CNAME record pointing to "contoso.trafficmanager.net." This tells the local service that the actual answer lies elsewhere.
+
+Traffic Manager intervenes in the local DNS service by filtering the name servers for "trafficmanager.net," which it manages, and then employs its capabilities:
+
+By checking the health and availability of all configured endpoints for the Contoso Corp application (e.g., contoso-us.cloudapp.net, contoso-eu.cloudapp.net).
+
+Based on the chosen traffic routing method (e.g., geographic or performance), the most suitable endpoint is selected.
+
+In this example, let's say "contoso-eu.cloudapp.net" is chosen.
+
+Final Stop: The Endpoint IP: Traffic Manager returns another clue, a CNAME record pointing to "Contoso-eu.cloudapp.net." The local DNS service now knows precisely where to go.
+
+Local DNS Delivers: The local DNS service gathers all the information and sends a final response back to the user's device, containing the IP address of the chosen endpoint (contoso-eu.cloudapp.net).
+
+Direct Connection Established: The user's device finally has the answer! It bypasses Traffic Manager and directly connects to the chosen endpoint's IP address to access the Contoso Corp partner portal.
+
+Image showing how client connects to endpoint through traffic managerImage showing how client connects to endpoint through traffic manager
+Conclusion
+In conclusion, Azure Traffic Manager is a valuable tool for enhancing the user experience, availability, scalability, and global reach of your cloud-based applications. It offers various traffic routing methods, health monitoring with failover capabilities, and insightful metrics for comprehensive traffic management. By leveraging Azure Traffic Manager, you can ensure your applications perform optimally for users worldwide.
+
+Imagine that your e-commerce store has suddenly hit a growth spurt. You have the basics in place, but with the intense demand spread across multiple regions, you realize you need various services to communicate with each. To be more specific, you need inventory management, order processing, and shipping services to communicate independently, which will give your business the scalability it needs. Microsoft has a wonderful tool called Azure Service Bus that helps applications chat with each other smoothly. Whether you're building complex systems or integrating old school software, Service Bus can be your go to tool for communication. When separate applications work together, data must flow reliably and securely between them, even if written in different languages and live on different computers. Azure Service Bus acts like a central message broker, allowing applications to send messages to each other without needing to worry about very granular details.
+This keeps things separate or decoupled, so applications can evolve independently and operate asynchronously. Service Bus offers two main communication methods for applications, Queues and topics. Queues, also known as point to point, can be thought of as lines. Applications send messages to a queue. Only one receiver can get each message at a time in the order they were sent. For example, this is well suited for processing tasks, fulfilling orders, or sending essential notifications where the order matters. Regarding topics or publish subscribe, imagine a broadcast system.
+An application publishes a message to a topic, and multiple receivers can subscribe to that topic to receive the message. This is ideal for real time updates like stock prices, sensor data or event notifications where various applications need the same information. Subscribers can even filter messages they receive to avoid information overload. Azure Service Bus also has relays, which act like secure gateways. They allow applications on your on-premises computers to connect and communicate with applications running in Azures Cloud Environment. This lets you leverage the power of Service Bus for communication, even if your applications aren't all in the same place. Imagine a complex system where applications need to talk to each other, but can't directly yell across the room.
+Service Bus is a central hub, ensuring messages are delivered reliably, even if the applications are busy or unavailable. Here are some of the ways Service Bus facilitates communication. If you need a quick answer, request-reply is a pattern that is like a two-way conversation. An application sends a question or a request message and waits for a response. It's perfect for scenarios like user logins are invoking specific actions. Fan-out is applicable when spreading the news. Think of a company-wide announcement.
+Fan-out delivers a single message published to a topic to all subscribed applications simultaneously. It's ideal for real time updates like stock prices or event notifications, where everyone needs to be on the same page. Lastly, dead letter queues or DLQ, for short, relate to undelivered mail. Sometimes messages get lost in the shuffle. Service Bus automatically sends undelivered messages to a DLQ, like a lost and found for messages. This helps identify and troubleshoot any delivery issues. How are applications integrated?
+Let's put Service Bus to work through the following e-commerce example where a customer places an order on an e-commerce platform. First, send the order details. The application creates a message containing the order details. Service Bus client libraries, which are available in various programming languages, help the application connect and send this message to a queue. Next, hold onto the order until it's processed. Here, the message is stored securely in the queue until the order processing system is ready. This ensures no order data gets lost, even if the processing system is temporarily unavailable.
+When you're ready to receive the order, configure the order processor. In this phase, the order processing system sets up a listener on Service Bus, waiting for new messages on the chosen queue. Finally, fulfilling the order is achieved by processing that takes action. When a new order message arrives, the listener retrieves the details. The order processing system then springs into action, deducting inventory, generating invoices, and potentially sending confirmation messages back depending on the specific needs. In summary, Azure Service Bus offers excellent benefits. It makes applications independent, allowing for easier development and scaling.
+There's guaranteed delivery and message persistence to ensure data integrity. Then elastic scaling meets your application's ever changing needs through infrastructure requirements that adapt to network traffic patterns. Additionally, built in security features provide peace of mind. In this video, you learned what Azure Service Bus is, which facilitates seamless communication between different components. You explored the message delivery patterns and how applications are integrated. Furthermore, you concluded with a summary of some of the benefits of the Azure Service Bus tool. Now, you can experiment with this tool to enhance your component communication pathways.
+
+Azure Service Bus - Connecting and integrating applications
+Introduction
+Azure Service Bus is a fully managed enterprise message broker with message queues and publish-subscribe (Pub/Sub) topics. Service Bus is used to decouple applications and services from each other.
+
+Benefits
+Some of the benefits of Service Bus include:
+
+Load-balancing work across competing workers
+
+Safely routing and transferring data and control across service and application boundaries
+
+Coordinating transactional work that requires a high degree of reliability
+
+Data is transferred between different applications and services using messages. A message is a container carrying data and decorated with metadata. The data can be any kind of information, including structured data.
+
+Some common messaging scenarios are:
+
+Messaging involves transferring business data, such as sales or purchase orders, journals, or inventory movements.
+
+Decouple applications improve the reliability and scalability of applications and services. Producers and consumers can be offline and readily available simultaneously the load levels out so that traffic spikes don't overtax a service.
+
+Load balancing allows multiple competing consumers to read from a queue simultaneously, each safely obtaining exclusive ownership of specific messages.
+
+Topics and subscriptions enable a 1:n relationship ratio between publishers and subscribers, allowing subscribers to select particular messages from a published message stream.
+
+Transactions allow you to do several operations, all in the scope of an atomic transaction. For example, the following operations can be done in the scope of a transaction:
+
+Obtain a message from one queue.
+
+Post results of processing to one or more different queues.
+
+Move the input message from the original queue.
+
+The results become visible to downstream consumers only upon success, including the successful settlement of the input message. This allows for once-only processing semantics. This transaction model is a robust foundation for the compensating transaction pattern in the greater solution context.
+
+Message sessions implement high-scale coordination of workflows and multiplexed transfers requiring strict message ordering or deferral.
+
+As Service Bus is a platform as a service (PaaS) offering, a key difference is that you do not need to worry about the following actions because Azure handles them for you:
+
+Worrying about hardware failures
+
+Keeping the operating systems or the products patched
+
+Placing logs and managing disk space
+
+Handling backups
+
+Failing over to a reserve machine
+
+Azure Service Bus concepts
+There are basic, yet essential Service Bus concepts to take note of. These include queues and topics.
+
+Queues
+Messages are sent to and received from queues. Queues store messages until the receiving application is available to accept and process them.
+
+Note the following Service Bus queue. A sender and a receiver send and receive messages.
+
+Service Bus queue. Showing a sender and a receiver send and receive messages.Service Bus queue. Showing a sender and a receiver send and receive messages.
+Messages in queues are ordered and time-stamped on arrival. Once the broker accepts the message, it is always held durably in triple-redundant storage. If the namespace is zone-enabled, these are spread across availability zones. A namespace is a container for all messaging components, such as queues and topics, but you’ll cover this later. Service Bus keeps messages in memory or volatile storage until the client reports them as accepted.
+
+Messages are delivered in what is known as pull mode, only delivering messages when requested. Unlike the busy-polling model of other cloud queues, the pull operation can be long-lived and only complete once a message is available.
+
+Topics
+Next are topics. You can also use topics to send and receive messages. While a queue is often used for point-to-point communication, topics are useful in publish-subscribe (Pub/Sub) scenarios.
+
+Now review a Service Bus topic with one sender and multiple receivers.
+
+Service Bus queue. Showing a sender and a receiver send and receive messages.Service Bus queue. Showing a sender and a receiver send and receive messages.
+Topics can have multiple independent subscriptions that attach to the topic and otherwise work exactly like queues from the receiver side. A subscriber to a topic can receive a copy of each message sent to that topic. Subscriptions are named entities. Subscriptions are durable by default, but can be configured to expire and then be automatically deleted. Via the Java Message Service (JMS) API, Service Bus Premium allows you to create volatile subscriptions for the duration of the connection.
+
+You can define rules on a subscription. A subscription rule has a filter to define a condition for the message to be copied into the subscription and an optional action that can modify message metadata. You can explore topic filters and actions a bit further in the Additional Resources reading. Topic filters are useful in the following scenarios:
+
+You may not want a subscription to receive all messages sent to a topic.
+
+You want to mark up messages with extra metadata when they pass through a subscription.
+
+Namespaces
+Recall that a namespace carries queues and topics. It can have one or more queues and topics and is often an application container.
+
+A namespace can be compared to a server in the terminology of other brokers, but the concepts aren't directly equivalent. A Service Bus namespace is your own capacity slice within a large cluster of dozens of all-active virtual machines. It optionally spans three Azure availability zones. So, you benefit by getting all the availability and power of running the message broker at an enormous scale. The best part is that you need not worry about underlying complexities. Service Bus is serverless messaging.
+
+Advanced features
+Service Bus also has advanced features that enable you to solve more complex messaging problems. These features include:
+
+Message sessions
+
+When processing messages in Service Bus queues or subscriptions, you can use sessions to realize a first-in, first-out (FIFO) guarantee. Sessions can also be used to implement request-response patterns. The request-response pattern enables the sender application to send a request and allows the receiver to accurately send a response back to the sender application correctly. For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading later.
+
+Auto-forwarding
+
+The Auto-forwarding feature enables you to chain a queue or subscription to another queue or topic that is part of the same namespace. When auto-forwarding is enabled, Service Bus automatically removes messages placed in the first queue or subscription (source) and puts them in the second queue or topic (destination). For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading a bit later.
+
+Dead-lettering
+
+Service Bus queues and topic subscriptions provide a secondary subqueue, called a dead-letter queue (DLQ). The dead letter queue holds messages that can't be delivered to any receiver or messages that can't be processed. You can then remove messages from the DLQ and inspect them. With the help of an operator, an application might correct issues and resubmit the message, log the fact that there was an error, and take corrective action. For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading.
+
+Scheduled delivery
+
+You can submit messages to a queue or topic for delayed processing. For example, to schedule a job to become available for processing by a system at a particular time. For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading later.
+
+Message deferral
+
+When a queue or subscription client receives a message that it is willing to process but for which processing isn't currently possible because of special circumstances within the application, the entity can defer retrieval of the message to a later point. The message remains in the queue or subscription but is set aside. For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading a bit later.
+
+Transactions
+
+A transaction groups two or more operations together into an execution scope. Service Bus supports grouping operations against a single messaging entity (queue, topic, subscription) within the scope of a transaction. For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading later.
+
+Filters and actions
+
+Subscribers can define which messages they want to receive from a topic. These messages are specified as one or more named subscription rules. Each rule consists of a filter condition that selects particular messages and optionally contains an action that annotates the selected message. For each matching rule condition, the subscription produces a copy of the message, which can be differently annotated for each matching rule. For more information, visit Topic filters and actions in the Additional Resources reading.
+
+Auto-delete on idle
+
+Auto-delete on idle enables you to specify an idle interval after which the queue is automatically deleted. The interval is reset when there's traffic in the queue. The minimum duration is 5 minutes. For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading later.
+
+Duplicate detection
+
+If an error occurs that causes the client to have any doubt about the outcome of a send operation, duplicate detection takes the doubt out of these situations by enabling the sender to resend the same message, and the queue or topic discards any duplicate copies. For more information, refer to Azure Service Bus - advanced features in the Additional Resources reading later.
+
+Security
+
+Service Bus supports security protocols such as Shared Access Signatures (SAS), Role Based Access Control (RBAC) (RBAC) and Managed identities for Azure resources.
+
+Service Bus supports standard Advanced Message Queuing Protocol (AMQP) 1.0 and HTTP/REST protocols.
+
+Advanced Message Queuing Protocol (AMQP) 1.0 is a standardized messaging protocol designed for efficient, reliable, and interoperable messaging between different software systems. It defines a set of rules and formats for exchanging messages between applications or services, regardless of the underlying technology stack or programming language. AMQP provides features such as message queuing, routing, and reliability mechanisms like acknowledgments and transactions. It enables communication between different messaging systems, allowing seamless integration and interoperability across diverse environments.
+
+On the other hand, Hypertext Transfer Protocol/Representational State Transfer (HTTP/REST) protocols are widely used for communication between web-based systems and services. RESTful APIs (Application Programming Interfaces) utilize HTTP methods (GET, POST, PUT, and DELETE) to perform operations on resources identified by URLs. RESTful architecture emphasizes stateless communication, where each request from the client contains all the necessary information for the server to fulfill it without relying on stored context. HTTP/REST APIs are commonly used for their simplicity, scalability, and compatibility with various platforms and devices.
+
+In the context of Service Bus, support for both AMQP 1.0 and HTTP/REST protocols means that clients can communicate with Service Bus using either of these protocols, providing flexibility and interoperability for integrating with a wide range of applications and systems. Clients can choose the protocol that best fits their requirements, ensuring seamless communication with Service Bus regardless of their underlying technology stack or communication preferences.
+
+Geo-disaster recovery
+
+When Azure regions or datacenters experience downtime, Geo-disaster recovery enables data processing to continue operating in a different region or datacenter.
+
+For more security and geo-disaster recovery information, refer to Azure Service Bus - advanced features in the Additional Resources reading.
+
+Conclusion
+In this reading, you learned that Azure Service Bus offers a comprehensive solution for enterprise messaging needs, facilitating efficient communication and integration between applications and services. Organizations can achieve reliable and scalable messaging solutions by leveraging features such as queues, topics, and advanced functionalities like message sessions, auto-forwarding, and dead-lettering.
+
+Understanding API and Azure API management
+Introduction
+In the intricate web of modern software systems, application programming interfaces (APIs) are at the core of defining the rules of engagement between various software components. While often concealed beneath layers of digital interactions, these interfaces play a pivotal role in enabling seamless communication and interoperability among diverse systems.
+
+Think of your smartphone as your essential companion in the digital world. The applications residing on it rely extensively on APIs to retrieve data from remote servers, harness device functionalities, and facilitate user interactions. APIs orchestrate these operations as silent conductors orchestrating a symphony of digital interactions.
+
+But what exactly are APIs, and why are they indispensable in today's software landscape? Let's explore the technical intricacies and demystify these fundamental constructs.
+
+What are APIs?
+An API is like a contract, delineating the protocols and standards governing interactions between software components. It establishes a structured interface that facilitates the seamless exchange of data and commands.
+
+Imagine an identity platform offering an API for user registration. External applications interface with this API to create users dynamically. However, adhering to the API's specifications is imperative for successful interaction. Requirements, such as data format and endpoint conventions, are meticulously documented, empowering developers to integrate seamlessly with the platform.
+
+The importance of APIs
+APIs serve as conduits for data flow, enabling software to leverage the capabilities of disparate systems. They form the backbone of automation, empowering developers to craft sophisticated workflows with minimal effort.
+
+Imagine you're trying to gather information from a website programmatically, which can be a tedious and complicated process. However, there are tools called APIs that make this much easier. Developers can use these APIs to automatically get, manage, and share the data they need without having to manually collect it from the website themselves.
+
+APIs are more than technical utilities: they are potent business assets. Streamlining integration with external tools enhances platforms' appeal, fostering innovation and collaboration.
+
+A taxonomy of APIs
+Now, let’s explore this at a deeper level. APIs manifest in diverse forms, each tailored to specific contexts and functionalities. There is the ubiquitous Representational State Transfer Application Programming Interface (REST) and Simple Object Access Protocol (SOAP) APIs to the cutting-edge GraphQL (Graph Query Language). Each variant offers unique advantages and trade-offs.
+
+REST exemplifies simplicity and flexibility, and RESTful APIs leverage HTTP methods to interact with resources, mirroring real-world interactions.
+
+SOAP boasts formal specifications and XML-based exchanges. SOAP APIs excel in enterprise environments, prioritizing standardization and robustness.
+
+GraphQL empowers clients with fine-grained control over data retrieval, optimizing performance and efficiency.
+
+Remote Procedure Call (RPC) facilitates seamless function calls across networks. RPC APIs bridge the gap between local and remote execution, albeit with varying degrees of standardization.
+
+Beyond network communications
+While REST, SOAP, GraphQL, and RPC APIs dominate discussions on network interactions, APIs extend their reach beyond digital boundaries. System APIs, ingrained within operating systems and programming frameworks, grant access to device functionalities and programming abstractions.
+
+Furthermore, programming language APIs and asynchronous variants enrich the developer ecosystem, fostering innovation and collaboration.
+
+Synchronous versus asynchronous paradigms
+About APIs, the dichotomy between synchronous and asynchronous paradigms shapes interaction models. While synchronous APIs yield immediate results, asynchronous counterparts facilitate non-blocking operations, optimizing resource utilization and scalability.
+
+In essence, APIs help in binding disparate systems, fostering interoperability, automation, and innovation. Understanding their nuances empowers developers to navigate the intricate terrain of modern software development, unlocking boundless possibilities.
+
+What is Azure API Management?
+Let's move on to Azure API Management, focusing on API governance and orchestration. Azure API Management emerges as a potent solution, addressing the evolving needs of organizations grappling with managing their API ecosystems.
+
+Azure API Management: Overview
+Azure API Management stands as a beacon in the landscape of API governance, offering a robust platform for managing APIs across diverse environments. As a platform-as-a-service (PaaS) offering, Azure API Management extends comprehensive support throughout the API lifecycle, empowering organizations to harness the full potential of their digital assets.
+
+Graphic showing connected devices and services through API'sGraphic showing connected devices and services through API's
+Key components and capabilities
+Central to Azure API Management's expertise are its essential components and capabilities, meticulously designed to navigate the complexities of modern API management:
+
+API Lifecycle Management: Azure API Management facilitates seamless management of APIs, from inception to retirement, streamlining processes and enhancing operational efficiency.
+
+Backend abstraction: Abstracting the diversity and intricacies of backend architectures, Azure API Management shields API consumers from underlying complexities, fostering a streamlined and consistent developer experience.
+
+Security and access control: With robust security measures, Azure API Management enables organizations to securely expose both on-premises and cloud-hosted services as APIs, safeguarding against potential threats and vulnerabilities.
+
+Performance optimization: Leveraging advanced techniques, Azure API Management accelerates API performance, ensuring optimal responsiveness and scalability even under high loads.
+
+Observability and monitoring: Through comprehensive monitoring capabilities, Azure API Management empowers organizations to gain insights into API usage, performance metrics, and potential bottlenecks, facilitating proactive optimization and troubleshooting.
+
+Addressing organizational challenges
+In the dynamic landscape of digital transformation, Azure API Management emerges as a strategic ally, addressing organizational challenges such as:
+
+Legacy modernization: By abstracting legacy assets through APIs, Azure API Management paves the way for seamless modernization, enabling organizations to embrace innovation without the constraints of legacy architectures.
+
+Streamlined integration: Azure API Management fosters interoperability and collaboration by simplifying application integration, reducing integration costs and accelerating time-to-market for new initiatives.
+
+Enhanced user experiences: Empowering organizations to deliver multi-channel user experiences, Azure API Management facilitates the reuse of APIs across diverse applications and platforms. It amplifies development velocity and return on investment (ROI).
+
+Business-to-business (B2B) Integration: With APIs at the core of B2B integration, Azure API Management lowers collaboration barriers, enabling seamless data exchange and business process integration among partners and customers.
+
+Conclusion
+In summary, this reading highlighted how Azure API Management emerges as a catalyst for digital innovation, empowering organizations to navigate the intricacies of API governance and orchestration with confidence and agility. By embracing Azure API Management, organizations can unlock the full potential of their API ecosystems, driving transformative digital outcomes.
+
+Azure API management
+Introduction
+API Management is a sophisticated service, and at its core lie APIs, the foundation upon which its functionality is built. Each API represents a collection of operations available to application developers intricately linked to backend services. These operations are meticulously configurable, affording granular control over aspects such as URL mapping, parameter handling, and response caching.
+
+In this reading, you’ll explore Azure API Management products, groups, developers, workspaces, and its components. You’ll then move on to learning about the API and self-hosted gateways, the developer portal, and how Azure service integration enhances Azure API Management.
+
+Products
+Products act as the interface through which APIs are exposed to developers. Options for open accessibility or restricted access require subscription keys. When deemed ready, products can be published for developer consumption, with subscription approval governed by configurable settings.
+
+Groups
+Groups are used to manage the visibility of products to developers. API Management has the following built-in groups:
+
+Administrators who manage API Management service instances and create the APIs, operations, and products developers use. Azure subscription administrators are members of this group.
+
+Developers who are authenticated developer portal users who build applications using your APIs. Developers are granted access to the developer portal and build applications that call the operations of an API.
+
+Guests who are unauthenticated developer portal users, such as prospective customers visiting the developer portal. They can be granted certain read-only access, such as the ability to view APIs but not call them.
+
+Administrators can create custom groups or use external groups in an associated Microsoft Entra tenant to give developers visibility and access to API products. For example, create a custom group for developers in a partner organization to access a specific subset of APIs in a product. A user can belong to more than one group.
+
+Developers
+Developers represent the user accounts in an API Management service instance. Developers can be created, invited to join by administrators, or they can sign up from the developer portal. Each developer is a member of one or more groups and can subscribe to the products that grant visibility to those groups.
+
+Workspaces
+For decentralized development teams, workspaces provide an avenue for autonomous API management within a collaborative environment. Through robust access controls, workspaces are insulated from external interference.
+
+Policies
+Policies serve as the mechanism through which API behavior can be dynamically altered, enabling transformations and imposing constraints on incoming requests and outgoing responses.
+
+API Management components
+The infrastructure of Azure API Management comprises three fundamental components:
+
+API gateway
+
+Management plane
+
+Developer portal.
+
+These components are Azure-hosted and fully managed by default. API Management is available in various tiers differing in capacity and features.
+
+API management components
+API gateway
+All requests from client applications first reach the API gateway, which then forwards them to respective backend services. The gateway serves as the frontline interface for incoming requests, handling routing, security, and performance optimizations.
+
+Specifically, the gateway:
+
+Acts as a frontline to backend services by accepting API calls and routing them to appropriate backends.
+
+Verifies API keys and other credentials, such as JWT tokens and certificates, presented with requests.
+
+Enforces usage quotas and rate limits.
+
+Optionally transforms requests and responses as specified in policy statements.
+
+If configured, caches responses to improve response latency and minimize the load on backend services.
+
+Emits logs, metrics, and traces for monitoring, reporting, and troubleshooting.
+
+Self-hosted gateway
+With the self-hosted gateway, customers can deploy the API gateway to the same environments where they host their APIs to optimize API traffic and ensure compliance with local regulations and guidelines. The self-hosted gateway enables customers with hybrid IT infrastructure to manage APIs hosted on-premises and across clouds from a single API Management service in Azure.
+
+Management plane
+Meanwhile, the management plane empowers API providers with comprehensive control over service settings, analytics, and user management.
+
+Customers interact with the management plane through Azure tools, including the Azure portal, Azure PowerShell, Azure CLI, a Visual Studio Code extension, a REST API, and client SDKs in several popular programming languages.
+
+You can use the management plane to:
+
+Provision and configure API Management service settings.
+
+Define or import API schemas from various sources, including OpenAPI, WSDL, and OData definitions, Azure compute services, and WebSocket, GraphQL, and gRPC backends.
+
+Package APIs into products.
+
+Set up policies like quotas or transformations on the APIs.
+
+Get insights from analytics.
+
+Manage users.
+
+Developer portal
+Finally, the developer portal acts as the public face of the API ecosystem, facilitating developer onboarding and providing comprehensive documentation.
+
+API Management developer portal in administrator mode
+API providers can customize the look and feel of the developer portal by adding custom content, customizing styles, and adding their branding. You can extend the developer portal further by self-hosting.
+
+App developers use the open-source developer portal to discover the APIs, onboard to use them, and learn how to consume them in applications. (APIs can also be exported to the Power Platform for discovery and use by citizen developers.)
+
+Using the developer portal, developers can:
+
+Read API documentation.
+
+Call an API via the interactive console.
+
+Create an account and subscribe to get API keys.
+
+Access analytics on their own usage.
+
+Download API definitions.
+
+Manage API keys.
+
+API Management tiers
+Notably, API Management offers a spectrum of pricing tiers, catering to diverse needs and usage scenarios, from economical options for non-production environments to high-performance tiers tailored for enterprise-grade deployments.
+
+Classic - The original API Management offering, including the Developer, Basic, Standard, and Premium tiers. The Premium tier is designed for enterprises requiring access to private backends, enhanced security features, multi-region deployments, availability zones, and high scalability. The Developer tier is an economical option for non-production use, while the Basic, Standard, and Premium tiers are production-ready tiers.
+
+V2 - A new set of tiers that offer fast provisioning and scaling, including Basic v2 for development and testing and Standard v2 for production workloads. Standard v2 supports simplified connection to network-isolated backends.
+
+Consumption - The Consumption tier is a serverless gateway for managing APIs that scale based on demand and are billed per execution. It is designed for applications with serverless compute, microservices-based architectures, and variable traffic patterns.
+
+Integration with Azure services
+Integration with various Azure services further enriches the API Management experience, offering seamless interoperability with security, monitoring, and networking solutions, thereby fortifying the overall resilience and functionality of the API ecosystem, including:
+
+Azure Key Vault for secure safekeeping and management of client certificates and secrets
+
+Azure Monitor for logging, reporting, and alerting on management operations, systems events, and API requests
+
+Application Insights for live metrics, end-to-end tracing, and troubleshooting
+
+Virtual networks, private endpoints, and Application Gateway for network-level protection
+
+Azure Defender for APIs and Azure DDoS Protection for runtime protection against malicious attacks
+
+Microsoft Entra ID for developer authentication and request authorization
+
+Event Hubs for streaming events
+
+Several Azure compute offerings are commonly used to build and host APIs on Azure, including Functions, Logic Apps, Web Apps, Service Fabric, and the Azure OpenAI service.
+
+Conclusion
+In conclusion, Azure API Management is a versatile and robust platform for managing APIs. It offers a comprehensive suite of features and integrations to streamline API development, deployment, and consumption in the ever-evolving landscape of modern software engineering.
+
+The success of a business can often be summed up as a few practices that are consistently exercised and achieved internally. These factors may be operational efficiency, data integration, and adapting to scale the business to meet a greater demand. You may be wondering how businesses get it right. Well, having the right tools and knowing how to leverage them plays a part, especially when it comes to building simple yet effective workflows. Workflows, such as these, help achieve operational efficiency, data integration, and scalability. In this video, you'll learn about Azure Logic Apps and how to use it to build simple yet effective workflows. You'll also unpack the process of creating a specific workflow that acts like a watchful assistant to a user who works during specific hours.
+This workflow is intended to automatically start a virtual machine at a set time and shut it down during inactive hours to save costs. But first, let's identify the key components of Azure Logic Apps. These include workflows that automate processes you create, chaining different actions together, triggers where the events kickstart your workflow. Examples include receiving an email, a new file being added to storage or a scheduled time. Then there are connectors that act as bridges, allowing your workflow to interact with various services like Azure Blob Storage, Dynamics 365, or even third-party applications like X. Lastly, actions are the specific tasks your workflow performs within each step. For example, an action could be sending an email notification, updating a database record or calling an API.
+With the key components covered, it's time to create a basic workflow. Examine the following steps to create a simple workflow using Azure Logic Apps. After that, you can access the Azure portal and navigate to the Logic Apps service. To get started, let's head over to the Azure portal. Go ahead and sign in with your Azure account credentials. Once logged in, locate the search bar at the top. Type in Logic Apps to find the required service.
+From the search results, select Logic Apps. This then takes you to the Azure Logic Apps service. Let's start by setting up an Azure Logic App to automate the start up of a VM at 8:00 AM GMT. For example, you might need to provision a VM for a user whose working hours are from 9:00 AM to 5:00 PM. Once you have selected resource groups, select the create button. Give the resource group a name such as Server1-RG1 and select a region. Next, select the review plus create button in the bottom left corner.
+Once the validation is successful, initiate the creation process by selecting create. A pop-up notification appears upon the successful creation of a resource group. Now let's move on to creating the virtual machine. Once again, using the search bar, type in virtual machines. Select virtual machines from the search results, follow by selecting the create button. Next, select a subscription followed by the recently created resource group. Name the virtual machine as Server 1 and retain the default region availability and zone settings.
+Replace the existing image with Windows 10 Pro and configure the desired specifications. Next, consider selecting a decent size such as 16 gigabytes of RAM. Feel free to select a RAM size that aligns with your Azure credit. As you change the size specifications, an estimated cost will appear in the upper right corner. Under the administrator account section, select a username and secure password. Take a moment to review the configurations. If you are satisfied, select the checkbox for licensing, then select review plus create at the bottom.
+Use the opportunity to review the configurations again and select the create button. The virtual machine deployment may take a few moments. You can see the status by selecting the bell icon at the top of the screen. After a few moments, the deployment completes, and it's time to set up the Logic App. Type in Logic App in your search bar and select it from the search results. To create a Logic App, you must select the add plus button. Within the create Logic Apps screen, select the appropriate subscription and resource group you created, then designate a name for the Logic App such as logicapp-server1.
+Ensure the chosen name is available. A check mark sign will confirm the availability of the name you chose. Next, select workflow for publishing and specify the region. Opt for the standard plan, retaining the default settings for the Windows plan and pricing. Skip zone redundancy for this lab setup. Select the review plus create button and review your chosen options and select create. Recall that the bell icon opens the notifications panel where you can follow the status of the creation.
+Once the Logic App is created, navigate to its portal via the go to resource button. Let's close the notification panel now so that you can view it in full screen. Now let's select workflows from the left-hand side panel. Create a workflow by selecting the plus add button at the top left. This opens a window on the right. Name the workflow as StartVM. Under the state type, select the stateful radio button and select create at the bottom.
+A success pop-up window appears confirming the creation of the workflow. With the workflow listed, you can now select it. This opens up the designer. Under the designer section on the left, select developer. From the middle of the screen, select add a trigger, which opens a new window. Start by typing schedule into the search bar and select it. You want this to be recurring, so select recurrence to add a trigger.
+From the recurrence window under perimeters, change the frequency to daily by selecting day from the drop-down list. Then select the time zone to locate your current time zone from the drop down list. Now you needed to run daily at 8:00 AM in that specified time zone. You do this by entering the year, month and date, then entering T for time, 08:00, another colon, 00 again, and finish with a Z. You can then enter eight in the at these hours section and zero in the at these minute section. Below this, you will notice a preview box that shows you runs at 8:00 every day. Now, once you are happy with it, you can select the plus sign under the recurrence trigger in the middle of the screen.
+In the new add an action window, locate the Azure VM section and select start a virtual machine. You will notice that this action appears in the middle of the screen. In the corresponding window, select sign in to complete the sign in process with your Azure credentials. In the start virtual machine window, there are three drop-down options. Select each of them to specify the appropriate subscription, resource group, and the virtual machine you just created. Now, at the top left of the screen, select the save button to save the workflow. Now you have created a workflow that will start that VM at 8:00 AM every morning.
+A bit later, you'll be able to create another workflow called StopVM to automate the VM shutdown at 6:00 PM. This is a very basic example, but Azure Logic Apps allows for much more complex workflows. You can chain multiple actions together, incorporate conditional logic for branching execution paths, and use hundreds of built-in connectors to integrate with a vast array of services. Azure Logic Apps empowers you to automate tasks, streamline processes, and create powerful integrations within the Azure Cloud. You follow the steps involved to create a basic workflow and understand how Azure Logic Apps is capable of much more. With its visual designer and extensive library of connectors, it simplifies workflow creation without the need for extensive coding expertise, making your development easier and more efficient.
+
+Azure Event Grid
+Introduction
+Azure Event Grid is a highly scalable, fully managed event routing service in Microsoft Azure. It allows developers to build event-driven architectures for various purposes.
+
+In this reading, you’ll learn what Azure Event Grid is, examine its capabilities, and explore some everyday use cases with real-world examples.
+
+What is Azure Event Grid?
+Event Grid is a publish-subscribe (Pub/Sub) messaging service. It enables applications to communicate by publishing and subscribing to events (messages). Publishers notify Event Grid about events that happen within their system, and subscribers interested in those events can receive them. Event Grid acts as an intermediary, ensuring reliable delivery of events to subscribers.
+
+Here are the key features of Event Grid:
+
+Supports multiple protocols: Event Grid supports Message Queuing Telemetry Transport (MQTT) and Hypertext Transfer Protocol (HTTP) protocols for event communication.
+
+Flexible delivery modes: Event Grid offers both push and pull delivery for events.
+
+Rich capabilities: Event Grid provides various functionalities to manage event routing effectively, such as:
+
+CloudEvents 1.0 support: Ensures interoperability between Event Grid and other event-driven systems.
+
+Diagram showing role of Azure Event Grid as an intermediary between MQTT clients and event handlers
+Use cases of Azure Event Grid
+You can use Event Grid in various scenarios to implement event-driven architectures. Here are some everyday use cases with real-world examples:
+
+Example 1: IoT communication with MQTT
+Scenario: A fleet of intelligent sensors constantly collects environmental data and sends it to the cloud for analysis.
+
+Solution: The sensors publish telemetry data using MQTT to an Event Grid topic. Event Grid routes the data to an Azure Function that processes and stores the sensor readings in a database. This allows for real-time monitoring and analysis of environmental conditions.
+
+How Azure Event Grid facilitates IoT communication with MQTT
+Example 2: Data distribution with push delivery
+Scenario: An e-commerce platform uploads new product information to Azure Blob Storage.
+
+Solution: Azure Blob Storage publishes an event to Event Grid when a new blob is uploaded. Event Grid then pushes the event to a Logic App that automatically processes the product information and updates the e-commerce website. This ensures that new products are reflected on the website promptly.
+
+How Azure Event Grid distributes data from a blob
+Example 3: Event-driven serverless solutions
+Scenario: A social media application must scale automatically based on user activity.
+
+Solution: The application publishes events to Event Grid whenever a user performs an action like posting or commenting. Event Grid triggers Azure Functions to process these events and scale the application resources accordingly. This serverless approach allows for cost-effective handling of fluctuating user traffic.
+
+Using Azure Event Grid to receive events from your applications
+Example 4: Consuming events at your own pace (Pull delivery)
+Scenario: A data analytics application must process large amounts of event data but at a controlled rate to avoid overwhelming its resources.
+
+Solution: Using the pull delivery mode, the application pulls events from Event Grid at its own pace. This ensures the smooth processing of event data without overloading the system.
+
+Using Azure Event Grid for pull delivery
+Benefits of using Azure Event decoupled and scalable microservices
+Azure Event Grid promotes the creation of decoupled and scalable microservices architectures. Microservices are small, independent applications that collaborate to deliver a more extensive application functionality. Using Event Grid for communication between microservices, developers achieve the following benefits:
+
+Loose coupling: Microservices only need to publish or subscribe to events they are interested in without knowing the specific implementation details of other services. This loose coupling simplifies the development, testing, and deployment of individual services.
+
+Improved scalability: Each microservice can be scaled independently based on its processing needs. Event Grid ensures reliable event delivery even if a subscriber service is temporarily unavailable due to scaling operations.
+
+Increased resilience: If one microservice fails, it won't affect others as they communicate asynchronously through events. Event Grid's retry mechanism further ensures message delivery even in case of transient failures.
+
+Conclusion
+In this reading, you learned that Azure Event Grid emerges as a powerful and versatile tool for crafting event-driven architectures within the Azure ecosystem. Its support for diverse protocols, flexible delivery modes, rich features, and extensive integration capabilities make it a valuable asset for developers. You also explored some of the everyday use cases. Event Grid empowers developers to design scalable, efficient, loosely coupled applications that respond to real-time events.
+
+Congratulations on finishing the next segment of the course. You've acquired a thorough understanding of Azure exploring its fundamental services and real-world uses. Before progressing further, let's review the key concepts introduced this week. Additionally, take this opportunity to revisit earlier materials to guarantee your well equipped for the module quiz ahead. Azure is a powerhouse of services that covers everything from compute to storage to networking. These services form the backbone of cloud computing solutions, offering scalability, flexibility, and reliability. Throughout this week, you witnessed a breakdown of these services that highlighted their key features and functionalities and included visual aids and real-world examples.
+You discovered that compute services are at the heart of Azure's offerings. From virtual machines to containers, Azure provides a range of options to suit a variety of workloads. You learned how to optimize these services for different scenarios and gained an understanding of the associated costs through the Azure pricing calculator. But how do you know which compute service best fits your needs? This week, various real-world scenarios were analyzed to determine the most suitable options based on factors like scalability and cost-effectiveness. You then discovered that high availability is critical in the Cloud. Azure has robust solutions in place to ensure your applications are always up and running.
+You explored the principles and benefits of designing for high availability, which included using Azure availability zones and implementing load balancers. Following this, you discussed Azure Traffic Manager and how it effortlessly scales availability globally by enhancing application performance and responsiveness across various regions. Next, you walked through the steps of how to deploy a sample application using Azure availability zones, providing you with practical experience in constructing robust Cloud applications. You also explored Azure Service Bus, uncovering its seamless communication capabilities between components. You studied its features and gained insights into how it streamlines application integration through message queues and relays. Managing API was then simplified with Azure API management, which you now know allows you to configure policies and create modern API gateways effortlessly. Additionally, you learned that automation is critical to efficiency, and Azure logic apps make this a breeze.
+A demonstration showed you how to create workflows that streamline business processes and integrate seamlessly with other Azure services. Towards the end of the week, event-driven integration was discussed with Azure Event Grid, which enables you to simplify programming tasks and integrate with Azure services and custom events. Great job. Throughout this week, you engaged in various videos, readings, and activities that covered the essentials of Azure Services and explored their practical applications. You have gained valuable insights that will help you navigate the Azure ecosystem confidently.
