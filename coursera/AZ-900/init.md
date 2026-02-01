@@ -1979,3 +1979,51 @@ Congratulations on finishing the next segment of the course. You've acquired a t
 You discovered that compute services are at the heart of Azure's offerings. From virtual machines to containers, Azure provides a range of options to suit a variety of workloads. You learned how to optimize these services for different scenarios and gained an understanding of the associated costs through the Azure pricing calculator. But how do you know which compute service best fits your needs? This week, various real-world scenarios were analyzed to determine the most suitable options based on factors like scalability and cost-effectiveness. You then discovered that high availability is critical in the Cloud. Azure has robust solutions in place to ensure your applications are always up and running.
 You explored the principles and benefits of designing for high availability, which included using Azure availability zones and implementing load balancers. Following this, you discussed Azure Traffic Manager and how it effortlessly scales availability globally by enhancing application performance and responsiveness across various regions. Next, you walked through the steps of how to deploy a sample application using Azure availability zones, providing you with practical experience in constructing robust Cloud applications. You also explored Azure Service Bus, uncovering its seamless communication capabilities between components. You studied its features and gained insights into how it streamlines application integration through message queues and relays. Managing API was then simplified with Azure API management, which you now know allows you to configure policies and create modern API gateways effortlessly. Additionally, you learned that automation is critical to efficiency, and Azure logic apps make this a breeze.
 A demonstration showed you how to create workflows that streamline business processes and integrate seamlessly with other Azure services. Towards the end of the week, event-driven integration was discussed with Azure Event Grid, which enables you to simplify programming tasks and integrate with Azure services and custom events. Great job. Throughout this week, you engaged in various videos, readings, and activities that covered the essentials of Azure Services and explored their practical applications. You have gained valuable insights that will help you navigate the Azure ecosystem confidently.
+
+Additional resources: Exploring Core Azure Services
+Introduction
+Well done for acquiring a solid foundation for the core Azure Services. Specifically, you explored Microsoft's cloud platform's fundamental components, features, and applications. You also investigated how integrating other applications helps achieve strong, scalable solutions.
+
+Building on your understanding of workflow automation, this Additional Resources reading provides an opportunity to learn more about some of Azure’s compute services.
+
+Azure Functions
+Recall that Azure Functions can be considered the fundamental serverless computing unit. These are concise segments of code (functions) triggered by specific events, such as a user's action, like clicking a button or modifying data. Once developed, these functions are deployed on Azure.
+
+How Azure Functions works
+: Dig a bit deeper and unpack how Azure Function actually works.
+
+Architect scalable e-commerce web app
+: Examine this resource that highlights how to build it with Azure Functions and Web Apps to create personalized experiences while Azure takes care of the infrastructure.
+
+Compare Azure Functions versus Logic Apps
+: Azure Functions is a serverless compute service, whereas Azure Logic Apps is a serverless workflow integration platform. Learn how to leverage using both to build complex application workflows.
+
+When to use Azure Functions
+: Review some interesting cases where you can apply Azure Functions’ architecture.
+
+Azure Virtual Machines (VM)
+You have learned that virtual machines play a significant role in Azure’s scalable computing resources. It gives you more control over your computing environment. Explore the following resources to learn more about VMs.
+
+Overview of Azure Virtual Machines
+: Learn about what you should consider before creating a virtual machine and how to create and manage it.
+
+Virtual Machine Scale Sets
+: Azure Virtual Machine Scale Sets allow you to create and manage a group of load-balanced VMs. Review the benefits of Virtual Machine Scale Sets and learn how to use them to respond to a demand or defined schedule.
+
+Monitor Azure Virtual Machines
+: Discover the types of monitoring data you can collect for this service and the various ways to analyze it.
+
+Azure Service Bus
+Azure Service Bus acts as a message broker with queues and publish-subscribe topics. Take a deeper dive into the components and features available to you.
+
+Azure Service Bus queues, topics, and subscriptions
+: Service Bus enhances communication between services. This resource introduces creating queues and receive modes and outlines creating topics and subscriptions.
+
+Azure Service Bus - advanced features
+: Unpack Service Bus’ advanced features that enable you to solve more complex messaging problems.
+
+Topic filters and actions
+: Learn to define subscription rules, each consisting of a filter condition that selects particular messages and optionally contains an action that annotates the selected message.
+
+Conclusion
+This reading explored several additional resources on computing services, such as Azure Functions, Azure Virtual Machines, and Azure Service Bus. You learned that incorporating Azure Functions into your workflow automation toolkit can enhance efficiency and flexibility. By understanding the nuances of both Azure Functions and Logic Apps, you can strategically leverage each service to meet the unique demands of your projects. You also covered VM essentials such as considerations to keep in mind, how to create VMs, and how to manage them. Lastly, you gained more profound insight into queues, receive modes, topics, and subscriptions in Azure Service Bus and its advanced features.
