@@ -490,8 +490,7 @@ Not quite. MFA, while important, is not primarily an access control mechanism bu
 Incident response
 
 1 point 3.
-Question 3
-****\_\_\_**** involves applying software updates that fix security holes.
+Question 3 \***\*\_\_\_\*\*** involves applying software updates that fix security holes.
 
 Monitoring
 
@@ -527,3 +526,474 @@ Detection and identification of security incidents
 
 Correct
 That's correct. Detection and identification of security incidents are key components of an incident response plan.
+
+Your grade: 83.33%
+Your latest: 83.33%•
+Your highest: 83.33%•
+To pass you need at least 80%. We keep your highest score.
+
+1.  Question 1
+    How does cloud computing assist e-commerce businesses during peak shopping periods?
+
+Reduce resource usage
+
+Adaptively adjust resources to handle fluctuating customer traffic
+
+Increase upfront costs
+
+Correct
+That’s correct. Cloud computing can adaptively adjust resources to handle fluctuating customer traffic.
+
+1 / 1 point 2.
+Question 2
+What is a significant advantage of incorporating AI and ML in cloud computing?
+
+Slowing down the provisioning process
+
+Increasing manual intervention in resource scaling
+
+Automatically provisioning and scaling cloud resources based on real-time demand
+
+Decreasing security measures
+
+Correct
+That’s correct. AI and ML integration enables automatic provisioning and scaling of cloud resources based on real-time demand.
+
+1 / 1 point 3.
+Question 3
+What technology allows cloud providers to generate various virtual servers on a single physical server?
+
+Pay-per-use model
+
+Virtualization
+
+Multi-tenancy
+
+Auto-scaling
+
+Correct
+That’s correct. Virtualization technology enables cloud providers to create multiple virtual servers on a single physical server.
+
+1 / 1 point 4.
+Question 4
+Which factors are crucial for assessing the economic benefits of cloud computing?
+
+Cloud provider's brand popularity
+
+Cloud migration strategy
+
+Number of available cloud services
+
+Business size and needs
+
+Correct
+That’s correct. Business size and needs significantly influence the effectiveness of cloud computing.
+
+You didn't select all the correct answers
+1 point 5.
+Question 5
+What is a commonly used encryption standard by reputable cloud providers to secure data both at rest and in transit?
+
+DES
+
+RSA-128
+
+SHA-1
+
+AES-256
+
+Correct
+That’s correct. AES-256 is a standard encryption method considered virtually unbreakable and commonly used by reputable cloud providers.
+
+1 / 1 point 6.
+Question 6
+What is the essence of the shared responsibility model in cloud security?
+
+The customer is solely responsible for all security aspects.
+
+Both the CSP and the customer share responsibility for different security aspects
+
+The CSP and the customer have no role in ensuring security.
+
+The CSP is solely responsible for all security aspects.
+
+Correct
+That’s correct. In the shared responsibility model, both the CSP and the customer share responsibility for different security aspects.
+
+1 / 1 point 7.
+Question 7
+Fill-in-the-blank: Hybrid cloud computing integrates **\_\_** and **\_\_** cloud environments to provide a seamless computing experience.
+
+decentralized; centralized
+
+multi-cloud; edge
+
+private; hybrid
+
+public; private
+
+Correct
+That’s correct. Hybrid cloud computing integrates public and private cloud environments to create a unified computing environment.
+
+1 / 1 point 8.
+Question 8
+True or False: In an IaaS model, customers manage the underlying infrastructure, including servers, networking, and operating systems.
+
+True
+
+False
+
+Incorrect
+Not quite. Please review the video
+Exploring cloud service models: IaaS, PaaS,
+and SaaS
+.
+
+1 point 9.
+Question 9
+True or False: Sophia is the Chief Information Officer (CIO) of a large financial institution. She's evaluating different cloud deployment models for the organization's IT infrastructure.
+
+Do private clouds prioritize security and control, making them suitable for organizations with stringent regulatory requirements?
+
+True
+
+False
+
+Correct
+That’s correct. Private clouds offer enhanced security and control, making them ideal for organizations with strict compliance needs.
+
+1 / 1 point 10.
+Question 10
+Fill-in-the-blank: In a SaaS model, customers access applications over the **\_\_**, eliminating the need for local installations and updates.
+
+intranet
+
+internet
+
+Cloud Service Provider's Network
+
+Local Area Network
+
+Correct
+That’s correct. SaaS applications are accessed over the internet, reducing the burden of local installations and updates.
+
+1 / 1 point 11.
+Question 11
+Imagine your team is developing a real-time analytics platform that processes streaming data from IoT devices.
+
+Which Azure service would be most suitable for ingesting and processing the streaming data?
+
+Azure App Service
+
+Azure Virtual Machines
+
+Azure Event Hubs
+
+Azure Kubernetes Service (AKS)
+
+Correct
+That's correct. Azure Event Hubs is a highly scalable data streaming platform that can ingest and process large volumes of streaming data from IoT devices.
+
+1 / 1 point 12.
+Question 12
+Imagine your organization needs to implement a logging solution that can handle a high volume of log data generated by various applications.
+
+Which Azure service would be most suitable for this requirement?
+
+Azure Blob Storage
+
+Azure Event Hubs
+
+Azure SQL Database
+
+Azure Functions
+
+Correct
+That's correct. Azure Event Hubs is designed to handle high volumes of streaming data, making it suitable for logging large amounts of data generated by applications.
+
+1 / 1 point 13.
+Question 13
+Azure Stream Analytics is a real-time analytics service that is designed to analyze and process streaming data from which of the following sources?
+
+Azure SQL Database
+
+Azure Stream Analytics supports streaming data from Azure Event Hubs, IoT Hub, and Blob storage.
+
+Azure Functions
+
+Azure Event Hubs
+
+Correct
+That's correct. Azure Stream Analytics can analyze and process streaming data from Azure Event Hubs, IoT Hub, and Blob storage.
+
+1 / 1 point 14.
+Question 14
+Imagine your organization is developing an application that needs to react to changes in customer preferences in real time and update product recommendations accordingly.
+
+Which Azure service would best support this requirement?
+
+Azure Functions
+
+Azure Event Grid
+
+Azure Stream Analytics
+
+Azure Logic Apps
+
+Incorrect
+Not quite. Please review the video
+Overview of Azure
+s
+ervices
+.
+
+1 point 15.
+Question 15
+Imagine your organization needs to implement an event-driven architecture for processing messages from a legacy system that can only send messages via HTTP requests.
+
+Which Azure service would be most suitable for receiving and processing these messages?
+
+Azure Stream Analytics
+
+Azure Event Grid
+
+Azure Logic Apps
+
+Azure Functions
+
+Incorrect
+Not quite. Please review the video
+Overview of Azure
+s
+ervices
+.
+
+1 point 16.
+Question 16
+Imagine your organization operates a web application that experiences periodic spikes in traffic. You need to set up automated alerts to notify your team when these spikes occur.
+
+Which Azure service would you use to configure these alerts?
+
+Azure Monitor Logs
+
+Azure Log Analytics
+
+Azure Monitor Alerts
+
+Azure Application Insights
+
+Correct
+That's correct. Azure Monitor Alerts enables you to set up automated alerts based on metrics, logs, and application insights data, including detecting spikes in web application traffic.
+
+1 / 1 point 17.
+Question 17
+Your team is responsible for maintaining a microservices-based application deployed on Azure Kubernetes Service (AKS). You need to set up monitoring and alerting for the application's performance and availability.
+
+Which Azure service would you use for this purpose?
+
+Azure Application Insights
+
+Azure Monitor Logs
+
+Azure Monitor
+
+Azure Log Analytics
+
+Correct
+That's correct. Azure Monitor provides comprehensive monitoring and alerting capabilities for applications deployed on Azure Kubernetes Service (AKS) and other Azure services.
+
+1 / 1 point 18.
+Question 18
+Imagine your organization has a web application running on Azure App Service, and you need to monitor the application's performance and detect any issues proactively.
+
+Which Azure service would you use for monitoring and alerting in this scenario?
+
+Azure Application Insights
+
+Azure Monitor
+
+Azure Log Analytics
+
+Azure Monitor Logs
+
+Correct
+That's correct. Azure Application Insights provides monitoring and alerting capabilities specifically designed for web applications running on Azure App Service.
+
+1 / 1 point 19.
+Question 19
+Imagine your organization is implementing cost optimization measures for resources hosted on Azure. You need to set up automated actions to deallocate virtual machines during off-peak hours.
+
+Which Azure service would you use for this task?
+
+Azure Monitor
+
+Azure Automation
+
+Azure Logic Apps
+
+Azure Functions
+
+Correct
+That's correct. Azure Automation allows you to create and manage runbooks for automating repetitive tasks, such as allocating virtual machines during off-peak hours to optimize costs.
+
+1 / 1 point 20.
+Question 20
+Imagine your organization is implementing a data encryption solution using Azure Key Vault to manage encryption keys. You need to ensure that only specific applications deployed in Azure can retrieve the encryption keys from Azure Key Vault.
+
+Which Azure service would you use to manage access control for Azure Key Vault in this scenario?
+
+Azure AD B2C (Business to Customer)
+
+Azure RBAC (Role-Based Access Control)
+
+Azure AD Domain Services
+
+Azure Policy
+
+Correct
+That's correct. Azure RBAC allows you to define granular access control policies and permissions for Azure Key Vault, ensuring that only authorized applications can access the encryption keys stored in it.
+
+1 / 1 point 21.
+Question 21
+To streamline the deployment process in Azure, which service allows you to specify Azure infrastructure using declarative templates?
+
+Azure Resource Manager (ARM)
+
+Azure Functions
+
+Correct
+That’s correct. Azure Resource Manager (ARM) enables you to specify Azure infrastructure using declarative templates, simplifying the deployment process.
+
+1 / 1 point 22.
+Question 22
+You're tasked with ensuring the reliability of your organization's critical systems. Which approaches could help achieve high availability and data redundancy?
+
+Select all that apply.
+
+By deploying Azure Virtual Machines in availability zones and configuring Traffic Manager
+
+Correct
+That’s correct. Deploying Azure Virtual Machines in availability zones and configuring Traffic Manager can ensure high availability and data redundancy for critical systems.
+
+By deploying with Azure App Service and SQL Databases
+
+By using Azure Functions and Azure Automation
+
+By employing Azure Site Recovery and ARM templates
+
+Correct
+That’s correct. Employing Azure Site Recovery and ARM templates can help achieve high availability and data redundancy for critical systems.
+
+1 / 1 point 23.
+Question 23
+How do ARM templates ensure consistent deployments and repeatable configurations?
+
+By reducing the need for support due to configuration inconsistencies.
+
+By defining all the components needed for Azure infrastructure and their configurations.
+
+By ensuring dynamic endpoint retrieval using the reference function.
+
+By specifying explicit values for properties with default values.
+
+Correct
+That’s correct. ARM templates ensure consistent deployments and repeatable configurations by defining all the components needed for Azure infrastructure and their configurations.
+
+1 / 1 point 24.
+Question 24
+When examining an ARM template for a virtual machine deployment, what is the primary purpose of the "outputs" section?
+
+To specify the desired outcome or configuration of the Azure infrastructure.
+
+To define the Azure resources to be created.
+
+To create the resources in the Azure environment.
+
+To provide outputs returned after deployment, such as the public IP address of the virtual machine.
+
+Correct
+That’s correct. The "outputs" section of an ARM template provides outputs returned after deployment, such as the virtual machine's public IP address.
+
+1 / 1 point 25.
+Question 25
+In an Azure infrastructure deployment meeting, a team member asks about the purpose of the "parameters" section in an ARM template. What would be the correct response?
+
+It defines the desired outcome or configuration of the Azure infrastructure.
+
+It defines user-configurable values that can be provided during deployment.
+
+It saves values that are used throughout the template.
+
+It provides outputs returned after deployment.
+
+Correct
+That’s correct. The "parameters" section of an ARM template defines user-configurable values that can be provided during deployment.
+
+1 / 1 point 26.
+Question 26
+Your team is discussing Azure Policy implementations. What is the primary function of policy definitions?
+
+To contain conditions under which policies are enforced and the effects of enforcement.
+
+To provide a centralized compliance dashboard.
+
+To enforce restrictions on Azure resources based on user roles.
+
+To group multiple policy definitions under a single overarching goal.
+
+Correct
+That’s correct. Policy definitions contain conditions under which policies are enforced and the effects of enforcement in Azure Policy.
+
+1 / 1 point 27.
+Question 27
+True or False: Azure Policy primarily focuses on managing user permissions within an Azure environment.
+
+False
+
+True
+
+Correct
+That’s correct. Azure Policy instead primarily focuses on enforcing compliance rules on Azure resources to ensure they adhere to organizational security best practices and regulatory requirements.
+
+1 / 1 point 28.
+Question 28
+Which of the following is a primary function of Azure RBAC?
+
+Automating resource deployment with reusable templates
+
+Enforcing compliance rules on resources
+
+Defining policy definitions
+
+Controlling access to Azure resources based on roles
+
+Correct
+That’s correct. A primary function of Azure RBAC is controlling access to Azure resources based on roles assigned to users, groups, or service principals.
+
+1 / 1 point 29.
+Question 29
+True or False: Azure Monitor gathers data through metrics and logs, using Log Analytics workspaces for centralized data storage and analysis.
+
+True
+
+False
+
+Correct
+That’s correct. Azure Monitor gathers data through metrics and logs, utilizing Log Analytics workspaces for centralized data storage and analysis.
+
+1 / 1 point 30.
+Question 30
+You are tasked with troubleshooting network connectivity issues in your Azure environment. Which data source can provide insights into device status changes, errors, or performance metrics for SNMP-enabled devices like routers, switches, or firewalls?
+
+Windows Events and Syslog
+
+Resource Logs
+
+SNMP Traps
+
+Text Logs
+
+Incorrect
+Not quite. Please review the reading
+Troubleshoot with Confidence - Exploring Azure Monitor Data Sources
+.
